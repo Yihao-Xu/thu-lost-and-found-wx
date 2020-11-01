@@ -34,6 +34,14 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    myInfo:{
+      ID:"1",
+      wx:"yihao_xu",
+      qq:"89035689",
+      email:"yihao_xu@126.com",
+      mobile:"18611362038",
+      hasCertification:false
+    }
   }
 })

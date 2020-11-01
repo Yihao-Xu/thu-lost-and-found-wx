@@ -1,2 +1,28 @@
 <!--pages/personalInfo/personalInfo.wxml-->
-<text>pages/personalInfo/personalInfo.wxml</text>
+<view class="page">
+  <div class="head-info">
+    <image class="head-photo" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+    <text class="username" block>{{userInfo.nickName}}</text>
+    <text class="userId" block>ID:{{myInfo.ID}}</text>
+  </div>
+  <van-cell-group title="我的联系方式" class="cell-group">
+    <van-cell title="微信号" value="{{myInfo.wx}}"></van-cell>
+    <van-cell title="QQ号" value="{{myInfo.qq}}"></van-cell>
+    <van-cell title="邮箱" value="{{myInfo.email}}"></van-cell>
+    <van-cell title="手机" value="{{myInfo.mobile}}"></van-cell>
+  </van-cell-group>
+  <van-cell-group title="我的启事" class="cell-group">
+    <van-cell title="我的寻物启事"></van-cell>
+    <van-cell title="我的招领启事"></van-cell>
+  </van-cell-group>
+  <van-cell-group title="学生/教工认证" class="cell-group">
+    <van-cell title="认证：" value="未认证" wx:if="{{myInfo.hasCertification==false}}"></van-cell>
+    <van-cell title="认证：" value="已认证" wx:if="{{myInfo.hasCertification==true}}"></van-cell>
+  </van-cell-group>
+  <div class="button" wx:if="{{myInfo.hasCertification==false}}">
+    <van-button type="primary" class="button" block>前往认证</van-button>
+  </div>
+  <div class="button">
+    <van-button type="primary" class="button" block>编辑资料</van-button>
+  </div>
+</view>

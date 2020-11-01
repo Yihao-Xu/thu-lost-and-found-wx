@@ -1,19 +1,60 @@
 {
   "pages": [
+    "pages/found/found",
+    "pages/personalInfo/personalInfo",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/personalInfo/personalInfo"
+    "pages/lost/lost",
+    "pages/notice/notice"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "紫荆寻物",
     "navigationBarTextStyle": "black"
   },
-  "style": "v2",
   "sitemapLocation": "sitemap.json",
   "useExtendedLib": {
-    "weui":true,
-    "kbone":true
+    "weui": true
+  },
+  "usingComponents": {
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index",
+    "van-button": "@vant/weapp/button/index",
+    "found-card": "components/found-card/found-card",
+    "lost-card": "components/lost-card/lost-card"
+  },
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#82318E",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/found/found",
+        "text": "失物招领",
+        "iconPath": "image/found.png",
+        "selectedIconPath": "image/found-on.png"
+      },
+      {
+        "pagePath": "pages/lost/lost",
+        "text": "寻物启事",
+        "iconPath": "image/lost.png",
+        "selectedIconPath": "image/lost-on.png"
+      },
+      {
+        "pagePath": "pages/notice/notice",
+        "text": "通知",
+        "iconPath": "image/notice.png",
+        "selectedIconPath": "image/notice-on.png"
+      },
+      {
+        "pagePath": "pages/personalInfo/personalInfo",
+        "text": "我的",
+        "iconPath": "image/mine.png",
+        "selectedIconPath": "image/mine-on.png"
+      }
+    ]
   }
 }

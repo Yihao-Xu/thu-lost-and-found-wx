@@ -1,0 +1,4 @@
+<!--pages/found/found.wxml-->
+<view>
+  <found-card></found-card>
+</view> 
