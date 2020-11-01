@@ -1,1 +1,6 @@
 /* components/found-card/found-card.wxss */
+.head-photo{
+  width: 64rpx;
+  height: 64rpx;
+  margin: 20rpx;
+}

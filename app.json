@@ -9,7 +9,7 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#82318E",
     "navigationBarTitleText": "紫荆寻物",
     "navigationBarTextStyle": "black"
   },
@@ -24,7 +24,11 @@
     "van-col": "@vant/weapp/col/index",
     "van-button": "@vant/weapp/button/index",
     "found-card": "components/found-card/found-card",
-    "lost-card": "components/lost-card/lost-card"
+    "lost-card": "components/lost-card/lost-card",
+    "van-card": "@vant/weapp/card/index",
+    "van-panel": "@vant/weapp/panel/index",
+    "van-skeleton": "@vant/weapp/skeleton/index",
+    "van-divider": "@vant/weapp/divider/index"
   },
   "tabBar": {
     "color": "#000000",

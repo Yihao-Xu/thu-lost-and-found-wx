@@ -1,2 +1,8 @@
 <!--components/found-card/found-card.wxml-->
-<text>components/found-card/found-card.wxml</text>
+<div class="card">
+  <van-row>
+    <van-col><image src="/image/testimg.jpg" class="head-photo"></image></van-col>
+    <van-col><h2 style="position:relative; top:20rpx;">徐亦豪</h2></van-col>
+  </van-row>
+  <van-divider/>
+</div>
