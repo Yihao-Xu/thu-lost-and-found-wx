@@ -215,14 +215,15 @@ Page({
       var path = "infoData.tags"
 
       this.setData({
+        tagDialogShow: false,
         [path]: ts,
         tag: "",
-        tagDialogShow: false
+
       })
     }else{
       this.setData({
+        tagDialogShow: false,
         tag: "",
-        tagDialogShow: false
       })
     }
   },

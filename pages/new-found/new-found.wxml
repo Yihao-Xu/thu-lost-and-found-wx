@@ -8,13 +8,13 @@
       placeholder="请输入对失物的详情描述" />
   </van-cell-group>
   <van-panel title="标签" desc="对物品的描述，会用于招领与寻物的匹配。" use-footer-slot>
-    <view>
-      <van-tag wx:for="{{infoData.tags}}" type="primary" plain closeable bind:close="deleteTag" data-index="{{index}}" class="tag">
+    <view style="min-height='100px'">
+      <van-tag wx:for="{{infoData.tags}}" type="primary" plain closeable bind:close="deleteTag" data-index="{{index}}" class="tag" size="large">
         {{item}}</van-tag>
     </view>
     <view slot="footer">
-      <div style="align:right;">
-      <van-button type="primary" bindtap="openTagDialog" size="small" style="">增加标签</van-button>
+      <div style="position:relative; left:80%;">
+      <van-button type="primary" bindtap="openTagDialog" size="small" style="max-width:20%;">增加标签</van-button>
     </div>
     </view>
   </van-panel>
