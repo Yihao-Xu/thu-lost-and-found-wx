@@ -14,4 +14,7 @@
       <van-cell title="拾取时间" value="{{cardData.found_time}}"></van-cell>
     </van-cell-group>
   </view>
+  <view slot="footer">
+    <van-tag wx:for="{{cardData.tags}}" type="primary" class="tag">{{item}}</van-tag>
+  </view>
 </i-card>

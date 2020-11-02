@@ -7,7 +7,9 @@
 .card-pic{
   display: block;
 }
-
 .card{
   margin: 5rpx;
+}
+.tag{
+  margin: 0 10rpx 0 10rpx;
 }

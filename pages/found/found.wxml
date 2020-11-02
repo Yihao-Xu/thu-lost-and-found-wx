@@ -4,4 +4,5 @@
     bind:cancel="onCancel">
   </van-search>
   <found-card cardData="{{testData}}"></found-card>
+  <found-card cardData="{{testData}}"></found-card>
 </view>

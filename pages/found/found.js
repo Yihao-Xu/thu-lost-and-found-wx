@@ -15,7 +15,8 @@ Page({
       image3:"/image/ip12-3.jpg",
       object_name:"iPhone12 Pro",
       location:"六教602",
-      found_time:"10月31日下午"
+      found_time:"10月31日下午",
+      tags:["蓝色","没有手机壳"]
     },
     search_value:"",//搜索框的内容
   },

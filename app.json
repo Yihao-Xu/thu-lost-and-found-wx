@@ -1,12 +1,13 @@
 {
   "pages": [
+    "pages/found-info/found-info",
     "pages/found/found",
     "pages/personalInfo/personalInfo",
     "pages/index/index",
     "pages/logs/logs",
     "pages/lost/lost",
-    "pages/notice/notice",
-    "pages/found-info/found-info"
+    "pages/notice/notice"
+
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -31,7 +32,8 @@
     "van-skeleton": "@vant/weapp/skeleton/index",
     "van-divider": "@vant/weapp/divider/index",
     "i-card": "components/dist/card/index",
-    "van-search": "@vant/weapp/search/index"
+    "van-search": "@vant/weapp/search/index",
+    "van-tag": "@vant/weapp/tag/index"
   },
   "tabBar": {
     "color": "#000000",

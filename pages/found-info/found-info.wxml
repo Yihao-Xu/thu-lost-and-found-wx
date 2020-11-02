@@ -1,2 +1,8 @@
 <!--pages/found-info/found-info.wxml-->
-<text>pages/found-info/found-info.wxml</text>
+<view>
+  <div>
+    <image class="title-pic" src="{{infoData.images[1]}}"></image>
+    <text style="top:-100rpx; position:relative;" block>{{infoData.object_name}}</text>
+    <text style="top:-30rpx; position:relative; left:-200rpx;" block>{{infoData.object_sort}}</text>
+  </div>
+</view>
