@@ -1,1 +1,6 @@
 /* pages/found/found.wxss */
+.add-btn{
+  position: fixed;
+  right: 20rpx;
+  bottom: 20rpx;
+}

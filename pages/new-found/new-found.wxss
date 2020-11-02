@@ -1,0 +1,10 @@
+/* pages/new-found/new-found.wxss */
+.pic-uploader{
+  margin: 30rpx;
+}
+
+.release-btn{
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+}

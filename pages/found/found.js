@@ -91,4 +91,10 @@ Page({
       search_value:"",
     })
   },
+  
+  new_found:function(){
+    wx.navigateTo({
+      url: '/pages/new-found/new-found',
+    })
+  }
 })

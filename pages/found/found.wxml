@@ -5,4 +5,5 @@
   </van-search>
   <found-card cardData="{{testData}}"></found-card>
   <found-card cardData="{{testData}}"></found-card>
+  <van-button round color="#82318E" icon="plus" class="add-btn" bindtap="new_found"></van-button>
 </view>

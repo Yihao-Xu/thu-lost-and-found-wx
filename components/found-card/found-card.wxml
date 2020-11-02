@@ -1,5 +1,5 @@
 <!--components/found-card/found-card.wxml-->
-<i-card title="{{cardData.username}}" extra="{{cardData.release_time}}" thumb="{{cardData.avatar}}" class="card">
+<i-card title="{{cardData.username}}" extra="{{cardData.release_time}}" thumb="{{cardData.avatar}}" class="card" bindtap="enterInfo"> 
   <view slot="content">
     <div style="width:100%;"><text>{{cardData.content}}</text></div>
     <van-divider/>

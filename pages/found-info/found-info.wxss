@@ -8,13 +8,11 @@
 
 .object-name-text {
   position: relative;
-  top:-80rpx;
+  top: 20rpx;
 }
 
 .sort-text {
-  top: -30rpx;
   position: relative;
-  left: -240rpx;
   font-size: small;
   color: gray;
 }

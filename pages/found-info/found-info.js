@@ -18,8 +18,12 @@ Page({
       founder_name:"徐亦豪",
       object_name:"iPhone12 Pro",
       release_time:"今天11:02",
-      describe:"今天咱在六教602丢了一部手机，蓝色，iPhone12 Pro，没有手机壳，锁屏是一个美少女，捡到有香锅奶茶酬谢。",
+      describe:"今天咱在六教602捡到了一部手机，蓝色，iPhone12 Pro，没有手机壳，锁屏是一个美少女，失主请联系咱。",
       status:"未归还",
+      tags:[
+        "蓝色",
+        "没有手机壳"
+      ],
       contact_infomation:{
         "QQ":"89035689",
         "email":"89035689@qq.com",
@@ -28,7 +32,9 @@ Page({
       },
       object_sort:"手机"
     },
-    active_name:"0",
+    activeNames:"0",
+    gallery_show:false,
+    current_picture:1,
   },
 
   /**
@@ -87,9 +93,16 @@ Page({
 
   },
 
-  onChange: function(event){
-    this.setData({
-      active_name:event.detail,
+  showPicture: function(e){
+    console.log(this.data.infoData.images)
+    wx.previewImage({
+      current:e.currentUrl,
+      urls: this.data.infoData.images,
     })
+
+    // this.setData({
+    //   gallery_show:true,
+    //   current_picture:e.currentTarget.dataset.index,
+    // })
   }
 })
