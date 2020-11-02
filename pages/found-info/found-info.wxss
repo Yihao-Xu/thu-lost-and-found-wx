@@ -1,7 +1,20 @@
 /* pages/found-info/found-info.wxss */
 
-.title-pic{
-  max-height: 128rpx;
-  max-width: 128rpx;
+.title-pic {
+  max-height: 96rpx;
+  max-width: 96rpx;
   margin: 20rpx;
+}
+
+.object-name-text {
+  position: relative;
+  top:-80rpx;
+}
+
+.sort-text {
+  top: -30rpx;
+  position: relative;
+  left: -240rpx;
+  font-size: small;
+  color: gray;
 }

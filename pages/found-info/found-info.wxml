@@ -2,7 +2,17 @@
 <view>
   <div>
     <image class="title-pic" src="{{infoData.images[1]}}"></image>
-    <text style="top:-100rpx; position:relative;" block>{{infoData.object_name}}</text>
-    <text style="top:-30rpx; position:relative; left:-200rpx;" block>{{infoData.object_sort}}</text>
+    <text class="object-name-text">{{infoData.object_name}}</text>
+    <text class="sort-text">{{infoData.object_sort}}</text>
   </div>
+  <van-panel title="详情描述">
+    <view style="margin: 30rpx; font-size:28rpx; color:grey;">{{infoData.describe}}</view>
+  </van-panel>
+  <van-cell-group title="物品特征">
+    <van-cell title="物品种类" value="{{infoData.object_sort}}"></van-cell>
+    <van-cell title="拾取时间" value="{{infoData.found_time}}"></van-cell>
+    <van-cell title="拾取地点" value="{{infoData.found_location}}"></van-cell>
+    <van-cell title="拾取者" value="{{infoData.founder_name}}"></van-cell>
+    <van-cell title="状态" value="{{infoData.status}}"></van-cell>
+  </van-cell-group>
 </view>

@@ -15,6 +15,7 @@ Page({
       ],
       found_location:"六教602",
       found_time:"10月31日下午",
+      founder_name:"徐亦豪",
       object_name:"iPhone12 Pro",
       release_time:"今天11:02",
       describe:"今天咱在六教602丢了一部手机，蓝色，iPhone12 Pro，没有手机壳，锁屏是一个美少女，捡到有香锅奶茶酬谢。",
@@ -26,7 +27,8 @@ Page({
         "mobile":"18611362038"
       },
       object_sort:"手机"
-    }
+    },
+    active_name:"0",
   },
 
   /**
@@ -83,5 +85,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  onChange: function(event){
+    this.setData({
+      active_name:event.detail,
+    })
   }
 })
