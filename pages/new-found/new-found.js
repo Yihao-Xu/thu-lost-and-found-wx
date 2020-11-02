@@ -7,18 +7,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    infoData:{
-      object_sort:"",
-      found_time:"",
-      found_location:"",
-      describe:"",
-      picList:[
-        
+    infoData: {
+      object_sort: "",
+      found_time: "",
+      found_location: "",
+      describe: "",
+      picList: [
+
       ],
+      tags: ["test1", "test2"]
     },
-    pickerShow:false,
-    calendarShow:false,
-    pickerList:[//物品选择器的列表
+    pickerShow: false,
+    calendarShow: false,
+    pickerList: [ //物品选择器的列表
       "",
       "校园卡",
       "书籍",
@@ -28,8 +29,8 @@ Page({
       "其他"
     ],
     date: new Date().getTime(),
-    maxDate:new Date().getTime(),
-    formatter:function(type, value) {
+    maxDate: new Date().getTime(),
+    formatter: function (type, value) {
       if (type === 'year') {
         return `${value}年`;
       } else if (type === 'month') {
@@ -37,6 +38,8 @@ Page({
       }
       return value;
     },
+    tagDialogShow: false,
+    tag: ""
   },
 
   /**
@@ -96,36 +99,45 @@ Page({
   },
 
   // 用户上传图片前校验是否是图片
-  beforeRead:function(event){
-  },
+  beforeRead: function (event) {},
   //用户上传图片后
-  afterRead:function(event){
+  afterRead: function (event) {
     //有后端后才能填写
   },
 
   //关闭Picker弹窗
-  pickerClose: function(event){
-    this.setData({ pickerShow: false });
-  },
-  pickerChange: function(event){
-    const {value} = event.detail
-    var os="infoData.object_sort"
+  pickerClose: function (event) {
     this.setData({
-      [os]:value
+      pickerShow: false
+    });
+  },
+  pickerChange: function (event) {
+    const {
+      value
+    } = event.detail
+    var os = "infoData.object_sort"
+    this.setData({
+      [os]: value
     })
   },
-  openPicker: function(event){
-    this.setData({pickerShow:true})
+  openPicker: function (event) {
+    this.setData({
+      pickerShow: true
+    })
   },
 
   //打开日期选择器
-  openCalendar: function(event){
-    this.setData({calendarShow:true})
+  openCalendar: function (event) {
+    this.setData({
+      calendarShow: true
+    })
   },
-  calendarClose: function(event){
-    this.setData({calendarShow: false });
+  calendarClose: function (event) {
+    this.setData({
+      calendarShow: false
+    });
   },
-  formatter:function(type, value) {
+  formatter: function (type, value) {
     if (type === 'year') {
       return `${value}年`;
     } else if (type === 'month') {
@@ -133,41 +145,55 @@ Page({
     }
     return value;
   },
-  getYMDHMS:function(time) {
+  getYMDHMS: function (time) {
     var time = new Date(time)
     var year = time.getFullYear(),
-        month = time.getMonth() + 1,
-        date = time.getDate(),
-        hours = time.getHours(),
-        minute = time.getMinutes(),
-        second = time.getSeconds()
-    if (month < 10) { month = '0' + month; }
-    if (date < 10) { date = '0' + date; }
-    if (hours < 10) { hours = '0' + hours; }
-    if (minute < 10) { minute = '0' + minute; }
-    if (second < 10) { second = '0' + second; }
+      month = time.getMonth() + 1,
+      date = time.getDate(),
+      hours = time.getHours(),
+      minute = time.getMinutes(),
+      second = time.getSeconds()
+    if (month < 10) {
+      month = '0' + month;
+    }
+    if (date < 10) {
+      date = '0' + date;
+    }
+    if (hours < 10) {
+      hours = '0' + hours;
+    }
+    if (minute < 10) {
+      minute = '0' + minute;
+    }
+    if (second < 10) {
+      second = '0' + second;
+    }
     return {
-        year: year,
-        month: month,
-        date: date,
-        hours: hours,
-        minute: minute,
-        second: second
+      year: year,
+      month: month,
+      date: date,
+      hours: hours,
+      minute: minute,
+      second: second
     }
   },
-  calendarChange: function(event){
-    const{year,month,date} = this.getYMDHMS(event.detail)
-    var ft='infoData.found_time'
+  calendarChange: function (event) {
+    const {
+      year,
+      month,
+      date
+    } = this.getYMDHMS(event.detail)
+    var ft = 'infoData.found_time'
     this.setData({
-      date:event.detail,
-      [ft]:year+'-'+month+'-'+date
+      date: event.detail,
+      [ft]: year + '-' + month + '-' + date
     })
   },
-  release:function(event){
+  release: function (event) {
     Dialog.confirm({
-      title: '确认提交',
-      message: '您确认要提交招领启事吗？',
-    })
+        title: '确认提交',
+        message: '您确认要提交招领启事吗？',
+      })
       .then(() => {
         // on confirm
         wx.navigateBack({
@@ -180,7 +206,42 @@ Page({
       .catch(() => {
         // on cancel
       });
+  },
+
+  addTag: function (event) {
+    if (event.detail === "confirm" && this.data.tag!=="") {
+      var ts = this.data.infoData.tags
+      ts.push(this.data.tag)
+      var path = "infoData.tags"
+
+      this.setData({
+        [path]: ts,
+        tag: "",
+        tagDialogShow: false
+      })
+    }else{
+      this.setData({
+        tag: "",
+        tagDialogShow: false
+      })
+    }
+  },
+  cancelTag: function (event) {
+
+  },
+  openTagDialog: function (event) {
+    this.setData({
+      tagDialogShow: true
+    })
+  },
+  deleteTag: function (event) {
+    var ts = this.data.infoData.tags
+    ts.splice(event.currentTarget.dataset.index,1)
+    var path="infoData.tags"
+    this.setData({
+      [path]:ts
+    })
   }
-  
+
 
 })
