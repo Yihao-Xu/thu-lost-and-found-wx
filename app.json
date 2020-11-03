@@ -7,8 +7,9 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/lost/lost",
-    "pages/notice/notice"
-
+    "pages/notice/notice",
+    "pages/lost-info/lost-info",
+    "pages/new-lost/new-lost"
   ],
   "window": {
     "navigationBarTextStyle": "white",

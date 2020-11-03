@@ -1,0 +1,42 @@
+<!--pages/lost-info/lost-info.wxml-->
+<view>
+  <div>
+    <van-row>
+      <van-col>
+        <image class="title-pic" src="{{infoData.images[1]}}"></image>
+      </van-col>
+      <van-col>
+        <van-row> <text class="object-name-text">{{infoData.object_name}}</text></van-row>
+        <van-row> <text class="sort-text">{{infoData.object_sort}}</text></van-row>
+      </van-col>
+    </van-row>
+  </div>
+  <van-panel title="详情描述">
+    <view style="margin: 30rpx; font-size:28rpx; color:grey;">{{infoData.describe}}</view>
+  </van-panel>
+  <van-cell-group title="物品特征">
+    <van-cell title="物品种类" icon="apps-o" value="{{infoData.object_sort}}"></van-cell>
+    <van-cell title="丢失时间" icon="clock-o" value="{{infoData.found_time}}"></van-cell>
+    <van-cell title="丢失地点" icon="location-o" value="{{infoData.found_location}}"></van-cell>
+    <van-cell title="丢失者" icon="contact" value="{{infoData.founder_name}}"></van-cell>
+    <van-cell icon="label-o" title="标签">
+      <van-tag wx:for="{{infoData.tags}}" type="primary" plain style="margin:10rpx;">{{item}}</van-tag>
+    </van-cell>
+    <van-cell title="状态" value="{{infoData.status}}"></van-cell>
+  </van-cell-group>
+  <van-panel title="图片">
+    <view>
+      <van-grid column-num="3" class="card-pic">
+        <van-grid-item wx:for="{{infoData.images}}">
+          <image style="max-width: 33%; height: 90px" src="{{item}}" bindtap="showPicture" data-index="{{index}}" data-currentUrl="{{item}}" />
+        </van-grid-item>
+      </van-grid>
+    </view>
+    <!-- <mp-gallery show="{{gallery_show}}" img-urls="{{infoData.images}}" hide-on-click="{{true}}"
+      current="{{current_picture}}" delete="{{false}}"></mp-gallery> -->
+  </van-panel>
+  <van-cell-group title="联系方式">
+    <van-cell wx:for="{{infoData.contact_infomation}}" wx:for-index="key" title="{{key}}" value="{{item}}"></van-cell>
+  </van-cell-group>
+  <van-button type="primary" class="button" block>我有线索/我捡到了</van-button>
+</view>

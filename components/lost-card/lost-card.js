@@ -1,10 +1,11 @@
 // components/lost-card/lost-card.js
+
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-
+    cardData: Object
   },
 
   /**
@@ -18,6 +19,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    enterInfo: function (e) {
+      wx.navigateTo({
+        url: '/pages/lost-info/lost-info?id=1',
+      })
+    }
   }
 })

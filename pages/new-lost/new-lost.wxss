@@ -1,0 +1,14 @@
+/* pages/new-lost/new-lost.wxss */
+.pic-uploader{
+  margin: 30rpx;
+}
+
+.release-btn{
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+}
+
+.tag{
+  margin: 10px;
+}

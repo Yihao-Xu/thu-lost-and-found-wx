@@ -1,9 +1,9 @@
-<!--pages/new-found/new-found.wxml-->
+<!--pages/new-lost/new-lost.wxml-->
 <view>
   <van-cell-group title="物品信息">
     <van-cell title="物品种类" icon="apps-o" value="{{infoData.object_sort}}" is-link bindtap="openPicker" />
-    <van-cell title="拾取时间" icon="clock-o" value="{{infoData.found_time}}" is-link bindtap="openCalendar" />
-    <van-field label="拾取地点" left-icon="location-o" value="{{infoData.found_location}}" placeholder="请输入捡到失物的地点" />
+    <van-cell title="丢失时间" icon="clock-o" value="{{infoData.found_time}}" is-link bindtap="openCalendar" />
+    <van-field label="丢失地点" left-icon="location-o" value="{{infoData.found_location}}" placeholder="请输入捡到失物的地点" />
     <van-field label="详情描述" left-icon="description" value="{{infoData.describe}}" type="textarea" autosize
       placeholder="请输入对失物的详情描述" />
   </van-cell-group>
@@ -35,7 +35,7 @@
       formatter="{{formatter}}" />
   </van-popup>
 
-  <van-button block type="primary" class="release-btn" bindtap="release">提交招领启事</van-button>
+  <van-button plain block type="primary" class="release-btn" bindtap="release">提交招领启事</van-button>
 
   <van-dialog id="van-dialog" />
 

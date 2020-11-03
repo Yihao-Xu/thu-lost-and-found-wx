@@ -1,0 +1,18 @@
+/* pages/lost-info/lost-info.wxss */
+
+.title-pic {
+  max-height: 96rpx;
+  max-width: 96rpx;
+  margin: 20rpx;
+}
+
+.object-name-text {
+  position: relative;
+  top: 20rpx;
+}
+
+.sort-text {
+  position: relative;
+  font-size: small;
+  color: gray;
+}

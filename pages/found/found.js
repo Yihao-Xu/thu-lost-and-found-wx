@@ -80,7 +80,6 @@ Page({
    * 用户进行搜索
    */
   onSearch: function(){
-    console.log(this.data.search_value)
   },
 
     /**
