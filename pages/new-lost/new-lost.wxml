@@ -27,11 +27,11 @@
 
   <!-- 物品种类选择器 弹出层 -->
   <van-popup position="bottom" round model:show="{{ pickerShow }}" bind:close="pickerClose">
-    <van-picker title="物品种类" columns="{{ pickerList }}" bind:change="pickerChange" />
+    <van-picker title="物品种类" show-toolbar columns="{{ pickerList }}" bind:change="pickerChange" bind:confirm="pickerConfirm" bind:cancel="pickerCancel"/>
   </van-popup>
   <!-- 日期选择器 弹出层 -->
   <van-popup position="bottom" round model:show="{{ calendarShow }}" bind:close="calendarClose">
-    <van-datetime-picker title="拾取日期" type="date" value="{{date}}" bind:input="calendarChange" max-date="{{maxDate}}"
+    <van-datetime-picker title="拾取日期" type="date" value="{{date}}" bind:input="calendarChange" max-date="{{maxDate}}" bind:confirm="calendarConfirm" bind:cancel="calendarCancel"
       formatter="{{formatter}}" />
   </van-popup>
 

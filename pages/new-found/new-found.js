@@ -17,8 +17,9 @@ Page({
       ],
       tags: ["test1", "test2"]
     },
-    pickerShow: false,
-    calendarShow: false,
+    pickerShow: false,//是否显示物品种类选择器弹出层
+    calendarShow: false,//是否显示日期选择器弹出层
+    object_sort_tmp:"",//临时的物品种类记录
     pickerList: [ //物品选择器的列表
       "",
       "校园卡",
@@ -30,7 +31,7 @@ Page({
     ],
     date: new Date().getTime(),
     maxDate: new Date().getTime(),
-    formatter: function (type, value) {
+    formatter: function (type, value) {//日期选择器的格式化函数
       if (type === 'year') {
         return `${value}年`;
       } else if (type === 'month') {
@@ -38,8 +39,8 @@ Page({
       }
       return value;
     },
-    tagDialogShow: false,
-    tag: ""
+    tagDialogShow: false,//是否显示增加tag的弹窗
+    tag: "",//临时的tag记录
   },
 
   /**
@@ -112,12 +113,25 @@ Page({
     });
   },
   pickerChange: function (event) {
-    const {
-      value
-    } = event.detail
+    // const {
+    //   value
+    // } = event.detail
+    // var os = "infoData.object_sort"
+    // this.setData({
+    //   [os]: value
+    // })
+  },
+  pickerConfirm:function(event){
+    const{value}=event.detail
     var os = "infoData.object_sort"
     this.setData({
-      [os]: value
+      [os]:value,
+      pickerShow:false
+    })
+  },
+  pickerCancel:function(event){
+    this.setData({
+      pickerShow:false
     })
   },
   openPicker: function (event) {
@@ -178,6 +192,18 @@ Page({
     }
   },
   calendarChange: function (event) {
+    // const {
+    //   year,
+    //   month,
+    //   date
+    // } = this.getYMDHMS(event.detail)
+    // var ft = 'infoData.found_time'
+    // this.setData({
+    //   date: event.detail,
+    //   [ft]: year + '-' + month + '-' + date
+    // })
+  },
+  calendarConfirm:function(event){
     const {
       year,
       month,
@@ -186,9 +212,16 @@ Page({
     var ft = 'infoData.found_time'
     this.setData({
       date: event.detail,
-      [ft]: year + '-' + month + '-' + date
+      [ft]: year + '-' + month + '-' + date,
+      calendarShow:false
     })
   },
+  calendarCancel:function(event){
+    this.setData({
+      calendarShow:false
+    })
+  },
+  
   release: function (event) {
     Dialog.confirm({
         title: '确认提交',

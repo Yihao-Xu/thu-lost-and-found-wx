@@ -111,12 +111,25 @@ Page({
     });
   },
   pickerChange: function (event) {
-    const {
-      value
-    } = event.detail
+    // const {
+    //   value
+    // } = event.detail
+    // var os = "infoData.object_sort"
+    // this.setData({
+    //   [os]: value
+    // })
+  },
+  pickerConfirm:function(event){
+    const{value}=event.detail
     var os = "infoData.object_sort"
     this.setData({
-      [os]: value
+      [os]:value,
+      pickerShow:false
+    })
+  },
+  pickerCancel:function(event){
+    this.setData({
+      pickerShow:false
     })
   },
   openPicker: function (event) {
@@ -124,6 +137,7 @@ Page({
       pickerShow: true
     })
   },
+
 
   //打开日期选择器
   openCalendar: function (event) {
@@ -177,6 +191,18 @@ Page({
     }
   },
   calendarChange: function (event) {
+    // const {
+    //   year,
+    //   month,
+    //   date
+    // } = this.getYMDHMS(event.detail)
+    // var ft = 'infoData.found_time'
+    // this.setData({
+    //   date: event.detail,
+    //   [ft]: year + '-' + month + '-' + date
+    // })
+  },
+  calendarConfirm:function(event){
     const {
       year,
       month,
@@ -185,7 +211,13 @@ Page({
     var ft = 'infoData.found_time'
     this.setData({
       date: event.detail,
-      [ft]: year + '-' + month + '-' + date
+      [ft]: year + '-' + month + '-' + date,
+      calendarShow:false
+    })
+  },
+  calendarCancel:function(event){
+    this.setData({
+      calendarShow:false
     })
   },
   release: function (event) {
