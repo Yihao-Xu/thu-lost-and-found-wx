@@ -67,5 +67,19 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  //进入编辑资料页面的函数
+  enterEditor: function(event){
+    wx.navigateTo({
+      url: '/pages/personalInfoEditor/personalInfoEditor',
+    })
+  },
+
+  //进入认证界面
+  enterCertification: function(event){
+    wx.navigateTo({
+      url: '/pages/certification/certification',
+    })
   }
 })

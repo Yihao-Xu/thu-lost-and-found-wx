@@ -11,5 +11,5 @@
   margin: 5rpx;
 }
 .tag{
-  margin: 0 10rpx 0 10rpx;
+  margin: 10px;
 }

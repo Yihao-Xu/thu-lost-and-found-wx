@@ -9,7 +9,9 @@
     "pages/lost/lost",
     "pages/notice/notice",
     "pages/lost-info/lost-info",
-    "pages/new-lost/new-lost"
+    "pages/new-lost/new-lost",
+    "pages/personalInfoEditor/personalInfoEditor",
+    "pages/certification/certification"
   ],
   "window": {
     "navigationBarTextStyle": "white",

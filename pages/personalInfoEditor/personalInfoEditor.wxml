@@ -1,0 +1,8 @@
+<!--pages/personalInfoEditor/personalInfoEditor.wxml-->
+<van-cell-group>
+  <van-field label="昵称" maxlength="15" model:value="{{nickname}}" input-align="right"></van-field>
+  <van-field label="微信号" maxlength="30" model:value="{{wx}}" input-align="right"></van-field>
+  <van-field label="QQ" maxlength="15" model:value="{{QQ}}" input-align="right"></van-field>
+  <van-field label="邮箱" maxlength="50" model:value="{{email}}" input-align="right"></van-field>
+  <van-field label="手机" maxlength="11" model:value="{{mobile}}" input-align="right"></van-field>
+</van-cell-group>

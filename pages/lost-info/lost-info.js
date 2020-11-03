@@ -42,6 +42,9 @@ Page({
    */
   onLoad: function (options) {
     this.data.id=options.id
+    wx.setNavigationBarTitle({
+      title: '寻物启事详情',
+    })
   },
 
   /**

@@ -20,9 +20,9 @@
     <van-cell title="认证：" value="已认证" wx:if="{{myInfo.hasCertification==true}}"></van-cell>
   </van-cell-group>
   <div class="button" wx:if="{{myInfo.hasCertification==false}}">
-    <van-button type="primary" class="button" block>前往认证</van-button>
+    <van-button type="primary" class="button" block bindtap="enterCertification">前往认证</van-button>
   </div>
   <div class="button">
-    <van-button type="primary" class="button" block>编辑资料</van-button>
+    <van-button type="primary" class="button" block bindtap="enterEditor">编辑资料</van-button>
   </div>
 </view>

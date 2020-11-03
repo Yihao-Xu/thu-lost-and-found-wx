@@ -1,0 +1,6 @@
+<!--pages/certification/certification.wxml-->
+<van-cell-group>
+  <van-field label="学号" maxlength="15" model:value="{{number}}" placeholder="请输入学号" input-align="right"></van-field>
+  <van-field label="姓名" maxlength="30" model:value="{{name}}" placeholder="请输入真实姓名" input-align="right"></van-field>
+  <van-field label="邮箱" maxlength="15" model:value="{{email}}" placeholder="请输入清华邮箱" input-align="right"></van-field>
+</van-cell-group>
