@@ -13,12 +13,12 @@ Page({
         "/image/ip12-2.jpg",
         "/image/ip12-3.jpg"
       ],
-      found_location:"六教602",
+      found_location:"紫荆园食堂",
       found_time:"10月31日下午",
-      founder_name:"徐亦豪",
+      founder_name:"李祁",
       object_name:"iPhone12 Pro",
       release_time:"今天11:02",
-      describe:"今天咱在六教602捡到了一部手机，蓝色，iPhone12 Pro，没有手机壳，锁屏是一个美少女，失主请联系咱。",
+      describe:"今天我在紫荆园食堂丢了我的iPhone12 Pro，球球捡到的人给咱联系咱，必有重谢！",
       status:"未归还",
       tags:[
         "蓝色",
