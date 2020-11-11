@@ -9,5 +9,5 @@
   box-sizing: border-box;
 } 
 page{
-  background: rgb(255, 246, 255);
+  background: rgb(240, 239, 240);
 }

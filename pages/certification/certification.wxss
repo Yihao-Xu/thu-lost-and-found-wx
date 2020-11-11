@@ -1,1 +1,16 @@
 /* pages/certification/certification.wxss */
+.button{
+  width: 100%;
+  position: relative;
+  margin: 20px;
+}
+
+.input{
+  position: relative;
+  margin:0;
+}
+
+.group{
+  display:flex;
+  width: 100%;
+}

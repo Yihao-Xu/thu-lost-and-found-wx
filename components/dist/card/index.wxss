@@ -1,11 +1,11 @@
 .i-card {
-  margin: 0 16px;
+  margin: 0 0;
   font-size: 14px;
   overflow: hidden;
   position: relative;
   background: #fff;
   border: 1rpx solid #dddee1;
-  border-radius: 5px
+  border-radius: 0px
 }
 
 .i-card-full {
