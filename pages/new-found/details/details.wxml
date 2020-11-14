@@ -1,41 +1,34 @@
-<!--pages/new-found/new-found.wxml-->
+<!--pages/new-found/details/details.wxml-->
+<!--pages/new-lost/new-lost.wxml-->
 <view>
-  <!-- 物品信息 -->
-  <van-cell-group title="物品信息">
-    <van-cell title="物品种类" icon="apps-o" value="{{infoData.object_sort}}" is-link bindtap="openPicker" />
+  <van-cell-group title="拾取详情">
     <van-cell title="拾取时间" icon="clock-o" value="{{infoData.found_time}}" is-link bindtap="openCalendar" />
-    <van-field label="拾取地点" left-icon="location-o" value="{{infoData.found_location}}" placeholder="请输入捡到失物的地点" />
+    <van-cell title="拾取地点" icon="location-o" value="{{infoData.found_location}}" is-link bindtap="chooseLocation" />
     <van-field label="详情描述" left-icon="description" value="{{infoData.describe}}" type="textarea" autosize
-      placeholder="请输入对失物的详情描述" />
+      placeholder="请输入对拾取过程的详情描述" />
   </van-cell-group>
-  <!-- 标签 -->
   <van-panel title="标签" desc="对物品的描述，会用于招领与寻物的匹配。" use-footer-slot>
     <view style="min-height='100px'">
-      <van-tag wx:for="{{infoData.tags}}" type="primary" plain closeable bind:close="deleteTag" data-index="{{index}}" class="tag" size="large">
+      <van-tag wx:for="{{infoData.tags}}" type="primary" plain closeable bind:close="deleteTag" data-index="{{index}}"
+        class="tag" size="large">
         {{item}}</van-tag>
     </view>
     <view slot="footer">
       <div style="position:relative; left:80%;">
-      <van-button type="primary" bindtap="openTagDialog" size="small" style="max-width:20%;">增加标签</van-button>
-    </div>
+        <van-button type="primary" bindtap="openTagDialog" size="small" style="max-width:20%;">增加标签</van-button>
+      </div>
     </view>
   </van-panel>
-  <!-- 物品图片 -->
   <van-cell-group title="物品图片">
     <van-uploader class="pic-uploader" file-list="{{infoData.picList}}" max-count="3" use-before-read
       bind:before-read="beforeRead" bind:after-read="afterRead">
     </van-uploader>
   </van-cell-group>
 
-
-  <!-- 物品种类选择器 弹出层 -->
-  <van-popup position="bottom" round model:show="{{ pickerShow }}" bind:close="pickerClose">
-    <van-picker title="物品种类" show-toolbar columns="{{ pickerList }}" bind:change="pickerChange" bind:confirm="pickerConfirm" bind:cancel="pickerCancel"/>
-  </van-popup>
   <!-- 日期选择器 弹出层 -->
   <van-popup position="bottom" round model:show="{{ calendarShow }}" bind:close="calendarClose">
-    <van-datetime-picker title="拾取日期" type="date" value="{{date}}" bind:input="calendarChange" max-date="{{maxDate}}" bind:confirm="calendarConfirm" bind:cancel="calendarCancel"
-      formatter="{{formatter}}" />
+    <van-datetime-picker title="拾取日期" type="date" value="{{date}}" bind:input="calendarChange" max-date="{{maxDate}}"
+      bind:confirm="calendarConfirm" bind:cancel="calendarCancel" formatter="{{formatter}}" />
   </van-popup>
 
   <van-button block type="primary" class="release-btn" bindtap="release">提交招领启事</van-button>

@@ -1,0 +1,8 @@
+<!--pages/new-found/attribute/attribute.wxml-->
+<view class='page'>
+  <van-cell-group>
+    <van-field wx:for="{{template}}" wx:for-item="value" wx:for-index="key" label="{{key}}" value="{{template[key]}}" placeholder="请输入{{key}}">
+    </van-field>
+  </van-cell-group>
+  <van-button type="primary" block class="button" bindtap="enterNext">下一步</van-button>
+</view>

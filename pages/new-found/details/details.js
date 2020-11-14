@@ -1,5 +1,4 @@
-// pages/new-found/new-found.js
-
+// pages/new-found/details/details.js
 import Dialog from '@vant/weapp/dialog/dialog';
 Page({
 
@@ -8,7 +7,6 @@ Page({
    */
   data: {
     infoData: {
-      object_sort: "",
       found_time: "",
       found_location: "",
       describe: "",
@@ -17,21 +15,10 @@ Page({
       ],
       tags: ["test1", "test2"]
     },
-    pickerShow: false,//是否显示物品种类选择器弹出层
-    calendarShow: false,//是否显示日期选择器弹出层
-    object_sort_tmp:"",//临时的物品种类记录
-    pickerList: [ //物品选择器的列表
-      "",
-      "校园卡",
-      "书籍",
-      "手机",
-      "电子产品",
-      "自行车/电动车",
-      "其他"
-    ],
+    calendarShow: false,
     date: new Date().getTime(),
     maxDate: new Date().getTime(),
-    formatter: function (type, value) {//日期选择器的格式化函数
+    formatter: function (type, value) {
       if (type === 'year') {
         return `${value}年`;
       } else if (type === 'month') {
@@ -39,8 +26,8 @@ Page({
       }
       return value;
     },
-    tagDialogShow: false,//是否显示增加tag的弹窗
-    tag: "",//临时的tag记录
+    tagDialogShow: false,
+    tag: ""
   },
 
   /**
@@ -48,7 +35,7 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '发布招领启事',
+      title: '拾取详情',
     })
   },
 
@@ -101,45 +88,26 @@ Page({
 
   },
 
+  /**
+   * 选择地点
+   */
+  chooseLocation: function(){
+    const that=this
+    wx.chooseLocation({
+      success(res){
+        var path = 'infoData.found_location'
+        that.setData({
+          [path]:res.name
+        })
+      }
+    })
+  },
+
   // 用户上传图片前校验是否是图片
   beforeRead: function (event) {},
   //用户上传图片后
   afterRead: function (event) {
     //有后端后才能填写
-  },
-
-  //关闭Picker弹窗
-  pickerClose: function (event) {
-    this.setData({
-      pickerShow: false
-    });
-  },
-  pickerChange: function (event) {
-    // const {
-    //   value
-    // } = event.detail
-    // var os = "infoData.object_sort"
-    // this.setData({
-    //   [os]: value
-    // })
-  },
-  pickerConfirm:function(event){
-    const{value}=event.detail
-    var os = "infoData.object_sort"
-    this.setData({
-      [os]:value,
-      pickerShow:false
-    })
-  },
-  pickerCancel:function(event){
-    this.setData({
-      pickerShow:false
-    })
-  },
-  openPicker: function (event) {
-    this.setData({
-      pickerShow: true
-    })
   },
 
   //打开日期选择器
@@ -223,7 +191,6 @@ Page({
       calendarShow:false
     })
   },
-  
   release: function (event) {
     Dialog.confirm({
         title: '确认提交',
@@ -232,7 +199,7 @@ Page({
       .then(() => {
         // on confirm
         wx.navigateBack({
-          delta: 1,
+          delta: 3,
           success: (res) => {},
           fail: (res) => {},
           complete: (res) => {},
@@ -278,6 +245,4 @@ Page({
       [path]:ts
     })
   }
-
-
 })

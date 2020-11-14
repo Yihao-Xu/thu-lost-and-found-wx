@@ -1,4 +1,4 @@
-/* pages/new-found/new-found.wxss */
+/* pages/new-found/details/details.wxss */
 .pic-uploader{
   margin: 30rpx;
 }

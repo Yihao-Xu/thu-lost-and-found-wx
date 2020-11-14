@@ -1,0 +1,29 @@
+/* pages/new-found/kind/kind.wxss */
+.page{
+  display: flex;
+}
+
+.grid{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 75%;
+}
+
+.grid-item{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 30%;
+  margin: 1.5%;
+}
+
+.grid-image{
+  max-height:60px;
+  max-width:90%;
+  margin: 5px;
+}
+
+.grid-text{
+  margin: 2px auto;
+}
