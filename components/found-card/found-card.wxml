@@ -1,8 +1,8 @@
 <!--components/found-card/found-card.wxml-->
 <i-card title="{{cardData.username}}" extra="{{cardData.release_time}}" thumb="{{cardData.avatar}}" class="card" bindtap="enterInfo"> 
   <view slot="content">
-    <div style="width:100%;"><text>{{cardData.content}}</text></div>
-    <van-divider/>
+    <!-- <div style="width:100%;"><text>{{cardData.content}}</text></div> -->
+    <!-- <van-divider/> -->
     <van-grid column-num="3" class="card-pic">
       <van-grid-item><image style="width: 33%; height: 90px;" src="{{cardData.image1}}" /></van-grid-item>
       <van-grid-item> <image style="width: 33%; height: 90px;" src="{{cardData.image2}}" /></van-grid-item>

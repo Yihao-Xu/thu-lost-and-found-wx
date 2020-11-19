@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/found/found",
-    "pages/new-found/kind/kind",
+    "pages/new-found/types/types",
     "pages/certification/certification",
     "pages/found-info/found-info",
     "pages/personalInfo/personalInfo",

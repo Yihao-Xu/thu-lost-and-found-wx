@@ -13,7 +13,6 @@ Page({
       picList: [
 
       ],
-      tags: ["test1", "test2"]
     },
     calendarShow: false,
     date: new Date().getTime(),
@@ -26,8 +25,7 @@ Page({
       }
       return value;
     },
-    tagDialogShow: false,
-    tag: ""
+    
   },
 
   /**
@@ -177,12 +175,14 @@ Page({
     const {
       year,
       month,
-      date
+      date,
+      hours,
+      minute,
     } = this.getYMDHMS(event.detail)
     var ft = 'infoData.found_time'
     this.setData({
       date: event.detail,
-      [ft]: year + '-' + month + '-' + date,
+      [ft]: year + '-' + month + '-' + date + ' ' + hours + ':' + minute,
       calendarShow:false
     })
   },
@@ -210,39 +210,5 @@ Page({
       });
   },
 
-  addTag: function (event) {
-    if (event.detail === "confirm" && this.data.tag!=="") {
-      var ts = this.data.infoData.tags
-      ts.push(this.data.tag)
-      var path = "infoData.tags"
-
-      this.setData({
-        tagDialogShow: false,
-        [path]: ts,
-        tag: "",
-
-      })
-    }else{
-      this.setData({
-        tagDialogShow: false,
-        tag: "",
-      })
-    }
-  },
-  cancelTag: function (event) {
-
-  },
-  openTagDialog: function (event) {
-    this.setData({
-      tagDialogShow: true
-    })
-  },
-  deleteTag: function (event) {
-    var ts = this.data.infoData.tags
-    ts.splice(event.currentTarget.dataset.index,1)
-    var path="infoData.tags"
-    this.setData({
-      [path]:ts
-    })
-  }
+  
 })

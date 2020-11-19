@@ -3,3 +3,7 @@
 .button{
   margin: 20px;
 }
+
+.tag{
+  margin: 10px;
+}

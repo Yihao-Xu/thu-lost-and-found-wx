@@ -1,8 +1,30 @@
 <!--pages/new-found/attribute/attribute.wxml-->
 <view class='page'>
   <van-cell-group>
-    <van-field wx:for="{{template}}" wx:for-item="value" wx:for-index="key" label="{{key}}" value="{{template[key]}}" placeholder="请输入{{key}}">
+    <van-field wx:for="{{template.fields}}" wx:for-item="value" wx:for-index="key" label="{{key}}" value="{{template.fields[key]}}" placeholder="请输入{{key}}">
     </van-field>
+    <van-field label="物品详情" placeholder="请输入物品详情(选填)" value="{{description}}" type="textarea" autosize></van-field>
   </van-cell-group>
+
+  <!-- tag显示面板 -->
+  <van-panel title="标签" desc="对物品的描述，会用于招领与寻物的匹配。" use-footer-slot>
+    <view style="min-height='100px'">
+      <van-tag wx:for="{{tags}}" type="primary" plain closeable bind:close="deleteTag" data-index="{{index}}"
+        class="tag" size="large">
+        {{item}}</van-tag>
+    </view>
+    <view slot="footer">
+      <div style="position:relative; left:80%;">
+        <van-button type="primary" bindtap="openTagDialog" size="small" style="max-width:20%;">增加标签</van-button>
+      </div>
+    </view>
+  </van-panel>
+  <!-- tag添加窗口 -->
+  <van-dialog id="tag-dialog" show-cancel-button title="增加标签" use-slot show="{{tagDialogShow}}" bind:close="addTag">
+    <van-cell-group>
+      <van-field placeholder="请输入标签名称" model:value="{{tag}}" style="position:relative;width:60%;"></van-field>
+    </van-cell-group>
+  </van-dialog>
+
   <van-button type="primary" block class="button" bindtap="enterNext">下一步</van-button>
 </view>

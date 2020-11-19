@@ -1,16 +1,21 @@
 // pages/new-found/attribute/attribute.js
+import Dialog from '@vant/weapp/dialog/dialog';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    kind:"",
+    type:"",
     template:{
       '姓名':'',
       '院系':'',
       '卡号':'',
-    }
+    },
+    description:"",
+    tags: ["test1", "test2"],
+    tagDialogShow: false,
+    tag: ""
   },
 
   /**
@@ -18,10 +23,20 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      kind:options.kind
+      type:options.type,
     })
+    const that = this
+    wx.getStorage({
+      key: 'cur-template',
+      success(res){
+        that.setData({template:res.data})
+      }
+    })
+    console.log(wx.getStorage({
+      key: 'cur-template',
+    }))
     wx.setNavigationBarTitle({
-      title: '填写'+this.data.kind+'特征',
+      title: '填写'+this.data.type+'特征',
     })
   },
 
@@ -79,9 +94,49 @@ Page({
    */
   enterNext:function(){
     // 将填写的内容存入localstorage
-    // TODO
+    var property = {}
+    property.template = this.data.type
+    property.attribute = this.data.template
+    property.name = 'name'
+    wx.setStorage({
+      data: property,
+      key: 'cur-property',
+    })
     wx.navigateTo({
       url: '/pages/new-found/details/details',
+    })
+  },
+
+  addTag: function (event) {
+    if (event.detail === "confirm" && this.data.tag!=="") {
+      var ts = this.data.tags
+      ts.push(this.data.tag)
+      this.setData({
+        tagDialogShow: false,
+        tags: ts,
+        tag: "",
+
+      })
+    }else{
+      this.setData({
+        tagDialogShow: false,
+        tag: "",
+      })
+    }
+  },
+  cancelTag: function (event) {
+
+  },
+  openTagDialog: function (event) {
+    this.setData({
+      tagDialogShow: true
+    })
+  },
+  deleteTag: function (event) {
+    var ts = this.data.tags
+    ts.splice(event.currentTarget.dataset.index,1)
+    this.setData({
+      tags:ts
     })
   }
 })

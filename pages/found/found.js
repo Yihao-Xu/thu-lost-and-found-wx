@@ -106,7 +106,7 @@ Page({
   
   new_found:function(){
     wx.navigateTo({
-      url: '/pages/new-found/kind/kind',
+      url: '/pages/new-found/types/types',
     })
   }
 })

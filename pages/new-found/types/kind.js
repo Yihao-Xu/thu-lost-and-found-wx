@@ -30,6 +30,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '选择物品种类',
     })
+    //发送请求加载kind
   },
 
   /**
