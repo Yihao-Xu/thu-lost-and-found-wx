@@ -204,6 +204,7 @@ Page({
         data.found_datetime = this.data.infoData.found_time
         data.found_location = this.data.infoData.found_location
         data.description = this.data.infoData.describe
+        data.author = 2
         wx.getStorage({
           key: 'cur-property',
           success(res){
@@ -213,7 +214,7 @@ Page({
         data.contacts = [
           {
             name:"xyh",
-            method:"phone",
+            method:"PHN",
             details:"18611362038"
           }
         ]
