@@ -1,5 +1,6 @@
 // pages/new-found/details/details.js
 import Dialog from '@vant/weapp/dialog/dialog';
+import { getReq, postReq } from '../../../service/http';
 Page({
 
   /**
@@ -198,6 +199,27 @@ Page({
       })
       .then(() => {
         // on confirm
+        //组合提交的Json
+        var data = {}
+        data.found_datetime = this.data.infoData.found_time
+        data.found_location = this.data.infoData.found_location
+        data.description = this.data.infoData.describe
+        wx.getStorage({
+          key: 'cur-property',
+          success(res){
+            data.property = res.data
+          }
+        })
+        data.contacts = [
+          {
+            name:"xyh",
+            method:"phone",
+            details:"18611362038"
+          }
+        ]
+        //api提交启事
+        postReq('/found-notices/',data,null)
+        //返回首页
         wx.navigateBack({
           delta: 3,
           success: (res) => {},

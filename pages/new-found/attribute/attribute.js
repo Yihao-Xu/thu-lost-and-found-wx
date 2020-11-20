@@ -96,8 +96,11 @@ Page({
     // 将填写的内容存入localstorage
     var property = {}
     property.template = this.data.type
-    property.attribute = this.data.template
+    property.attribute = this.data.template.fields
     property.name = 'name'
+    property.tags = this.data.tags
+    property.description = this.data.description
+    console.log(property)
     wx.setStorage({
       data: property,
       key: 'cur-property',
@@ -137,6 +140,16 @@ Page({
     ts.splice(event.currentTarget.dataset.index,1)
     this.setData({
       tags:ts
+    })
+  },
+  // wx双向绑定不支持深度路径，只能利用函数来改变值
+  attributeChange: function(event){
+    var key = event.currentTarget.dataset.key
+    var path = 'template.fields.' + key
+    console.log(path)
+    console.log(event.detail)
+    this.setData({
+      [path]:event.detail
     })
   }
 })

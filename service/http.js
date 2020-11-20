@@ -1,5 +1,5 @@
 // var rootDocument = 'xyh.iterator-traits.com'
-var rootDocument = 'http://192.168.0.103:80'
+var rootDocument = 'http://xyh.iterator-traits.com'
 
 var header = {
   'Accept' : 'application/json',
@@ -13,7 +13,7 @@ function getReq(url, cb) {
   })
   wx.request({
     url: rootDocument + url,
-    method : 'get',
+    method : 'GET',
     header: header,
     success :function (res){
       wx.hideLoading()
@@ -40,7 +40,7 @@ function postReq(url, data, cb) {
       url: rootDocment + url,
       header: header,
       data: data,
-      method: 'post',
+      method: 'POST',
       success: function (res) {
         wx.hideLoading();
         return typeof cb == "function" && cb(res.data)
@@ -53,6 +53,9 @@ function postReq(url, data, cb) {
           showCancel: false
         })
         return typeof cb == "function" && cb(false)
+      },
+      complete: function (){
+        wx.hideLoading()
       }
     })
  

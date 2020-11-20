@@ -1,9 +1,9 @@
 <!--pages/new-found/attribute/attribute.wxml-->
 <view class='page'>
   <van-cell-group>
-    <van-field wx:for="{{template.fields}}" wx:for-item="value" wx:for-index="key" label="{{key}}" value="{{template.fields[key]}}" placeholder="请输入{{key}}">
+    <van-field wx:for="{{template.fields}}" wx:for-item="value" wx:for-index="key" label="{{key}}"  placeholder="请输入{{key}}" data-key="{{key}}" bind:change="attributeChange">
     </van-field>
-    <van-field label="物品详情" placeholder="请输入物品详情(选填)" value="{{description}}" type="textarea" autosize></van-field>
+    <van-field label="物品详情" placeholder="请输入物品详情(选填)" model:value="{{description}}" type="textarea" autosize></van-field>
   </van-cell-group>
 
   <!-- tag显示面板 -->
