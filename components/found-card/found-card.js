@@ -20,7 +20,7 @@ Component({
   methods: {
     enterInfo:function(e){
       wx.navigateTo({
-        url: '/pages/found-info/found-info?id=1',
+        url: '/pages/found-info/found-info?id='+this.data.cardData.id,
       })
     }
   }

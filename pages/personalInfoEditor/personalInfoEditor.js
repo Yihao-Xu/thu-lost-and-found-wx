@@ -1,3 +1,5 @@
+const { putReq } = require("../../service/http")
+
 // pages/personalInfoEditor/personalInfoEditor.js
 Page({
 
@@ -5,11 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    nickname:"徐亦豪",
-    wx:"yihao_xu",
-    QQ:"89035689",
-    email:"yihao_xu@126.com",
-    mobile:"18611362038"
+    myInfo:{}
   },
 
   /**
@@ -18,6 +16,9 @@ Page({
   onLoad: function (options) {
     wx.setNavigationBarTitle({
       title: '编辑个人信息',
+    })
+    this.setData({
+      myInfo:wx.getStorageSync('myInfo')
     })
   },
 
@@ -68,5 +69,30 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 提交修改
+   */
+  release: function(){
+    var id = this.data.myInfo.id
+    putReq("/users/"+id+'/', this.data.myInfo,function(data){
+      if(data == false) return
+      wx.setStorage({
+        data: data,
+        key: 'myInfo',
+      })
+    })
+    wx.navigateBack({
+      delta: 1,
+    })
+  },
+
+  onChange:function(event){
+    var key = event.target.dataset.key
+    var path = "myInfo." + key
+    this.setData({
+      [path] : event.detail
+    })
   }
 })

@@ -1,3 +1,5 @@
+const { getReq } = require("../../service/http")
+const {timeTrans} = require("../../lib/lib")
 // pages/found/found.js
 Page({
 
@@ -33,6 +35,7 @@ Page({
         tags:["绿色","拥有神秘力量"]
       }
     ],
+    next:"",//下一页的内容
     search_value:"",//搜索框的内容
   },
 
@@ -40,7 +43,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this
+    getReq('/found-notices/',function(data){
+      that.setData({
+        foundList:data.results,
+        next:data.next
+      })
+    })
   },
 
   /**
@@ -74,12 +83,33 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    var that = this
+    getReq('/found-notices/',function(data){
+      that.setData({
+        foundList:data.results,
+        next:data.next
+      })
+    })
+    wx.stopPullDownRefresh()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    if(this.data.next===null) return
+    var that = this
+    console.log(this.data.next)
+    var api = this.data.next.split("http://xyh.iterator-traits.com")[1]
+    var fl = this.data.foundList
+    getReq(api,function(data){
+      var nfl = fl.concat(data.results)
+      console.log(data.results)
+      that.setData({
+        foundList:nfl,
+        next:data.next
+      })
+    })
   },
 
   /**

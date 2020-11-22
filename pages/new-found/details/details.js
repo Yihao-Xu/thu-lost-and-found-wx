@@ -1,6 +1,9 @@
 // pages/new-found/details/details.js
 import Dialog from '@vant/weapp/dialog/dialog';
-import { getReq, postReq } from '../../../service/http';
+import {
+  getReq,
+  postReq
+} from '../../../service/http';
 Page({
 
   /**
@@ -26,7 +29,10 @@ Page({
       }
       return value;
     },
-    
+    upData:{},
+    wx_checked: false,
+    phone_checked:false,
+    email_checked:false
   },
 
   /**
@@ -90,13 +96,13 @@ Page({
   /**
    * 选择地点
    */
-  chooseLocation: function(){
-    const that=this
+  chooseLocation: function () {
+    const that = this
     wx.chooseLocation({
-      success(res){
+      success(res) {
         var path = 'infoData.found_location'
         that.setData({
-          [path]:res.name
+          [path]: res.name
         })
       }
     })
@@ -172,7 +178,7 @@ Page({
     //   [ft]: year + '-' + month + '-' + date
     // })
   },
-  calendarConfirm:function(event){
+  calendarConfirm: function (event) {
     const {
       year,
       month,
@@ -184,12 +190,12 @@ Page({
     this.setData({
       date: event.detail,
       [ft]: year + '-' + month + '-' + date + ' ' + hours + ':' + minute,
-      calendarShow:false
+      calendarShow: false
     })
   },
-  calendarCancel:function(event){
+  calendarCancel: function (event) {
     this.setData({
-      calendarShow:false
+      calendarShow: false
     })
   },
   release: function (event) {
@@ -204,34 +210,79 @@ Page({
         data.found_datetime = this.data.infoData.found_time
         data.found_location = this.data.infoData.found_location
         data.description = this.data.infoData.describe
-        data.author = 2
-        wx.getStorage({
-          key: 'cur-property',
-          success(res){
-            data.property = res.data
-          }
+        // wx.getStorageSync({
+        //   key: 'cur-property',
+        //   success(res) {
+        //     property = res.data
+        //     //这里修改tag的格式
+        //     var tags = property.tags
+        //     var newtags = []
+        //     for (var item of tags) {
+        //       var i = {
+        //         "name": item
+        //       }
+        //       newtags.push(i)
+        //     }
+        //     property.tags = newtags
+        //     data.property=property
+        //   }
+        // })
+        try{
+          data.property = wx.getStorageSync('cur-property')
+        }catch (e){
+
+        }
+        // 这里修改tag的格式
+            var tags = data.property.tags
+            var newtags = []
+            for (var item of tags) {
+              var i = {
+                "name": item
+              }
+              newtags.push(i)
+            }
+            data.property.tags = newtags
+        data.contacts = [{
+          name: "xyh",
+          method: "PHN",
+          details: "18611362038"
+        }]
+        this.setData({
+          upData:data
         })
-        data.contacts = [
-          {
-            name:"xyh",
-            method:"PHN",
-            details:"18611362038"
-          }
-        ]
         //api提交启事
-        postReq('/found-notices/',data,null)
-        //返回首页
-        wx.navigateBack({
-          delta: 3,
-          success: (res) => {},
-          fail: (res) => {},
-          complete: (res) => {},
+        postReq('/found-notices/', this.data.upData, function () {
+          //返回首页
+          wx.navigateBack({
+            delta: 3,
+            success: (res) => {},
+            fail: (res) => {},
+            complete: (res) => {},
+          })
         })
+
       })
       .catch(() => {
         // on cancel
       });
   },
 
-  
+  /**
+   * 开关状态改变
+   */
+  checkedChange(event){
+    var key = event.currentTarget.dataset.key
+    switch(key){
+      case "wx":
+        this.setData({wx_checked:event.detail})
+        break
+      case "phone":
+        this.setData({phone_checked:event.detail})
+        break
+      case "email":
+        this.setData({email_checked:event.detail})
+        break
+    }
+  }
+
 })

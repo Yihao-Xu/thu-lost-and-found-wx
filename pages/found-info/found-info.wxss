@@ -16,3 +16,7 @@
   font-size: small;
   color: gray;
 }
+
+.button{
+  margin:20px;
+}

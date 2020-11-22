@@ -7,6 +7,7 @@ Page({
    */
   data: {
     type:"",
+    name:"",
     template:{
       '姓名':'',
       '院系':'',
@@ -95,9 +96,9 @@ Page({
   enterNext:function(){
     // 将填写的内容存入localstorage
     var property = {}
-    property.template = this.data.type
-    property.attribute = this.data.template.fields
-    property.name = 'name'
+    property.template = this.data.template.name
+    property.attributes = this.data.template.fields
+    property.name = this.data.name
     property.tags = this.data.tags
     property.description = this.data.description
     console.log(property)

@@ -1,8 +1,12 @@
 <!--pages/personalInfoEditor/personalInfoEditor.wxml-->
-<van-cell-group>
-  <van-field label="昵称" maxlength="15" model:value="{{nickname}}" input-align="right"></van-field>
-  <van-field label="微信号" maxlength="30" model:value="{{wx}}" input-align="right"></van-field>
-  <van-field label="QQ" maxlength="15" model:value="{{QQ}}" input-align="right"></van-field>
-  <van-field label="邮箱" maxlength="50" model:value="{{email}}" input-align="right"></van-field>
-  <van-field label="手机" maxlength="11" model:value="{{mobile}}" input-align="right"></van-field>
-</van-cell-group>
+<view>
+  <van-cell-group>
+    <van-field label="昵称" maxlength="15" value="{{myInfo.username}}" input-align="right" data-key="username" bind:change="onChange"></van-field>
+    <van-field label="微信号" maxlength="30" value="{{myInfo.wechat_id}}" input-align="right" data-key="wechat_id" bind:change="onChange"></van-field>
+    <van-field label="邮箱" maxlength="50" value="{{myInfo.email}}" input-align="right" data-key="email" bind:change="onChange"></van-field>
+    <van-field label="手机" maxlength="11" value="{{myInfo.phone}}" input-align="right" data-key="phone" bind:change="onChange"></van-field>
+  </van-cell-group>
+  <van-button type="primary" bindtap="release" block style="margin:20px;">提交修改</van-button>
+</view>
+
+

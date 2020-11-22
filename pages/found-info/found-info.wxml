@@ -1,34 +1,43 @@
 <!--pages/found-info/found-info.wxml-->
+<wxs src="../../wxs/lib.wxs" module="tools"></wxs>
 <view>
   <div>
     <van-row>
-      <van-col>
+      <van-col wx:if="this.data.infoData.images!=null">
         <image class="title-pic" src="{{infoData.images[1]}}"></image>
       </van-col>
       <van-col>
-        <van-row> <text class="object-name-text">{{infoData.object_name}}</text></van-row>
-        <van-row> <text class="sort-text">{{infoData.object_sort}}</text></van-row>
+        <van-row> <text class="object-name-text">{{infoData.property.name}}</text></van-row>
+        <van-row> <text class="sort-text">{{infoData.property.template}}</text></van-row>
       </van-col>
     </van-row>
   </div>
-  <van-panel title="详情描述">
-    <view style="margin: 30rpx; font-size:28rpx; color:grey;">{{infoData.describe}}</view>
-  </van-panel>
-  <van-cell-group title="物品特征">
-    <van-cell title="物品种类" icon="apps-o" value="{{infoData.object_sort}}"></van-cell>
-    <van-cell title="拾取时间" icon="clock-o" value="{{infoData.found_time}}"></van-cell>
+  <van-cell-group title="拾取情况">
+    <van-cell title="拾取时间" icon="clock-o" value="{{tools.timeTrans(infoData.found_datetime)}}"></van-cell>
     <van-cell title="拾取地点" icon="location-o" value="{{infoData.found_location}}"></van-cell>
-    <van-cell title="拾取者" icon="contact" value="{{infoData.founder_name}}"></van-cell>
-    <van-cell icon="label-o" title="标签">
-      <van-tag wx:for="{{infoData.tags}}" type="primary" plain style="margin:10rpx;">{{item}}</van-tag>
-    </van-cell>
-    <van-cell title="状态" value="{{infoData.status}}"></van-cell>
+    <van-cell title="拾取者" icon="contact" value="{{infoData.author.username}}"></van-cell>
+    <van-panel title="拾取详情" wx:if="{{infoData.description !== ''}}">
+      <view style="margin: 30rpx; font-size:28rpx; color:grey;">{{infoData.description}}</view>
+    </van-panel>
   </van-cell-group>
-  <van-panel title="图片">
+
+  <van-cell-group title="物品特征">
+    <van-cell title="物品种类" icon="apps-o" value="{{infoData.property.template}}"></van-cell>
+    <van-cell icon="label-o" title="标签" wx:if="{{infoData.property.tags !== null}}">
+      <van-tag wx:for="{{infoData.property.tags}}" plain style="margin:10rpx;" color="{{item.color}}">{{item.name}}
+      </van-tag>
+    </van-cell>
+    <van-cell title="状态" icon="info-o" value="{{tools.acronymTrans(infoData.status)}}"></van-cell>
+    <van-panel title="物品详情" wx:if="{{infoData.property.description !== ''}}">
+      <view style="margin: 30rpx; font-size:28rpx; color:grey;">{{infoData.property.description}}</view>
+    </van-panel>
+  </van-cell-group>
+  <van-panel title="图片" wx:if="{{infoData.images !== null}}">
     <view>
       <van-grid column-num="3" class="card-pic">
         <van-grid-item wx:for="{{infoData.images}}">
-          <image style="max-width: 33%; height: 90px" src="{{item}}" bindtap="showPicture" data-index="{{index}}" data-currentUrl="{{item}}" />
+          <image style="max-width: 33%; height: 90px" src="{{item}}" bindtap="showPicture" data-index="{{index}}"
+            data-currentUrl="{{item}}" />
         </van-grid-item>
       </van-grid>
     </view>
@@ -36,7 +45,8 @@
       current="{{current_picture}}" delete="{{false}}"></mp-gallery> -->
   </van-panel>
   <van-cell-group title="联系方式">
-    <van-cell wx:for="{{infoData.contact_infomation}}" wx:for-index="key" title="{{key}}" value="{{item}}"></van-cell>
+    <van-cell wx:for="{{infoData.contacts}}" title="{{item.name}} {{tools.acronymTrans(item.method)}}"
+      value="{{item.details}}"></van-cell>
   </van-cell-group>
   <van-button type="primary" class="button" block>是我的？联系拾到者</van-button>
 </view>

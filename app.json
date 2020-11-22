@@ -57,7 +57,8 @@
     "i-grid": "components/dist/grid/index",
     "i-grid-item": "components/dist/grid-item/index",
     "i-grid-icon": "components/dist/grid-icon/index",
-    "i-grid-label": "components/dist/grid-label/index"
+    "i-grid-label": "components/dist/grid-label/index",
+    "van-switch": "@vant/weapp/switch/index"
   },
   "tabBar": {
     "color": "#000000",
