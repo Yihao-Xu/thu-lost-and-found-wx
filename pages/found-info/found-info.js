@@ -1,5 +1,5 @@
 const { timeTrans, acronymTrans} = require("../../lib/lib")
-const { getReq } = require("../../service/http")
+const { getReq, deleteReq } = require("../../service/http")
 
 // pages/found-info/found-info.js
 Page({
@@ -14,6 +14,7 @@ Page({
     activeNames:"0",
     gallery_show:false,
     current_picture:1,
+    myInfo:{},
   },
 
   /**
@@ -23,6 +24,9 @@ Page({
     this.data.id=options.id
     wx.setNavigationBarTitle({
       title: '招领启事详情',
+    })
+    this.setData({
+      myInfo:wx.getStorageSync('myInfo')
     })
     var that = this
     getReq('/found-notices/'+options.id,function(data){
@@ -92,5 +96,28 @@ Page({
     //   gallery_show:true,
     //   current_picture:e.currentTarget.dataset.index,
     // })
+  },
+
+  /**
+   * 删除启事
+   */
+  delete:function(){
+    deleteReq('/found-notices/'+this.data.infoData.id+'/', function(data){
+      wx.showToast({
+        title: '删除成功',
+        icon:'success',
+        duration: 1500
+      })
+      wx.navigateBack({
+        delta: 1,
+      })
+    })
+  },
+
+  /**
+   * 编辑启事
+   */
+  edit: function(){
+    
   }
 })

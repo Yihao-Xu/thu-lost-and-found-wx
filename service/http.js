@@ -104,9 +104,63 @@ function putReq(url, data, cb) {
   })
 }
 
+function deleteReq(url, cb){
+  wx.showLoading({
+    title: '加载中',
+  })
+  wx.request({
+    url: rootDocument + url,
+    method : 'DELETE',
+    header: header,
+    success :function (res){
+      wx.hideLoading()
+      return typeof cb == "function" && cb(res.data)
+    },
+    fail: function() {
+      wx.hideLoading()
+      wx.showModal({
+        title : '网络错误',
+        content : '网络出错，请刷新重试',
+        showCancel : false
+      })
+      return typeof cb == "function" && cb(false)
+    }
+  })
+}
+
+function uploadImage(url, filePath, name, cb){
+  wx.showLoading({
+    title: '上传图片中',
+  })
+  wx.uploadFile({
+    filePath: filePath,
+    name: name,
+    url: rootDocument+url,
+    success(res){
+      if(res.code >= 200 && res.code < 300){
+        wx.showToast({
+          title: '上传成功',
+          icon: 'success',
+          duration: 1500
+        })
+      }else{
+        wx.showToast({
+          title: '上传失败',
+          icon: 'fail',
+          duration: 1500
+        })
+      }
+
+      cb(res)
+    }
+  })
+  wx.hideLoading()
+}
 module.exports = {
   getReq: getReq,
   postReq: postReq,
   header: header,
-  putReq: putReq
+  putReq: putReq,
+  deleteReq: deleteReq,
+  uploadImage: uploadImage
 }

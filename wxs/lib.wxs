@@ -19,7 +19,7 @@ var acronymTransform = function(status){
       return "未发布"
     case "PHN":
       return "手机"
-    case "WX":
+    case "WCT":
       return "微信"
     case "EML":
       return "邮箱"

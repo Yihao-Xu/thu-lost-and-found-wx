@@ -20,8 +20,7 @@
   </van-cell-group>
 
   <van-cell-group title="物品图片">
-    <van-uploader class="pic-uploader" file-list="{{infoData.picList}}" max-count="3" use-before-read
-      bind:before-read="beforeRead" bind:after-read="afterRead">
+    <van-uploader class="pic-uploader" file-list="{{images}}" max-count="3" bind:after-read="afterRead">
     </van-uploader>
   </van-cell-group>
 
