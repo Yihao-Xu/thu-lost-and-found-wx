@@ -90,7 +90,7 @@ Page({
    */
   onPullDownRefresh: function () {
     var that = this
-    getReq('/found-notices/',function(data){
+    getReq('/found-notices/?search=' + this.data.search_value,function(data){
       that.setData({
         foundList:data.results,
         next:data.next
@@ -129,6 +129,13 @@ Page({
    * 用户进行搜索
    */
   onSearch: function(){
+    var that = this
+    getReq('/found-notices?search=' + this.data.search_value,function(data){
+      that.setData({
+        foundList:data.results,
+        next:data.next
+      })
+    })
   },
 
     /**

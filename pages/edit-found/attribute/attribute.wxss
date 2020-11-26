@@ -1,0 +1,9 @@
+/* pages/new-found/attribute/attribute.wxss */
+
+.button{
+  margin: 20px;
+}
+
+.tag{
+  margin: 10px;
+}

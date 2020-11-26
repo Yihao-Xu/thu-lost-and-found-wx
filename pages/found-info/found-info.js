@@ -118,6 +118,9 @@ Page({
    * 编辑启事
    */
   edit: function(){
-    
+    wx.setStorageSync('cur-found-notice', this.data.infoData)
+    wx.navigateTo({
+      url: '/pages/edit-found/attribute',
+    })
   }
 })
