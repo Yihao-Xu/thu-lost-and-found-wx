@@ -1,18 +1,21 @@
 <!--pages/new-found/attribute/attribute.wxml-->
 <view class='page'>
   <van-cell-group>
-    <van-field label="物品名称" model:value="{{name}}" placeholder="请输入物品名称" ></van-field>
-    <van-field wx:for="{{template.fields}}" wx:for-item="value" wx:for-index="key" label="{{key}}"  placeholder="请输入{{key}}" data-key="{{key}}" bind:change="attributeChange">
+    <van-field label="物品名称" data-path="infoData.property.name" value = "{{infoData.property.name}}" bind:change="attributeChange"
+      placeholder="请输入物品名称"></van-field>
+    <van-field wx:for="{{infoData.property.attributes}}" wx:for-item="value" wx:for-index="key" label="{{key}}"
+      placeholder="请输入{{key}}" value = "{{value}}" data-path="infoData.property.attributes.{{key}}" bind:change="attributeChange">
     </van-field>
-    <van-field label="物品详情" placeholder="请输入物品详情(选填)" model:value="{{description}}" type="textarea" autosize></van-field>
+    <van-field label="物品详情" placeholder="请输入物品详情(选填)" data-path="infoData.property.description" value = "{{infoData.property.description}}" bind:change="attributeChange" type="textarea" autosize>
+    </van-field>
   </van-cell-group>
 
   <!-- tag显示面板 -->
   <van-panel title="标签" desc="对物品的描述，会用于招领与寻物的匹配。" use-footer-slot>
     <view style="min-height='100px'">
-      <van-tag wx:for="{{tags}}" type="primary" plain closeable bind:close="deleteTag" data-index="{{index}}"
+      <van-tag wx:for="{{infoData.property.tags}}" type="primary" plain closeable bind:close="deleteTag" data-index="{{index}}"
         class="tag" size="large">
-        {{item}}</van-tag>
+        {{item.name}}</van-tag>
     </view>
     <view slot="footer">
       <div style="position:relative; left:80%;">
@@ -26,6 +29,5 @@
       <van-field placeholder="请输入标签名称" model:value="{{tag}}" style="position:relative;width:60%;"></van-field>
     </van-cell-group>
   </van-dialog>
-
   <van-button type="primary" block class="button" bindtap="enterNext">下一步</van-button>
 </view>

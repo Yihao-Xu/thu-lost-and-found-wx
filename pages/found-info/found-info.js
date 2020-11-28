@@ -91,11 +91,6 @@ Page({
       current:e.currentUrl,
       urls: this.data.infoData.images,
     })
-
-    // this.setData({
-    //   gallery_show:true,
-    //   current_picture:e.currentTarget.dataset.index,
-    // })
   },
 
   /**
@@ -119,8 +114,10 @@ Page({
    */
   edit: function(){
     wx.setStorageSync('cur-found-notice', this.data.infoData)
+    // 将启事详情存入localstorage
+    wx.setStorageSync('cur-notices', this.data.infoData)
     wx.navigateTo({
-      url: '/pages/edit-found/attribute',
+      url: '/pages/edit-found/attribute/attribute?type=' + this.data.infoData.property.template,
     })
   }
 })

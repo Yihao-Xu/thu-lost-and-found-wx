@@ -4,7 +4,7 @@
   <van-cell-group title="拾取详情">
     <van-cell title="拾取时间" icon="clock-o" value="{{infoData.found_time}}" is-link bindtap="openCalendar" />
     <van-cell title="拾取地点" icon="location-o" value="{{infoData.found_location}}" is-link bindtap="chooseLocation" />
-    <van-field label="详情描述" left-icon="description" value="{{infoData.describe}}" type="textarea" autosize
+    <van-field label="详情描述" left-icon="description" value="{{infoData.describe}}" data-path="infoData.describe" bind:change="attributeChange" type="textarea" autosize
       placeholder="请输入对拾取过程的详情描述" />
   </van-cell-group>
   <van-cell-group title="联系方式">

@@ -3,6 +3,7 @@ import Dialog from '@vant/weapp/dialog/dialog';
 import {
   getReq,
   postReq,
+  putReq,
   uploadImage
 } from '../../../service/http';
 Page({
@@ -11,14 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    infoData: {
-      found_time: "",
-      found_location: "",
-      describe: "",
-      picList: [
-
-      ],
-    },
+    infoData: {},
     calendarShow: false,
     date: new Date().getTime(),
     maxDate: new Date().getTime(),
@@ -43,6 +37,30 @@ Page({
   onLoad: function (options) {
     wx.setNavigationBarTitle({
       title: '拾取详情',
+    })
+    var that = this
+    wx.getStorage({
+      key: 'cur-notices',
+      success(res){
+        console.log(res.data)
+        that.setData({
+          infoData:res.data
+        })
+        // 设置联系方式开关
+        for (var item of that.data.infoData.contacts){
+          switch(item.methods){
+            case "WCT":
+              that.setData({wx_checked:true})
+              break;
+            case "PHN":
+              that.setData({phone_checked:true})
+              break;
+            case "EML":
+              that.setData({email_checked:true})
+              break;
+          }
+        }
+      }
     })
   },
 
@@ -184,7 +202,7 @@ Page({
       hours,
       minute,
     } = this.getYMDHMS(event.detail)
-    var ft = 'infoData.found_time'
+    var ft = 'infoData.found_datetime'
     this.setData({
       date: event.detail,
       [ft]: year + '-' + month + '-' + date + ' ' + hours + ':' + minute,
@@ -203,24 +221,6 @@ Page({
       })
       .then(() => {
         // on confirm
-        //组合提交的Json
-        var data = {}
-        data.found_datetime = this.data.infoData.found_time
-        data.found_location = this.data.infoData.found_location
-        data.description = this.data.infoData.describe
-        try{
-          data.property = wx.getStorageSync('cur-property')
-        }catch (e){
-        }
-        // 这里修改tag的格式
-            var tags = data.property.tags
-            var newtags = []
-            for (var item of tags) {
-              var i = {"name": item}
-              newtags.push(i)
-            }
-            data.property.tags = newtags
-        //这里添加联系方式
         var contacts = []
         var myInfo = wx.getStorageSync('myInfo')
         if(this.data.wx_checked && myInfo.wechat_id !== ""){
@@ -244,14 +244,14 @@ Page({
         //     "details":myInfo.phone
         //   })
         // }
-        data.contacts = contacts
-
+        var path = "infoData.contacts"
         this.setData({
-          upData:data
+          [path]:contacts
         })
         //api提交启事
         var that = this
-        postReq('/found-notices/', this.data.upData, function (res) {
+        
+        putReq('/found-notices/', this.data.infoData, function (res) {
           //上传图片
           for(var image of that.data.images){
             uploadImage('/found-notices/'+res.id+'/upload-image/',image.url, 'rua.jpg', function(r){
@@ -288,6 +288,14 @@ Page({
         this.setData({email_checked:event.detail})
         break
     }
-  }
+  },
+
+    // wx双向绑定不支持深度路径，只能利用函数来改变值
+    attributeChange: function (event) {
+      var path = event.currentTarget.dataset.path
+      this.setData({
+        [path]: event.detail
+      })
+    }
 
 })

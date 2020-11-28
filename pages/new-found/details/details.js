@@ -288,6 +288,14 @@ Page({
         this.setData({email_checked:event.detail})
         break
     }
-  }
+  },
+
+    // wx双向绑定不支持深度路径，只能利用函数来改变值
+    attributeChange: function (event) {
+      var path = event.currentTarget.dataset.path
+      this.setData({
+        [path]: event.detail
+      })
+    }
 
 })
