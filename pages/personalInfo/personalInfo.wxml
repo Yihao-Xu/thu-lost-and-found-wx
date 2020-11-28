@@ -1,13 +1,12 @@
 <!--pages/personalInfo/personalInfo.wxml-->
 <view class="page">
   <div class="head-info">
-    <image class="head-photo" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-    <text class="username" block>{{userInfo.nickName}}</text>
-    <text class="userId" block>ID:{{myInfo.ID}}</text>
+    <image class="head-photo" src="{{myInfo.avater}}" mode="cover"></image>
+    <text class="username" block>{{myInfo.username}}</text>
+    <text class="userId" block>ID:{{myInfo.id}}</text>
   </div>
   <van-cell-group title="我的联系方式" class="cell-group">
-    <van-cell title="微信号" value="{{myInfo.wx}}"></van-cell>
-    <van-cell title="QQ号" value="{{myInfo.qq}}"></van-cell>
+    <van-cell title="微信号" value="{{myInfo.wechat_id}}"></van-cell>
     <van-cell title="邮箱" value="{{myInfo.email}}"></van-cell>
     <van-cell title="手机" value="{{myInfo.mobile}}"></van-cell>
   </van-cell-group>
