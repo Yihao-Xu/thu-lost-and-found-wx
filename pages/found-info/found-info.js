@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    id:0,
+    id:1,
     infoData:{
     },
     activeNames:"0",
