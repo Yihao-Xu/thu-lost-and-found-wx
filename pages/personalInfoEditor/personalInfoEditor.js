@@ -76,6 +76,8 @@ Page({
    */
   release: function(){
     var id = this.data.myInfo.id
+    var info = this.data.myInfo
+    delete info.avatar
     putReq("/users/"+id+'/', this.data.myInfo,function(data){
       if(data == false) return
       wx.setStorage({

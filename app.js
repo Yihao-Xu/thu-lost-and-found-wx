@@ -27,7 +27,7 @@ App({
           })
           that.globalData.access = data.access
           header.Authorization = "Bearer " + data.access
-          console.log(header.Authorization)
+          // console.log(header.Authorization)
           getReq('/users/me/', function (data) {
             wx.setStorageSync('myInfo', data)
           })
@@ -41,8 +41,8 @@ App({
                     // 可以将 res 发送给后台解码出 unionId
                     that.globalData.userInfo = res.userInfo
                     var myInfo = wx.getStorageSync('myInfo')
-                    if (myInfo.avatar == null) {
-                      myInfo.avatar = res.userInfo.avatarUrl
+                    if (myInfo.username !== res.userInfo.nickName) {
+                      // myInfo.avatar = res.userInfo.avatarUrl
                       myInfo.username = res.userInfo.nickName
                       wx.setStorage({
                         data: myInfo,
