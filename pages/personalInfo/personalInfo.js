@@ -78,8 +78,15 @@ Page({
 
   //进入认证界面
   enterCertification: function(event){
-    wx.navigateTo({
-      url: '/pages/certification/certification',
+    wx.navigateToMiniProgram({
+      appId: 'wx1ebe3b2266f4afe0',
+      path: 'pages/index/index',
+      envVersion:'trial',
+      extraData:{
+        origin:"miniapp",
+        type:"id.tsinghua"
+      },
+      success(res){}
     })
   }
 })

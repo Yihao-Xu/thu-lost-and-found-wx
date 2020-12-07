@@ -30,11 +30,11 @@ Page({
       }
       return value;
     },
-    upData:{},
+    upData: {},
     wx_checked: false,
-    phone_checked:false,
-    email_checked:false,
-    images:[]
+    phone_checked: false,
+    email_checked: false,
+    images: []
   },
 
   /**
@@ -115,13 +115,27 @@ Page({
   //用户上传图片后
   afterRead: function (event) {
     console.log(event.detail)
-    const {file} = event.detail
-    var imgs = this.data.images
-    imgs.push({
-      'url':file.url
-    })
-    this.setData({
-      images:imgs
+    var that = this
+    const {
+      file
+    } = event.detail
+    // var imgs = this.data.images
+    // imgs.push({
+    //   'url': file.url
+    // })
+    // this.setData({
+    //   images: imgs
+    // })
+    uploadImage('/found-notices/upload-image/', file.url, 'rua.jpg', function (r) {
+      var imgs = that.data.images
+      console.log(r)
+      console.log(typeof(r.data))
+      imgs.push({
+        'url': r.data[0]
+      })
+      that.setData({
+        images: imgs
+      })
     })
   },
 
@@ -207,34 +221,36 @@ Page({
         var data = {}
         data.found_datetime = this.data.infoData.found_time
         data.found_location = this.data.infoData.found_location
+        data.images = this.data.images
         data.description = this.data.infoData.describe
-        try{
+        try {
           data.property = wx.getStorageSync('cur-property')
-        }catch (e){
-        }
+        } catch (e) {}
         // 这里修改tag的格式
-            var tags = data.property.tags
-            var newtags = []
-            for (var item of tags) {
-              var i = {"name": item}
-              newtags.push(i)
-            }
-            data.property.tags = newtags
+        var tags = data.property.tags
+        var newtags = []
+        for (var item of tags) {
+          var i = {
+            "name": item
+          }
+          newtags.push(i)
+        }
+        data.property.tags = newtags
         //这里添加联系方式
         var contacts = []
         var myInfo = wx.getStorageSync('myInfo')
-        if(this.data.wx_checked && myInfo.wechat_id !== ""){
+        if (this.data.wx_checked && myInfo.wechat_id !== "") {
           contacts.push({
-            "name":myInfo.username,
-            "method":"WCT",
-            "details":myInfo.wechat_id
+            "name": myInfo.username,
+            "method": "WCT",
+            "details": myInfo.wechat_id
           })
         }
-        if(this.data.email_checked && myInfo.email !== ""){
+        if (this.data.email_checked && myInfo.email !== "") {
           contacts.push({
-            "name":myInfo.username,
-            "method":"EML",
-            "details":myInfo.email
+            "name": myInfo.username,
+            "method": "EML",
+            "details": myInfo.email
           })
         }
         // if(this.data.phone_checked && myInfo.phone !== ""){
@@ -247,16 +263,11 @@ Page({
         data.contacts = contacts
 
         this.setData({
-          upData:data
+          upData: data
         })
         //api提交启事
         var that = this
         postReq('/found-notices/', this.data.upData, function (res) {
-          //上传图片
-          for(var image of that.data.images){
-            uploadImage('/found-notices/'+res.id+'/upload-image/',image.url, 'rua.jpg', function(r){
-            })
-          }
           //返回首页
           wx.navigateBack({
             delta: 3,
@@ -275,27 +286,33 @@ Page({
   /**
    * 开关状态改变
    */
-  checkedChange(event){
+  checkedChange(event) {
     var key = event.currentTarget.dataset.key
-    switch(key){
+    switch (key) {
       case "wx":
-        this.setData({wx_checked:event.detail})
+        this.setData({
+          wx_checked: event.detail
+        })
         break
       case "phone":
-        this.setData({phone_checked:event.detail})
+        this.setData({
+          phone_checked: event.detail
+        })
         break
       case "email":
-        this.setData({email_checked:event.detail})
+        this.setData({
+          email_checked: event.detail
+        })
         break
     }
   },
 
-    // wx双向绑定不支持深度路径，只能利用函数来改变值
-    attributeChange: function (event) {
-      var path = event.currentTarget.dataset.path
-      this.setData({
-        [path]: event.detail
-      })
-    }
+  // wx双向绑定不支持深度路径，只能利用函数来改变值
+  attributeChange: function (event) {
+    var path = event.currentTarget.dataset.path
+    this.setData({
+      [path]: event.detail
+    })
+  }
 
 })
