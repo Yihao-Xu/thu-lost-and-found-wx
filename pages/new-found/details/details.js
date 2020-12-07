@@ -130,8 +130,9 @@ Page({
       var imgs = that.data.images
       console.log(r)
       console.log(typeof(r.data))
+      console.log(JSON.parse(r.data))
       imgs.push({
-        'url': r.data[0]
+        'url': JSON.parse(r.data).url[0]
       })
       that.setData({
         images: imgs
