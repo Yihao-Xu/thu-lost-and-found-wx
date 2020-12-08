@@ -37,8 +37,8 @@
     <view>
       <van-grid column-num="3" class="card-pic">
         <van-grid-item wx:for="{{infoData.images}}">
-          <image style="max-width: 33%; height: 90px" src="{{item}}" bindtap="showPicture" data-index="{{index}}"
-            data-currentUrl="{{item}}" />
+          <image class="image" src="{{item.url}}" bindtap="showPicture" data-index="{{index}}"
+            data-currentUrl="{{item.url}}" mode="widthFix" />
         </van-grid-item>
       </van-grid>
     </view>

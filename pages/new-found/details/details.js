@@ -119,13 +119,6 @@ Page({
     const {
       file
     } = event.detail
-    // var imgs = this.data.images
-    // imgs.push({
-    //   'url': file.url
-    // })
-    // this.setData({
-    //   images: imgs
-    // })
     uploadImage('/found-notices/upload-image/', file.url, 'rua.jpg', function (r) {
       var imgs = that.data.images
       console.log(r)
@@ -139,7 +132,15 @@ Page({
       })
     })
   },
-
+  // 用户删除图片
+  deleteImage:function(event){
+    const {index} = event.detail
+    var imgs = this.data.images
+    imgs.splice(index, 1);
+    this.setData({
+      images:imgs
+    })
+  },
   //打开日期选择器
   openCalendar: function (event) {
     this.setData({
