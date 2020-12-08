@@ -17,6 +17,10 @@
   color: gray;
 }
 
-.button{
-  margin:20px;
+.button {
+  margin: 20px;
+}
+
+.image {
+  max-width: 33%;
 }

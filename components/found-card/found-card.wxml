@@ -5,7 +5,7 @@
     <!-- <div style="width:100%;"><text>{{cardData.content}}</text></div> -->
     <!-- <van-divider/> -->
     <van-grid column-num="3" class="card-pic">
-      <van-grid-item wx:for="{{cardData.images}}"><image style="width: 33%; height: 90px;" src="{{item}}" /></van-grid-item>
+      <van-grid-item wx:for="{{cardData.images}}"><image style="width: 33%; max-height: 200px;" src="{{item.url}}" mode="widthFix" /></van-grid-item>
     </van-grid>
     <van-cell-group>
       <van-cell title="拾取物" value="{{cardData.property.name}}"></van-cell>
