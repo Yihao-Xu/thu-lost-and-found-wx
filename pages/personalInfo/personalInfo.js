@@ -31,7 +31,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var info = wx.getStorageSync('myInfo')
+    this.setData({
+      myInfo: info
+    })
   },
 
   /**
@@ -86,7 +89,9 @@ Page({
         origin:"miniapp",
         type:"id.tsinghua"
       },
-      success(res){}
+      success(res){
+        console.log(res)
+      }
     })
   }
 })

@@ -255,13 +255,13 @@ Page({
             "details": myInfo.email
           })
         }
-        // if(this.data.phone_checked && myInfo.phone !== ""){
-        //   contacts.push({
-        //     "name":myInfo.username,
-        //     "method":"WX",
-        //     "details":myInfo.phone
-        //   })
-        // }
+        if(this.data.phone_checked && myInfo.phone !== ""){
+          contacts.push({
+            "name":myInfo.username,
+            "method":"PHN",
+            "details":myInfo.phone
+          })
+        }
         data.contacts = contacts
 
         this.setData({

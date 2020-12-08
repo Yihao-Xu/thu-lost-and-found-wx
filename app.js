@@ -30,6 +30,7 @@ App({
           // console.log(header.Authorization)
           getReq('/users/me/', function (data) {
             wx.setStorageSync('myInfo', data)
+            that.globalData.myInfo = data
           })
           // 获取用户信息
           wx.getSetting({
@@ -73,12 +74,6 @@ App({
   globalData: {
     userInfo: null,
     myInfo: {
-      ID: "1",
-      wx: "yihao_xu",
-      qq: "89035689",
-      email: "yihao_xu@126.com",
-      mobile: "18611362038",
-      hasCertification: false
     },
     access: ""
   }

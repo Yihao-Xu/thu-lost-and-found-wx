@@ -80,14 +80,12 @@ Page({
     delete info.avatar
     putReq("/users/"+id+'/', this.data.myInfo,function(data){
       if(data == false) return
-      wx.setStorage({
-        data: data,
-        key: 'myInfo',
+      wx.setStorageSync('myInfo', data)
+      wx.navigateBack({
+        delta: 1,
       })
     })
-    wx.navigateBack({
-      delta: 1,
-    })
+
   },
 
   onChange:function(event){
