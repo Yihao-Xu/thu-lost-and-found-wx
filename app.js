@@ -8,6 +8,36 @@ const {
 } = require('./service/http')
 
 App({
+  onShow: function (options) {
+    console.log(options.referrerInfo.extraData)
+    if (options.referrerInfo.extraData != undefined) {
+      wx.showLoading({
+        title: '加载中',
+      })
+      wx.request({
+        url: "https://alumni-test.iterator-traits.com/fake-id-tsinghua-proxy/api/user/session/token",
+        method: 'POST',
+        header: {
+          "accept": "*/*",
+          "content-type": "application/json"
+        },
+        data: JSON.parse(options.referrerInfo.extraData),
+        success: function (res) {
+          wx.hideLoading()
+          console.log(res)
+        },
+        fail: function () {
+          wx.hideLoading()
+          wx.showModal({
+            title: '网络错误',
+            content: '网络出错，请刷新重试',
+            showCancel: false
+          })
+        }
+      })
+
+    }
+  },
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -73,8 +103,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    myInfo: {
-    },
+    myInfo: {},
     access: ""
   }
 })

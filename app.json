@@ -11,13 +11,12 @@
     "pages/lost-info/lost-info",
     "pages/new-lost/new-lost",
     "pages/personalInfoEditor/personalInfoEditor",
-
     "pages/new-found/types/types",
     "pages/new-found/attribute/attribute",
     "pages/new-found/details/details",
-    
     "pages/edit-found/attribute/attribute",
-    "pages/edit-found/details/details"
+    "pages/edit-found/details/details",
+    "pages/add-contact/add-contact"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -62,7 +61,9 @@
     "i-grid-item": "components/dist/grid-item/index",
     "i-grid-icon": "components/dist/grid-icon/index",
     "i-grid-label": "components/dist/grid-label/index",
-    "van-switch": "@vant/weapp/switch/index"
+    "van-switch": "@vant/weapp/switch/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-icon": "@vant/weapp/icon/index"
   },
   "tabBar": {
     "color": "#000000",

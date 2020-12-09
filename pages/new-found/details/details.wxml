@@ -1,5 +1,6 @@
 <!--pages/new-found/details/details.wxml-->
 <!--pages/new-lost/new-lost.wxml-->
+<wxs src="../../../wxs/lib.wxs" module="tools"></wxs>
 <view>
   <van-cell-group title="拾取详情">
     <van-cell title="拾取时间" icon="clock-o" value="{{infoData.found_time}}" is-link bindtap="openCalendar" />
@@ -16,6 +17,10 @@
     </van-cell>
     <van-cell title="使用我的手机"  wx:if="{{myInfo.phone !== ''}}" label="{{myInfo.phone}}">
         <van-switch size="24px" checked="{{phone_checked}}" data-key="phone" bind:change="checkedChange" active-color="#07c160"></van-switch>
+    </van-cell>
+    <van-cell wx:for="{{contacts}}" label="{{tools.acronymTrans(item.method)}}" title="{{item.name}}">{{item.details}}</van-cell>
+    <van-cell title="添加联系方式" bind:click="addNewContact">
+      <van-icon slot="right-icon" name="/image/add.png" size="25px"></van-icon>
     </van-cell>
   </van-cell-group>
 

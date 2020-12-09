@@ -35,7 +35,8 @@ Page({
     phone_checked: false,
     email_checked: false,
     myInfo: {},
-    images: []
+    images: [],
+    contacts:[]
   },
 
   /**
@@ -46,7 +47,7 @@ Page({
       title: '拾取详情',
     })
     this.setData({
-      myInfo:wx.getStorageSync("myInfo")
+      myInfo: wx.getStorageSync("myInfo")
     })
   },
 
@@ -61,7 +62,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // 如果新添加了联系方式，从storage中取出，并置null。
+    var that = this
+    wx.getStorage({
+      key: 'new-contact',
+      success(res) {
+        if (res.data !== null) {
+          var contacts = that.data.contacts
+          contacts.push(res.data)
+          that.setData({contacts:contacts})
+          wx.setStorageSync('new-contact', null)
+        }
+      }
+    })
   },
 
   /**
@@ -116,7 +129,9 @@ Page({
 
   // 用户上传图片前校验是否是图片
   beforeRead: function (event) {},
-  //用户上传图片后
+  /**
+   * 用户上传图片后，上传到服务器上
+   */
   afterRead: function (event) {
     console.log(event.detail)
     var that = this
@@ -126,7 +141,7 @@ Page({
     uploadImage('/found-notices/upload-image/', file.url, 'rua.jpg', function (r) {
       var imgs = that.data.images
       console.log(r)
-      console.log(typeof(r.data))
+      console.log(typeof (r.data))
       console.log(JSON.parse(r.data))
       imgs.push({
         'url': JSON.parse(r.data).url[0]
@@ -137,15 +152,19 @@ Page({
     })
   },
   // 用户删除图片
-  deleteImage:function(event){
-    const {index} = event.detail
+  deleteImage: function (event) {
+    const {
+      index
+    } = event.detail
     var imgs = this.data.images
     imgs.splice(index, 1);
     this.setData({
-      images:imgs
+      images: imgs
     })
   },
-  //打开日期选择器
+  /**
+   *   打开日期选择器
+   */
   openCalendar: function (event) {
     this.setData({
       calendarShow: true
@@ -216,6 +235,9 @@ Page({
       calendarShow: false
     })
   },
+  /**
+   * 提交启事
+   */
   release: function (event) {
     Dialog.confirm({
         title: '确认提交',
@@ -243,7 +265,7 @@ Page({
         }
         data.property.tags = newtags
         //这里添加联系方式
-        var contacts = []
+        var contacts = this.data.contacts
         var myInfo = wx.getStorageSync('myInfo')
         if (this.data.wx_checked && myInfo.wechat_id !== "") {
           contacts.push({
@@ -259,11 +281,11 @@ Page({
             "details": myInfo.email
           })
         }
-        if(this.data.phone_checked && myInfo.phone !== ""){
+        if (this.data.phone_checked && myInfo.phone !== "") {
           contacts.push({
-            "name":myInfo.username,
-            "method":"PHN",
-            "details":myInfo.phone
+            "name": myInfo.username,
+            "method": "PHN",
+            "details": myInfo.phone
           })
         }
         data.contacts = contacts
@@ -318,6 +340,15 @@ Page({
     var path = event.currentTarget.dataset.path
     this.setData({
       [path]: event.detail
+    })
+  },
+
+  /**
+   * 跳转到添加联系方式页面
+   */
+  addNewContact:function(event){
+    wx.navigateTo({
+      url: '/pages/add-contact/add-contact',
     })
   }
 

@@ -88,9 +88,6 @@ Page({
       extraData:{
         origin:"miniapp",
         type:"id.tsinghua"
-      },
-      success(res){
-        console.log(res)
       }
     })
   }
