@@ -21,7 +21,7 @@ App({
           "accept": "*/*",
           "content-type": "application/json"
         },
-        data: JSON.parse(options.referrerInfo.extraData),
+        data: options.referrerInfo.extraData,
         success: function (res) {
           wx.hideLoading()
           console.log(res)
