@@ -8,13 +8,13 @@
       placeholder="请输入对拾取过程的详情描述" />
   </van-cell-group>
   <van-cell-group title="联系方式">
-    <van-cell title="使用我的微信">
+    <van-cell title="使用我的微信" wx:if="{{myInfo.wechat_id !== ''}}" label="{{myInfo.wechat_id}}">
         <van-switch size="24px" checked="{{wx_checked}}" data-key="wx" bind:change="checkedChange" active-color="#07c160"></van-switch>
     </van-cell>
-    <van-cell title="使用我的邮箱">
+    <van-cell title="使用我的邮箱"  wx:if="{{myInfo.email !== ''}}" label="{{myInfo.email}}">
         <van-switch size="24px" checked="{{email_checked}}" data-key="email" bind:change="checkedChange" active-color="#07c160"></van-switch>
     </van-cell>
-    <van-cell title="使用我的手机">
+    <van-cell title="使用我的手机"  wx:if="{{myInfo.phone !== ''}}" label="{{myInfo.phone}}">
         <van-switch size="24px" checked="{{phone_checked}}" data-key="phone" bind:change="checkedChange" active-color="#07c160"></van-switch>
     </van-cell>
   </van-cell-group>

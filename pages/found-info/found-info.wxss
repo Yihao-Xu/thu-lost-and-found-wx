@@ -1,8 +1,8 @@
 /* pages/found-info/found-info.wxss */
 
 .title-pic {
-  max-height: 96rpx;
-  max-width: 96rpx;
+  max-height: 120rpx;
+  max-width: 120rpx;
   margin: 20rpx;
 }
 

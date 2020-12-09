@@ -86,10 +86,10 @@ Page({
   },
 
   showPicture: function(e){
-    console.log(this.data.infoData.images)
+    var urlArray = this.data.infoData.images.map(a => a.url)
     wx.previewImage({
       current:e.currentUrl,
-      urls: this.data.infoData.images,
+      urls: urlArray
     })
   },
 

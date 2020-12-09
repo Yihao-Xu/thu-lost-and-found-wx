@@ -34,6 +34,7 @@ Page({
     wx_checked: false,
     phone_checked: false,
     email_checked: false,
+    myInfo: {},
     images: []
   },
 
@@ -43,6 +44,9 @@ Page({
   onLoad: function (options) {
     wx.setNavigationBarTitle({
       title: '拾取详情',
+    })
+    this.setData({
+      myInfo:wx.getStorageSync("myInfo")
     })
   },
 

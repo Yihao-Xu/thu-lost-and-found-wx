@@ -4,7 +4,7 @@
   <div>
     <van-row>
       <van-col wx:if="this.data.infoData.images!=null">
-        <image class="title-pic" src="{{infoData.images[1]}}"></image>
+        <image class="title-pic" src="{{infoData.images[0].url}}" mode="widthFix"></image>
       </van-col>
       <van-col>
         <van-row> <text class="object-name-text">{{infoData.property.name}}</text></van-row>

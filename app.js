@@ -42,8 +42,8 @@ App({
                     // 可以将 res 发送给后台解码出 unionId
                     that.globalData.userInfo = res.userInfo
                     var myInfo = wx.getStorageSync('myInfo')
-                    if (myInfo.username !== res.userInfo.nickName) {
-                      // myInfo.avatar = res.userInfo.avatarUrl
+                    if (myInfo.username !== res.userInfo.nickName || myInfo.wechat_avatar !== res.userInfo.avatarUrl) {
+                      myInfo.wechat_avatar = res.userInfo.avatarUrl
                       myInfo.username = res.userInfo.nickName
                       wx.setStorage({
                         data: myInfo,
@@ -51,7 +51,7 @@ App({
                       })
                       putReq('/users/' + myInfo.id + '/', myInfo, function (data) {
                         wx.showToast({
-                          title: '信息初始化成功',
+                          title: '信息更改成功',
                         })
                       })
                     }

@@ -1,7 +1,7 @@
 <!--pages/personalInfo/personalInfo.wxml-->
 <view class="page">
   <div class="head-info">
-    <image class="head-photo" src="{{myInfo.avater}}" mode="cover"></image>
+    <image class="head-photo" src="{{myInfo.wechat_avatar}}" mode="cover"></image>
     <text class="username" block>{{myInfo.username}}</text>
     <text class="userId" block>ID:{{myInfo.id}}</text>
   </div>
