@@ -1,6 +1,6 @@
 <!--components/found-card/found-card.wxml-->
 <wxs module="tools" src="../../wxs/lib.wxs"></wxs>
-<i-card title="{{cardData.author.username}}" extra="{{tools.timeTrans(cardData.created_at)}}" thumb="{{cardData.author.avatar}}" class="card" bindtap="enterInfo"> 
+<i-card title="{{cardData.author.username}}" extra="{{tools.timeTrans(cardData.created_at)}}" thumb="{{cardData.author.wechat_avatar}}" class="card" bindtap="enterInfo"> 
   <view slot="content">
     <!-- <div style="width:100%;"><text>{{cardData.content}}</text></div> -->
     <!-- <van-divider/> -->

@@ -1,0 +1,43 @@
+/* pages/notice/notice-list/notice-list.wxss */
+
+.chat-cell{
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+}
+
+.chat-cell-right-part{
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-cell-name-part{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0px 5px 0 0;
+}
+
+.chat-cell-avatar{
+  width: 50px;
+  height: 50px;
+  margin: 5px 10px 5px 5px;
+}
+
+.chat-cell-time{
+  color: gray;
+  font-size: smaller;
+  flex-basis: auto;
+  margin-left: auto;
+}
+
+.chat-cell-message{
+  color: gray;
+  font-size: small;
+  overflow: hidden;
+  width: 90%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

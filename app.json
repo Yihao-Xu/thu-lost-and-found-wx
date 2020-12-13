@@ -7,7 +7,6 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/lost/lost",
-    "pages/notice/notice",
     "pages/lost-info/lost-info",
     "pages/new-lost/new-lost",
     "pages/personalInfoEditor/personalInfoEditor",
@@ -16,7 +15,9 @@
     "pages/new-found/details/details",
     "pages/edit-found/attribute/attribute",
     "pages/edit-found/details/details",
-    "pages/add-contact/add-contact"
+    "pages/add-contact/add-contact",
+    "pages/notice/notice-info/notice-info",
+    "pages/notice/notice-list/notice-list"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -83,7 +84,7 @@
         "selectedIconPath": "image/lost-on.png"
       },
       {
-        "pagePath": "pages/notice/notice",
+        "pagePath": "pages/notice/notice-list/notice-list",
         "text": "通知",
         "iconPath": "image/notice.png",
         "selectedIconPath": "image/notice-on.png"

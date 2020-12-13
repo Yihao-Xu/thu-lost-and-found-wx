@@ -350,6 +350,18 @@ Page({
     wx.navigateTo({
       url: '/pages/add-contact/add-contact',
     })
+  },
+
+  /**
+   * 删除联系方式
+   */
+  deleteContact: function(event){
+    var index = event.currentTarget.dataset.index
+    var contacts = this.data.contacts
+    contacts.splice(index, 1)
+    this.setData({
+      contacts:contacts
+    })
   }
 
 })

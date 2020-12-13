@@ -1,5 +1,6 @@
 <!--pages/new-found/details/details.wxml-->
 <!--pages/new-lost/new-lost.wxml-->
+<wxs src="../../../wxs/lib.wxs" module="tools"></wxs>
 <view>
   <van-cell-group title="拾取详情">
     <van-cell title="拾取时间" icon="clock-o" value="{{infoData.found_datetime}}" is-link bindtap="openCalendar" />
@@ -8,19 +9,14 @@
       placeholder="请输入对拾取过程的详情描述" />
   </van-cell-group>
   <van-cell-group title="联系方式">
-    <van-cell title="使用我的微信">
-        <van-switch size="24px" checked="{{wx_checked}}" data-key="wx" bind:change="checkedChange" active-color="#07c160"></van-switch>
-    </van-cell>
-    <van-cell title="使用我的邮箱">
-        <van-switch size="24px" checked="{{email_checked}}" data-key="email" bind:change="checkedChange" active-color="#07c160"></van-switch>
-    </van-cell>
-    <van-cell title="使用我的手机">
-        <van-switch size="24px" checked="{{phone_checked}}" data-key="phone" bind:change="checkedChange" active-color="#07c160"></van-switch>
+    <van-cell wx:for="{{infoData.contacts}}" label="{{tools.acronymTrans(item.method)}}" title="{{item.name}}"><van-icon slot="right-icon" name="/image/delete.png" size="23px" class="contacts-delete-icon" bindtap="deleteContact" data-index="{{index}}"></van-icon>{{item.details}}</van-cell>
+    <van-cell title="添加联系方式" bind:click="addNewContact">
+      <van-icon slot="right-icon" name="/image/add.png" size="25px"></van-icon>
     </van-cell>
   </van-cell-group>
 
   <van-cell-group title="物品图片">
-    <van-uploader class="pic-uploader" file-list="{{images}}" max-count="3" bind:after-read="afterRead">
+    <van-uploader class="pic-uploader" file-list="{{infoData.images}}" max-count="3" bind:after-read="afterRead" bind:delete="deleteImage">
     </van-uploader>
   </van-cell-group>
 

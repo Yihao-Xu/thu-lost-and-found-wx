@@ -1,39 +1,31 @@
 /* pages/personalInfo/personalInfo.wxss */
 .head-photo{
-  position: relative;
   width: 128rpx;
   height: 128rpx;
-  margin: 20rpx;
-  left: 50rpx;
-  border-radius: 50%;
+  margin: 50rpx 50rpx 20rpx 50rpx;
+  border-radius: 10%;
 }
 .username{
   font-size: large;
   color: black;
-  position: relative;
-  left: 100rpx;
-  top:-100rpx;
 }
 
 .userId{
   font-size: medium;
   color: gray;
-  position: relative;
-  top:-30rpx;
 }
 
 .head-info{
-  position: absolute;
-  top: 0;
+  display : flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .cell-group{
   position: relative;
-  top: 200rpx;
 }
 
 .button{
   position: relative;
   margin-right: 1rpx;
-  top: 100rpx;
 }

@@ -1,0 +1,14 @@
+<!--pages/notice/notice-list/notice-list.wxml-->
+<view>
+  <div class='chat-cell'>
+    <image src='/image/notice-on.png' class='chat-cell-avatar'></image>
+    <div class='chat-cell-right-part'>
+      <div class="chat-cell-name-time">
+        <div class="chat-cell-name">系统匹配</div>
+        <div class="chat-cell-time">12:31</div>
+      </div>
+      <div class="chat-cell-message"><p>系统发现您的启事“IPad2019救救孩子”有相似的匹配启事</p></div>
+    </div>
+
+  </div>
+</view>

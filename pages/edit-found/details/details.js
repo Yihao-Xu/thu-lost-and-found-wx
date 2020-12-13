@@ -24,11 +24,11 @@ Page({
       }
       return value;
     },
-    upData:{},
+    upData: {},
     wx_checked: false,
-    phone_checked:false,
-    email_checked:false,
-    images:[]
+    phone_checked: false,
+    email_checked: false,
+    images: []
   },
 
   /**
@@ -41,22 +41,28 @@ Page({
     var that = this
     wx.getStorage({
       key: 'cur-notices',
-      success(res){
+      success(res) {
         console.log(res.data)
         that.setData({
-          infoData:res.data
+          infoData: res.data
         })
         // 设置联系方式开关
-        for (var item of that.data.infoData.contacts){
-          switch(item.methods){
+        for (var item of that.data.infoData.contacts) {
+          switch (item.methods) {
             case "WCT":
-              that.setData({wx_checked:true})
+              that.setData({
+                wx_checked: true
+              })
               break;
             case "PHN":
-              that.setData({phone_checked:true})
+              that.setData({
+                phone_checked: true
+              })
               break;
             case "EML":
-              that.setData({email_checked:true})
+              that.setData({
+                email_checked: true
+              })
               break;
           }
         }
@@ -75,7 +81,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // 如果新添加了联系方式，从storage中取出，并置null。
+    var that = this
+    wx.getStorage({
+      key: 'new-contact',
+      success(res) {
+        if (res.data !== null) {
+          var contacts = that.data.infoData.contacts
+          var path = 'infoData.contacts'
+          contacts.push(res.data)
+          that.setData({
+            [path]: contacts
+          })
+          wx.setStorageSync('new-contact', null)
+        }
+      }
+    })
   },
 
   /**
@@ -130,25 +151,35 @@ Page({
 
   // 用户上传图片前校验是否是图片
   beforeRead: function (event) {},
-  //用户上传图片后
+  /**
+   * 用户上传图片后，上传到服务器上
+   */
   afterRead: function (event) {
-    console.log(event.detail)
-    const {file} = event.detail
-    var imgs = this.data.images
-    imgs.push({
-      'url':file.url
-    })
-    this.setData({
-      images:imgs
+    var that = this
+    const {
+      file
+    } = event.detail
+    uploadImage('/found-notices/upload-image/', file.url, 'rua.jpg', function (r) {
+      var imgs = that.data.infoData.images
+      var path = 'infoData.images'
+      imgs.push({
+        url: JSON.parse(r.data).url[0]
+      })
+      that.setData({
+        [path]: imgs
+      })
     })
   },
   // 用户删除图片
-  deleteImage:function(event){
-    const {index} = event.detail
-    var imgs = this.data.images
+  deleteImage: function (event) {
+    const {
+      index
+    } = event.detail
+    var imgs = this.data.infoData.images
     imgs.splice(index, 1);
+    var path = 'infoData.images'
     this.setData({
-      images:imgs
+      [path]: imgs
     })
   },
 
@@ -229,46 +260,11 @@ Page({
         message: '您确认要提交招领启事吗？',
       })
       .then(() => {
-        // on confirm
-        var contacts = []
-        var myInfo = wx.getStorageSync('myInfo')
-        if(this.data.wx_checked && myInfo.wechat_id !== ""){
-          contacts.push({
-            "name":myInfo.username,
-            "method":"WCT",
-            "details":myInfo.wechat_id
-          })
-        }
-        if(this.data.email_checked && myInfo.email !== ""){
-          contacts.push({
-            "name":myInfo.username,
-            "method":"EML",
-            "details":myInfo.email
-          })
-        }
-        // if(this.data.phone_checked && myInfo.phone !== ""){
-        //   contacts.push({
-        //     "name":myInfo.username,
-        //     "method":"WX",
-        //     "details":myInfo.phone
-        //   })
-        // }
-        var path = "infoData.contacts"
-        this.setData({
-          [path]:contacts
-        })
-        //api提交启事
-        var that = this
-        
-        putReq('/found-notices/', this.data.infoData, function (res) {
-          //上传图片
-          for(var image of that.data.images){
-            uploadImage('/found-notices/'+res.id+'/upload-image/',image.url, 'rua.jpg', function(r){
-            })
-          }
+
+        putReq('/found-notices/'+ this.data.infoData.id + '/', this.data.infoData, function (res) {
           //返回首页
           wx.navigateBack({
-            delta: 3,
+            delta: 2,
             success: (res) => {},
             fail: (res) => {},
             complete: (res) => {},
@@ -284,27 +280,54 @@ Page({
   /**
    * 开关状态改变
    */
-  checkedChange(event){
+  checkedChange(event) {
     var key = event.currentTarget.dataset.key
-    switch(key){
+    switch (key) {
       case "wx":
-        this.setData({wx_checked:event.detail})
+        this.setData({
+          wx_checked: event.detail
+        })
         break
       case "phone":
-        this.setData({phone_checked:event.detail})
+        this.setData({
+          phone_checked: event.detail
+        })
         break
       case "email":
-        this.setData({email_checked:event.detail})
+        this.setData({
+          email_checked: event.detail
+        })
         break
     }
   },
 
-    // wx双向绑定不支持深度路径，只能利用函数来改变值
-    attributeChange: function (event) {
-      var path = event.currentTarget.dataset.path
-      this.setData({
-        [path]: event.detail
-      })
-    }
+  // wx双向绑定不支持深度路径，只能利用函数来改变值
+  attributeChange: function (event) {
+    var path = event.currentTarget.dataset.path
+    this.setData({
+      [path]: event.detail
+    })
+  },
 
+  /**
+   * 跳转到添加联系方式页面
+   */
+  addNewContact: function (event) {
+    wx.navigateTo({
+      url: '/pages/add-contact/add-contact',
+    })
+  },
+
+  /**
+   * 删除联系方式
+   */
+  deleteContact: function(event){
+    var index = event.currentTarget.dataset.index
+    var contacts = this.data.infoData.contacts
+    var path = 'infoData.contacts'
+    contacts.splice(index, 1)
+    this.setData({
+      [path]:contacts
+    })
+  }
 })

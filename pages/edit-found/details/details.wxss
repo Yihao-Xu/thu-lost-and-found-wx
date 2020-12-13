@@ -9,3 +9,7 @@
   bottom: 0px;
 }
 
+.contacts-delete-icon{
+  margin: 5px;
+}
+

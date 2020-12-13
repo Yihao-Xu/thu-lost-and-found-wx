@@ -1,4 +1,4 @@
-// pages/notice/notice.js
+// pages/notice/notice-list/notice-list.js
 Page({
 
   /**

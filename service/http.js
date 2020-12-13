@@ -52,8 +52,7 @@ function postReq(url, data, cb) {
         })
         wx.hideLoading()
       }
-      
-      
+
     },
     fail: function() {
       wx.hideLoading()
