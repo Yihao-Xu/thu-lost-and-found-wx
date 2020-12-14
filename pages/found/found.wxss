@@ -4,3 +4,14 @@
   right: 20rpx;
   bottom: 20rpx;
 }
+
+.found-card{
+  position: relative;
+  margin: 10px 3.5%;
+}
+
+.found-list{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+}

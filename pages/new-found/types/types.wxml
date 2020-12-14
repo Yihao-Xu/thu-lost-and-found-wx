@@ -7,7 +7,7 @@
   <!-- 详细内容 -->
   <div class="grid">
     <div wx:for="{{typesData[activeKey].templates}}" class="grid-item" data-template="{{item}}" bindtap="enterNext">
-      <image src="{{item.thumbnail}}" class="grid-image" mode="aspectFit" />
+      <image src="{{item.thumbnail}}" class="grid-image" mode="aspectFill" />
       <div class="grid-text">{{item.name}}</div>
     </div>
   </div>

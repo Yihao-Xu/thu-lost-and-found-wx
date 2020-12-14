@@ -1,9 +1,7 @@
 <!--components/found-card/found-card.wxml-->
 <wxs module="tools" src="../../wxs/lib.wxs"></wxs>
-<i-card title="{{cardData.author.username}}" extra="{{tools.timeTrans(cardData.created_at)}}" thumb="{{cardData.author.wechat_avatar}}" bindtap="enterInfo"> 
+<!-- <i-card title="{{cardData.author.username}}" extra="{{tools.timeTrans(cardData.created_at)}}" thumb="{{cardData.author.wechat_avatar}}" bindtap="enterInfo"> 
   <view slot="content">
-    <!-- <div style="width:100%;"><text>{{cardData.content}}</text></div> -->
-    <!-- <van-divider/> -->
     <van-grid column-num="3" class="card-pic">
       <van-grid-item wx:for="{{cardData.images}}"><image style="width: 33%; max-height: 200px;" src="{{item.url}}" mode="widthFix" /></van-grid-item>
     </van-grid>
@@ -17,21 +15,23 @@
   <van-tag wx:for="{{cardData.tags}}" type="primary" class="tag">{{item}}</van-tag>
 
   </view>
-</i-card>
+</i-card> -->
 
-<view class="card">
+<view class="card" bindtap="enterInfo">
   <div class="header">
     <image class="avatar" src="{{cardData.author.wechat_avatar}}" mode="aspectFit" />
     <div class="username">{{cardData.author.username}}</div>
-    <div class="release-time">{{tools.timeTrans(cardData.created_at)}}</div>
+    <!-- <div class="release-time">{{tools.timeTrans(cardData.created_at)}}</div> -->
   </div>
-
   <div class="info">
-    <div class="property-name">{{cardData.property.name}}</div>
-    <div class="found-location">{{cardData.found_location}}</div>
-    <div class="found-datetime">{{tools.timeTrans(cardData.found_datetime)}}</div>
+    <div class="property-name info-item"><van-icon name="orders-o" class="icon"/>{{cardData.property.name}}</div>
+    <div class="found-location info-item"><van-icon name="location-o" class="icon"/>{{cardData.found_location}}</div>
+    <div class="found-datetime info-item"><van-icon name="clock-o" class="icon"/>{{tools.timeTrans(cardData.found_datetime)}}</div>
   </div>
   <div class="images">
-    <image class="image-item" wx:for="{{cardData.images}}" src="{{item.url}}" mode="aspectFit" />
+    <image class="image-item" wx:for="{{cardData.images}}" src="{{item.url}}" mode="aspectFill" />
+  </div>
+  <div class="tags">
+    <van-tag wx:for="{{cardData.property.tags}}" color="{{item.color}}" class="tag" type="primary" size="medium" plain>{{item.name}}</van-tag>
   </div>
 </view>
