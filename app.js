@@ -9,33 +9,11 @@ const {
 
 App({
   onShow: function (options) {
+    /* 发送认证信息 */
     console.log(options.referrerInfo.extraData)
+    var myInfo = wx.getStorageSync('myInfo')
     if (options.referrerInfo.extraData != undefined) {
-      wx.showLoading({
-        title: '加载中',
-      })
-      wx.request({
-        url: "https://alumni-test.iterator-traits.com/fake-id-tsinghua-proxy/api/user/session/token",
-        method: 'POST',
-        header: {
-          "accept": "*/*",
-          "content-type": "application/json"
-        },
-        data: options.referrerInfo.extraData,
-        success: function (res) {
-          wx.hideLoading()
-          console.log(res)
-        },
-        fail: function () {
-          wx.hideLoading()
-          wx.showModal({
-            title: '网络错误',
-            content: '网络出错，请刷新重试',
-            showCancel: false
-          })
-        }
-      })
-
+     postReq('/users/'+ myInfo.id +'/wechat_thu_auth/',options.referrerInfo.extraData, function(res){})
     }
   },
   onLaunch: function () {

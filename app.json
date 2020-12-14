@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/notice/notice-info/notice-info",
+    "pages/notice/notice-list/notice-list",
     "pages/found/found",
     "pages/certification/certification",
     "pages/found-info/found-info",
@@ -15,9 +17,9 @@
     "pages/new-found/details/details",
     "pages/edit-found/attribute/attribute",
     "pages/edit-found/details/details",
-    "pages/add-contact/add-contact",
-    "pages/notice/notice-info/notice-info",
-    "pages/notice/notice-list/notice-list"
+    "pages/add-contact/add-contact"
+    
+    
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -64,7 +66,9 @@
     "i-grid-label": "components/dist/grid-label/index",
     "van-switch": "@vant/weapp/switch/index",
     "van-action-sheet": "@vant/weapp/action-sheet/index",
-    "van-icon": "@vant/weapp/icon/index"
+    "van-icon": "@vant/weapp/icon/index",
+    "chat-bubble-opp": "components/chat-bubble-opp/chat-bubble-opp",
+    "chat-bubble-me": "components/chat-bubble-me/chat-bubble-me"
   },
   "tabBar": {
     "color": "#000000",

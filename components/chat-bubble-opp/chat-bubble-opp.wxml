@@ -1,0 +1,9 @@
+<!--components/chat-bubble-opp/chat-bubble-opp.wxml-->
+<wxs module="tools" src="../../wxs/lib.wxs"></wxs>
+<view class="chat-box">
+  <image src="{{avatar}}" class="chat-avatar"></image>
+  <div class="chat-right-part">
+    <div class="chat-time">{{username}} {{time}}</div>
+    <div class="chat-text">{{text}}</div>
+  </div>
+</view>

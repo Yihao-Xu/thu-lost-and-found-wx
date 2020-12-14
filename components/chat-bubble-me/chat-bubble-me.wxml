@@ -1,0 +1,9 @@
+<!--components/chat-bubble-me/chat-bubble-me.wxml-->
+<wxs module="tools" src="../../wxs/lib.wxs"></wxs>
+<view class="chat-box">
+  <div class="chat-left-part">
+    <div class="chat-time">{{username}} {{time}}</div>
+    <div class="chat-text">{{text}}</div>
+  </div>
+  <image src="{{avatar}}" class="chat-avatar"></image>
+</view>

@@ -6,14 +6,17 @@
   display: flex;
   flex-direction: row;
   background-color: white;
+  align-items: center;
 }
 
 .chat-cell-right-part{
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  align-items: stretch;
 }
 
-.chat-cell-name-part{
+.chat-cell-name-time{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -23,13 +26,23 @@
 .chat-cell-avatar{
   width: 50px;
   height: 50px;
-  margin: 5px 10px 5px 5px;
+  flex: 0 0 50px;
+  margin: 5px 5px 5px 5px;
+}
+
+.chat-cell-name {
+  min-width: 0;
+  flex: 1 1 0;
+  overflow: hidden;
+  margin-right: 3em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .chat-cell-time{
   color: gray;
   font-size: smaller;
-  flex-basis: auto;
+  flex: 0 0;
   margin-left: auto;
 }
 
@@ -37,7 +50,6 @@
   color: gray;
   font-size: small;
   overflow: hidden;
-  width: 90%;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
