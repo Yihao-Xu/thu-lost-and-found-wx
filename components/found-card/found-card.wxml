@@ -1,6 +1,6 @@
 <!--components/found-card/found-card.wxml-->
 <wxs module="tools" src="../../wxs/lib.wxs"></wxs>
-<i-card title="{{cardData.author.username}}" extra="{{tools.timeTrans(cardData.created_at)}}" thumb="{{cardData.author.wechat_avatar}}" class="card" bindtap="enterInfo"> 
+<i-card title="{{cardData.author.username}}" extra="{{tools.timeTrans(cardData.created_at)}}" thumb="{{cardData.author.wechat_avatar}}" bindtap="enterInfo"> 
   <view slot="content">
     <!-- <div style="width:100%;"><text>{{cardData.content}}</text></div> -->
     <!-- <van-divider/> -->
@@ -18,3 +18,20 @@
 
   </view>
 </i-card>
+
+<view class="card">
+  <div class="header">
+    <image class="avatar" src="{{cardData.author.wechat_avatar}}" mode="aspectFit" />
+    <div class="username">{{cardData.author.username}}</div>
+    <div class="release-time">{{tools.timeTrans(cardData.created_at)}}</div>
+  </div>
+
+  <div class="info">
+    <div class="property-name">{{cardData.property.name}}</div>
+    <div class="found-location">{{cardData.found_location}}</div>
+    <div class="found-datetime">{{tools.timeTrans(cardData.found_datetime)}}</div>
+  </div>
+  <div class="images">
+    <image class="image-item" wx:for="{{cardData.images}}" src="{{item.url}}" mode="aspectFit" />
+  </div>
+</view>

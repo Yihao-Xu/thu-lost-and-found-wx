@@ -1,10 +1,19 @@
 <!--pages/notice/notice-info/notice-info.wxml-->
-<view>
-  <chat-bubble-opp username="九月的南瓜" time="12:13" text="我累了啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" avatar="/image/testimg.jpg" />
-  <chat-bubble-opp username="九月的南瓜" time="12:13" text="我累了" avatar="/image/testimg.jpg" />
-  <chat-bubble-me username="终极萌妹" time="12:14" text="累就对了，舒服是留给有钱人的" avatar="/image/mine-on.png" />
+<view class="box">
+  <view class="bubble-list">
+    <chat-bubble-opp username="九月的南瓜" time="12:13"
+      text="我累了啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" avatar="/image/testimg.jpg" />
+    <chat-bubble-opp username="九月的南瓜" time="12:13" text="我累了" avatar="/image/testimg.jpg" />
+    <chat-bubble-me username="终极萌妹" time="12:14" text="累就对了，舒服是留给有钱人的" avatar="/image/mine-on.png" />
+    <chat-bubble-opp username="九月的南瓜" time="12:13"
+      text="我累了啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" avatar="/image/testimg.jpg" />
+    <chat-bubble-opp username="九月的南瓜" time="12:13"
+      text="我累了啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" avatar="/image/testimg.jpg" />
+    <chat-bubble-opp username="九月的南瓜" time="12:13"
+      text="我累了啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" avatar="/image/testimg.jpg" />
+  </view>
   <div class="input-box">
-    <textarea class="input-textarea" focus="{{inputFocus}}" auto-height auto-focus></textarea>
-    <van-button class="input-sendBtn" bindta>发送</van-button>
+    <textarea class="input-textarea input" focus="{{inputFocus}}" auto-height auto-focus></textarea>
+    <van-button class="input-sendBtn input" bindtap="sendMsg" type="primary" size="small">发送</van-button>
   </div>
 </view>

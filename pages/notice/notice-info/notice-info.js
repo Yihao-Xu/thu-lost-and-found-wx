@@ -12,7 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.pageScrollToBottom()
   },
 
   /**
@@ -62,6 +62,17 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 滚动到页面最下端
+   */
+  pageScrollToBottom: function(){
+    wx.createSelectorQuery().select('.box').boundingClientRect(function(rect){
+      wx.pageScrollTo({
+        scrollTop:rect.bottom
+      })
+    }).exec()
   }
 
 })

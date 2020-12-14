@@ -1,3 +1,5 @@
+const { getReq } = require("../../service/http");
+
 // pages/personalInfo/personalInfo.js
 var app = getApp();
 Page({
@@ -14,9 +16,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var info = wx.getStorageSync('myInfo')
-    this.setData({
-      myInfo: info
+    var that = this
+    getReq('/users/me/', function (data) {
+      wx.setStorageSync('myInfo', data)
+      that.setData({
+        myInfo:data
+      })
     })
   },
 
@@ -31,9 +36,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var info = wx.getStorageSync('myInfo')
-    this.setData({
-      myInfo: info
+    var that = this
+    getReq('/users/me/', function (data) {
+      wx.setStorageSync('myInfo', data)
+      that.setData({
+        myInfo:data
+      })
     })
   },
 
@@ -41,7 +49,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    
   },
 
   /**

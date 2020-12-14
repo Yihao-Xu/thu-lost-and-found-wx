@@ -13,16 +13,19 @@
 .grid-item{
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
+  flex-grow: 0;
   width: 30%;
   margin: 1.5%;
+  height: 120px;
 }
 
 .grid-image{
-  max-width:90%;
+  max-width: 100%;
   margin: 5px;
 }
 
 .grid-text{
-  margin: 2px auto;
+  margin: 2px;
 }

@@ -1,7 +1,5 @@
 {
   "pages": [
-    "pages/notice/notice-info/notice-info",
-    "pages/notice/notice-list/notice-list",
     "pages/found/found",
     "pages/certification/certification",
     "pages/found-info/found-info",
@@ -17,9 +15,9 @@
     "pages/new-found/details/details",
     "pages/edit-found/attribute/attribute",
     "pages/edit-found/details/details",
-    "pages/add-contact/add-contact"
-    
-    
+    "pages/add-contact/add-contact",
+    "pages/notice/notice-info/notice-info",
+    "pages/notice/notice-list/notice-list"
   ],
   "window": {
     "navigationBarTextStyle": "white",

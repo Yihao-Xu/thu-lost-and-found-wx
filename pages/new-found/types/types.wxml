@@ -1,13 +1,13 @@
 <!--pages/new-found/kind/kind.wxml-->
 <view class="page">
   <!-- 侧边栏 -->
-  <van-sidebar active-key="{{activeKey}}"bind:change="sidebarChange" class="side-bar">
-    <van-sidebar-item wx:for="{{typesData}}" title="{{item.name}}"/>
+  <van-sidebar active-key="{{activeKey}}" bind:change="sidebarChange" class="side-bar">
+    <van-sidebar-item wx:for="{{typesData}}" title="{{item.name}}" />
   </van-sidebar>
   <!-- 详细内容 -->
   <div class="grid">
-    <div use-slot wx:for="{{typesData[activeKey].templates}}" class="grid-item" data-template="{{item}}" bindtap="enterNext">
-        <image src="{{item.thumbnail}}" class="grid-image" mode="widthFix"/> 
+    <div wx:for="{{typesData[activeKey].templates}}" class="grid-item" data-template="{{item}}" bindtap="enterNext">
+      <image src="{{item.thumbnail}}" class="grid-image" mode="aspectFit" />
       <div class="grid-text">{{item.name}}</div>
     </div>
   </div>
