@@ -3,7 +3,7 @@
   <div class="head-info">
     <image class="head-photo" src="{{myInfo.wechat_avatar}}" mode="cover"></image>
     <text class="username" block>{{myInfo.username}}</text>
-    <!-- <text class="userId" block>ID:{{myInfo.id}}</text> -->
+    <image src="/image/scanCode.png" class="scan-btn" bindtap="scanQRCode"></image>
   </div>
   <van-cell-group title="我的联系方式" class="cell-group">
     <van-cell title="微信号" value="{{myInfo.wechat_id}}"></van-cell>

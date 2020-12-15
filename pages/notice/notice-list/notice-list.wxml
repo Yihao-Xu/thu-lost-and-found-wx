@@ -1,13 +1,13 @@
 <!--pages/notice/notice-list/notice-list.wxml-->
 <view>
-  <div class='chat-cell'>
-    <image src="/image/notice-on.png" class="chat-cell-avatar"></image>
+  <div class='chat-cell' wx:for="{{chat_list}}" wx:key="sender">
+    <image src="{{item.author.wechat_avatar}}" class="chat-cell-avatar"></image>
     <div class="chat-cell-right-part">
       <div class="chat-cell-name-time">
-        <div class="chat-cell-name">系统匹配啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</div>
-        <div class="chat-cell-time">12:31</div>
+        <div class="chat-cell-name">{{item.author.username}}</div>
+        <div class="chat-cell-time">{{item.messages[item.message.length-1].time}}</div>
       </div>
-      <div class="chat-cell-message">系统发现您的启事“IPad2019救救孩子”有相似的匹配启事</div>
+      <div class="chat-cell-message">{{item.messages[item.message.length-1].message}}</div>
     </div>
 
   </div>

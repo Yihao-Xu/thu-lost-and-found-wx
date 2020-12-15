@@ -13,7 +13,7 @@ App({
     console.log(options.referrerInfo.extraData)
     var myInfo = wx.getStorageSync('myInfo')
     if (options.referrerInfo.extraData != undefined) {
-     postReq('/users/'+ myInfo.id +'/wechat_thu_auth/',options.referrerInfo.extraData, function(res){})
+      postReq('/users/' + myInfo.id + '/wechat_thu_auth/', options.referrerInfo.extraData, function (res) {})
     }
   },
   onLaunch: function () {
@@ -39,7 +39,19 @@ App({
           getReq('/users/me/', function (data) {
             wx.setStorageSync('myInfo', data)
             that.globalData.myInfo = data
+
+            //连接webSocket
+            wx.connectSocket({
+              url: 'wss://xyh.iterator-traits.com/ws/chat/' + that.globalData.myInfo.id + '/',
+              success(res) {
+                console.log('websocket connect success!')
+              },
+              fail(res) {
+
+              }
+            })
           })
+
           // 获取用户信息
           wx.getSetting({
             success: res => {
@@ -79,9 +91,10 @@ App({
     })
 
   },
+
   globalData: {
     userInfo: null,
     myInfo: {},
-    access: ""
+    access: "",
   }
 })

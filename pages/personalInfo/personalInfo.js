@@ -98,5 +98,19 @@ Page({
         type:"id.tsinghua"
       }
     })
+  },
+
+  /**
+   * 扫描二维码
+   */
+  scanQRCode: function(event){
+    wx.scanCode({
+      onlyFromCamera: false,
+      scanType: ['qrCode'],
+      success(res){
+        console.log(res)
+        console.log(res.result)
+      }
+    })
   }
 })

@@ -1,6 +1,7 @@
 const {
   timeTrans,
-  acronymTrans
+  acronymTrans,
+  createQrCode
 } = require("../../lib/lib")
 const {
   getReq,
@@ -25,6 +26,8 @@ Page({
       name: '修改'
     }, {
       name: '删除'
+    }, {
+      name: '转交（生成转交码）'
     }, {
       name: '举报',
       color: '#ee0a24'
@@ -106,15 +109,15 @@ Page({
   onShareAppMessage: function (res) {
     return {
       title: '紫荆寻物',
-      path: '/pages/found-info/found-info?id='+ this.data.id
+      path: 'pages/found-info/found-info?id=' + this.data.id
     }
   },
 
   /**
    * 用户分享到朋友圈
    */
-  onShareTimeline: function(){
-    return{
+  onShareTimeline: function () {
+    return {
       title: '紫荆寻物',
       query: 'id=' + this.data.id
     }
@@ -163,21 +166,25 @@ Page({
     switch (event.detail.name) {
       case '举报':
         break
+      case '转交（生成转交码）':
+        createQrCode('pages/found-info/found-info', '?id=' + this.data.id)
+        break
       case '删除':
         this.delete()
         break;
       case '修改':
         this.edit()
         break
+
     }
   },
 
   /**
    * 打开上拉菜单
    */
-  moreOnShow: function(event){
+  moreOnShow: function (event) {
     this.setData({
-      moreShow : true
+      moreShow: true
     })
   },
 

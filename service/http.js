@@ -1,7 +1,7 @@
 // var rootDocument = 'xyh.iterator-traits.com'
-var rootDocument = 'http://xyh.iterator-traits.com'
+var rootDocument = 'https://xyh.iterator-traits.com'
 // var rootDocument = 'http://192.168.0.103:8000'
-var app = getApp()
+// var app = getApp()
 var header ={"Authorization" : null}
 
 function getReq(url, cb) {

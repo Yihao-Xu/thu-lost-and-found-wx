@@ -2,7 +2,7 @@
 .head-photo{
   width: 128rpx;
   height: 128rpx;
-  margin: 50rpx 50rpx 20rpx 50rpx;
+  margin-right: 25px;
   border-radius: 10%;
 }
 .username{
@@ -19,6 +19,14 @@
   display : flex;
   flex-direction: row;
   align-items: center;
+  padding: 25px 25px 10px 25px;
+}
+
+.scan-btn{
+  margin-left: auto;
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
 }
 
 .cell-group{
@@ -27,5 +35,4 @@
 
 .button{
   position: relative;
-  margin-right: 1rpx;
 }
