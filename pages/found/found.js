@@ -44,12 +44,12 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    getReq('/found-notices/',function(data){
-      that.setData({
-        foundList:data.results,
-        next:data.next
-      })
-    })
+    // getReq('/found-notices/',function(data){
+    //   that.setData({
+    //     foundList:data.results,
+    //     next:data.next
+    //   })
+    // })
   },
 
   /**

@@ -51,7 +51,6 @@ App({
               }
             })
           })
-
           // 获取用户信息
           wx.getSetting({
             success: res => {
@@ -82,9 +81,14 @@ App({
                     }
                   }
                 })
+              }else{
+                console.log('get user info failed')
               }
+            },
+            fail:res=>{
             }
           })
+          console.log("finished!")
         })
 
       }
