@@ -1,6 +1,9 @@
 // pages/notice/notice-info/notice-info.js
 const {
-  onWsMessage, updateChatList, createChat
+  onWsMessage,
+  updateChatList,
+  createChat,
+  formatTime
 } = require('../../../utils/util')
 Page({
 
@@ -20,23 +23,22 @@ Page({
   onLoad: function (options) {
     var _this = this
     var sender = Number(options.sender)
-    wx.getStorage({
-      key: 'chat_list',
-      success(res){
-        var chat = res.data.find(item=>item.sender == sender)
-        if(chat == undefined){
-          createChat(res.data, null, sender, function(cl){})
-        }
-        _this.setData({
-          chat: res.data.find(item=>item.sender == sender),
-          sender: sender
-        })
-        _this.pageScrollToBottom()
-      }
+    var app = getApp()
+
+    var chat = app.globalData.chat_list.find(item => item.sender == sender)
+    if (chat == undefined) {
+      createChat(app.globalData.chat_list, null, sender, function (cl) {})
+    }
+    this.setData({
+      chat: app.globalData.chat_list.find(item => item.sender == sender),
+      sender: sender
     })
+    this.pageScrollToBottom()
+
+
     wx.getStorage({
       key: 'myInfo',
-      success(res){
+      success(res) {
         _this.setData({
           myInfo: res.data
         })
@@ -45,7 +47,7 @@ Page({
     wx.onSocketMessage((result) => {
       onWsMessage(result.data, function (cl) {
         _this.setData({
-          chat: cl.find(item=>item.sender == _this.data.sender)
+          chat: cl.find(item => item.sender == _this.data.sender)
         })
         _this.pageScrollToBottom()
       })
@@ -106,11 +108,14 @@ Page({
   /**
    * 用户发送信息
    */
-  sendMessage:function(event){
+  sendMessage: function (event) {
     var _this = this
-    var data =  {
+    var app = getApp()
+    var date = new Date()
+    var data = {
       receiver: this.data.sender,
-      message: this.data.message
+      message: this.data.message,
+      time: formatTime(date)
     }
     wx.sendSocketMessage({
       data: JSON.stringify(data)
@@ -118,19 +123,12 @@ Page({
     this.setData({
       message: ''
     })
-    wx.getStorage({
-      key: 'chat_list',
-      success(res){
-        console.log(res.data)
-        console.log(_this.data.sender)
-        updateChatList(res.data, data, _this.data.sender, function(chat_list){
-          _this.setData({
-            chat: chat_list.find(item=>item.sender == _this.data.sender)
-          })
-          _this.pageScrollToBottom()
-        })
 
-      }
+    updateChatList(app.globalData.chat_list, data, this.data.sender, function (chat_list) {
+      _this.setData({
+        chat: app.globalData.chat_list.find(item => item.sender == _this.data.sender)
+      })
+      _this.pageScrollToBottom()
     })
 
   },
