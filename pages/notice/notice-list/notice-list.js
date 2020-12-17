@@ -39,10 +39,13 @@ Page({
     var that = this
     var chat_list = this.data.chat_list
     wx.onSocketMessage((result) => {
-      for (var i = 0; i < that.chat_list.length; i++) {
-        if (chat_list[i].sender == result.sender) {
-          var first_chat = that.chat_list[i]
-          chat_list[i].messages.push(result)
+      var data_recv = JSON.parse(result.data)
+      console.log(data_recv)
+      for (var i = 0; i < chat_list.length; i++) {
+        if (chat_list[i].sender == data_recv.sender) {
+          var first_chat = chat_list[i]
+          first_chat.messages.push(data_recv)
+          first_chat.newest_message = data_recv
           chat_list.splice(i, 1)
           chat_list.unshift(first_chat)
           that.setData({
@@ -52,9 +55,10 @@ Page({
         }
       }
       var new_chat = {}
-      new_chat.message = [result]
-      new_chat.sender = result.sender
-      getReq('/users/' + result.sender + '/', function (data) {
+      new_chat.message = [data_recv]
+      new_chat.sender = data_recv.sender
+      new_chat.newest_message = data_recv
+      getReq('/users/' + data_recv.sender + '/', function (data) {
         new_chat.author = data
         chat_list.unshift(new_chat)
         that.setData({

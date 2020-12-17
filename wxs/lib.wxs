@@ -1,14 +1,27 @@
-var timeTransform = function(time){
-  if(typeof(time) !== "string") return time
+var timeTransform = function (time) {
+  if (typeof (time) !== "string") return time
   var res = ""
-  res+=time.split('T')[0]
-  res+=" "
-  var t=time.split('T')[1].split('Z')[0].split('.')[0].split(':')
-  res+=t[0]+":"+t[1]
+  res += time.split('T')[0]
+  res += " "
+  var t = time.split('T')[1].split('Z')[0].split('.')[0].split(':')
+  res += t[0] + ":" + t[1]
+
+
+  var date = getDate()
+  if (res.split('-')[0] === date.getFullYear()) {
+    res = res.split('-')[1]
+  }
+  if (res.split('-')[0] === date.getMonth()) {
+    res = res.split('-')[1]
+  }
+  if (res.split(' ')[0] === date.getDate()) {
+    res = res.split(' ')[1]
+  }
+
   return res
 }
-var acronymTransform = function(status){
-  switch (status){
+var acronymTransform = function (status) {
+  switch (status) {
     case 'RET':
       return "已归还"
     case "OPN":
@@ -27,6 +40,6 @@ var acronymTransform = function(status){
 }
 
 module.exports = {
-  acronymTrans:acronymTransform,
-  timeTrans:timeTransform
+  acronymTrans: acronymTransform,
+  timeTrans: timeTransform
 }

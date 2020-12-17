@@ -1,11 +1,12 @@
 <!--pages/notice/notice-list/notice-list.wxml-->
+<wxs src="../../../wxs/lib.wxs" module="tools"></wxs>
 <view>
   <div class='chat-cell' wx:for="{{chat_list}}" wx:key="sender" bindtap="enterInfo">
     <image src="{{item.author.wechat_avatar}}" class="chat-cell-avatar" mode="aspectFill"></image>
     <div class="chat-cell-right-part">
       <div class="chat-cell-name-time">
         <div class="chat-cell-name">{{item.author.username}}</div>
-        <div class="chat-cell-time">{{item.newest_message.time}}</div>
+        <div class="chat-cell-time">{{tools.timeTrans(item.newest_message.time)}}</div>
       </div>
       <div class="chat-cell-message">{{item.newest_message.message}}</div>
     </div>

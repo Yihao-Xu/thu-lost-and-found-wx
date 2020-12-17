@@ -45,6 +45,9 @@ App({
               url: 'wss://xyh.iterator-traits.com/ws/chat/' + that.globalData.myInfo.id + '/',
               success(res) {
                 console.log('websocket connect success!')
+                wx.onSocketMessage((result) => {
+                  console.log(result)
+                })
               },
               fail(res) {
 
