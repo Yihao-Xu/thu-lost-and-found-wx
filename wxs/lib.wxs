@@ -8,16 +8,15 @@ var timeTransform = function (time) {
 
 
   var date = getDate()
-  if (res.split('-')[0] === date.getFullYear()) {
-    res = res.split('-')[1]
+  if (res.split('-')[0] === date.getFullYear().toString()) {
+    res = res.substring(res.search('-') + 1, res.length)
   }
-  if (res.split('-')[0] === date.getMonth()) {
-    res = res.split('-')[1]
+  if (res.split('-')[0] === (date.getMonth() + 1).toString()) {
+    res = res.substring(res.search('-') + 1, res.length)
   }
-  if (res.split(' ')[0] === date.getDate()) {
-    res = res.split(' ')[1]
+  if (res.split(' ')[0] === date.getDate().toString()) {
+    res = res.substring(res.search(' ') + 1, res.length)
   }
-
   return res
 }
 var acronymTransform = function (status) {

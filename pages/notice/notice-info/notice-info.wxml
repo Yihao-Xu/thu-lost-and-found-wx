@@ -1,19 +1,18 @@
 <!--pages/notice/notice-info/notice-info.wxml-->
+<wxs src="../../../wxs/lib.wxs" module="tools"></wxs>
 <view class="box">
   <view class="bubble-list">
-    <chat-bubble-opp username="九月的南瓜" time="12:13"
-      text="我累了啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" avatar="/image/testimg.jpg" />
-    <chat-bubble-opp username="九月的南瓜" time="12:13" text="我累了" avatar="/image/testimg.jpg" />
-    <chat-bubble-me username="终极萌妹" time="12:14" text="累就对了，舒服是留给有钱人的" avatar="/image/mine-on.png" />
-    <chat-bubble-opp username="九月的南瓜" time="12:13"
-      text="我累了啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" avatar="/image/testimg.jpg" />
-    <chat-bubble-opp username="九月的南瓜" time="12:13"
-      text="我累了啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" avatar="/image/testimg.jpg" />
-    <chat-bubble-opp username="九月的南瓜" time="12:13"
-      text="我累了啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" avatar="/image/testimg.jpg" />
+    <div wx:for="{{chat.messages}}" wx:key="time">
+      <chat-bubble-opp wx:if="{{item.sender == sender}}" username="{{chat.author.username}}"
+        time="{{tools.timeTrans(item.time)}}" text="{{item.message}}" avatar="{{chat.author.wechat_avatar}}" />
+      <chat-bubble-me wx:if="{{item.sender != sender}}" username="{{myInfo.username}}"
+        time="{{tools.timeTrans(item.time)}}" text="{{item.message}}" avatar="{{myInfo.wechat_avatar}}" />
+    </div>
   </view>
-  <div class="input-box">
-    <textarea class="input-textarea input" focus="{{inputFocus}}" auto-height auto-focus></textarea>
-    <van-button class="input-sendBtn input" bindtap="sendMsg" type="primary" size="small">发送</van-button>
-  </div>
 </view>
+<div class="input-box">
+  <textarea class="input-textarea input" model:value="{{message}}" focus="{{inputFocus}}" auto-height
+    auto-focus></textarea>
+  <van-button class="input-sendBtn input" bindtap="sendMsg" type="primary" size="small" bindtap="sendMessage">发送
+  </van-button>
+</div>

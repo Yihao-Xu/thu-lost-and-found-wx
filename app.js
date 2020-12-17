@@ -7,6 +7,10 @@ const {
   putReq
 } = require('./service/http')
 
+const {
+  onWsMessage
+} = require('./utils/util')
+
 App({
   onShow: function (options) {
     /* 发送认证信息 */
@@ -21,6 +25,16 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+    wx.getStorage({
+      key: 'chat_list',
+      fail(res){
+        wx.setStorage({
+          data: [],
+          key: 'chat_list',
+        })
+      }
+    })
+
 
     // 登录
     var that = this
@@ -49,9 +63,9 @@ App({
                   console.log(result)
                 })
               },
-              fail(res) {
-
-              }
+            })
+            wx.onSocketMessage((result) => {
+              onWsMessage(result.data,function (chat_list) {})
             })
           })
           // 获取用户信息
@@ -84,12 +98,11 @@ App({
                     }
                   }
                 })
-              }else{
+              } else {
                 console.log('get user info failed')
               }
             },
-            fail:res=>{
-            }
+            fail: res => {}
           })
           console.log("finished!")
         })

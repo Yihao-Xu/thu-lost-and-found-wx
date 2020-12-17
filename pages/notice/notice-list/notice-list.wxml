@@ -1,7 +1,7 @@
 <!--pages/notice/notice-list/notice-list.wxml-->
 <wxs src="../../../wxs/lib.wxs" module="tools"></wxs>
 <view>
-  <div class='chat-cell' wx:for="{{chat_list}}" wx:key="sender" bindtap="enterInfo">
+  <div class='chat-cell' wx:for="{{chat_list}}" wx:key="sender" data-sender="{{item.sender}}" bindtap="enterInfo">
     <image src="{{item.author.wechat_avatar}}" class="chat-cell-avatar" mode="aspectFill"></image>
     <div class="chat-cell-right-part">
       <div class="chat-cell-name-time">

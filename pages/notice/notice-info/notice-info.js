@@ -1,18 +1,57 @@
 // pages/notice/notice-info/notice-info.js
+const {
+  onWsMessage, updateChatList, createChat
+} = require('../../../utils/util')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    inputFocus:true
+    chat: {},
+    myInfo: {},
+    sender: {},
+    message: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.pageScrollToBottom()
+    var _this = this
+    var sender = Number(options.sender)
+    wx.getStorage({
+      key: 'chat_list',
+      success(res){
+        var chat = res.data.find(item=>item.sender == sender)
+        if(chat == undefined){
+          createChat(res.data, null, sender, function(cl){})
+        }
+        _this.setData({
+          chat: res.data.find(item=>item.sender == sender),
+          sender: sender
+        })
+        _this.pageScrollToBottom()
+      }
+    })
+    wx.getStorage({
+      key: 'myInfo',
+      success(res){
+        _this.setData({
+          myInfo: res.data
+        })
+      }
+    })
+    wx.onSocketMessage((result) => {
+      onWsMessage(result.data, function (cl) {
+        _this.setData({
+          chat: cl.find(item=>item.sender == _this.data.sender)
+        })
+        _this.pageScrollToBottom()
+      })
+    })
+
+
   },
 
   /**
@@ -65,12 +104,44 @@ Page({
   },
 
   /**
+   * 用户发送信息
+   */
+  sendMessage:function(event){
+    var _this = this
+    var data =  {
+      receiver: this.data.sender,
+      message: this.data.message
+    }
+    wx.sendSocketMessage({
+      data: JSON.stringify(data)
+    })
+    this.setData({
+      message: ''
+    })
+    wx.getStorage({
+      key: 'chat_list',
+      success(res){
+        console.log(res.data)
+        console.log(_this.data.sender)
+        updateChatList(res.data, data, _this.data.sender, function(chat_list){
+          _this.setData({
+            chat: chat_list.find(item=>item.sender == _this.data.sender)
+          })
+          _this.pageScrollToBottom()
+        })
+
+      }
+    })
+
+  },
+
+  /**
    * 滚动到页面最下端
    */
-  pageScrollToBottom: function(){
-    wx.createSelectorQuery().select('.box').boundingClientRect(function(rect){
+  pageScrollToBottom: function () {
+    wx.createSelectorQuery().select('.box').boundingClientRect(function (rect) {
       wx.pageScrollTo({
-        scrollTop:rect.bottom
+        scrollTop: rect.bottom + 50000
       })
     }).exec()
   }
