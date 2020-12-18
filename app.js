@@ -22,11 +22,15 @@ App({
   },
   onLaunch: function () {
     // 展示本地存储能力
+    var _this = this
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     wx.getStorage({
       key: 'chat_list',
+      success(res){
+        _this.globalData.chat_list = res.data
+      },
       fail(res){
         wx.setStorage({
           data: [],
@@ -116,5 +120,6 @@ App({
     userInfo: null,
     myInfo: {},
     access: "",
+    chat_list: []
   }
 })

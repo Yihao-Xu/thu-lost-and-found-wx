@@ -2,6 +2,8 @@ const {
   getReq
 } = require('../service/http')
 
+var app = getApp()
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -10,7 +12,7 @@ const formatTime = date => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
 const formatNumber = n => {
@@ -24,15 +26,14 @@ const formatNumber = n => {
  * 如果 chat_list 为 null， 则从localstorage中拿
  */
 const onWsMessage = (data_recv, callback) => {
-  var chat_list = wx.getStorageSync('chat_list')
-  if (chat_list == undefined) {
-    chat_list = []
-  }
-  if (typeof (data) !== Object) {
-    var data = JSON.parse(data_recv)
-  }
+  // var chat_list = wx.getStorageSync('chat_list')
+  // if (chat_list == undefined) {
+  //   chat_list = []
+  // }
+  var app = getApp()
+  var data = JSON.parse(data_recv)
   console.log(data)
-  updateChatList(chat_list, data, data.sender, callback)
+  updateChatList(app.globalData.chat_list, data, data.sender, callback)
 }
 
 const updateChatList = (chat_list, message, sender, callback) => {
@@ -44,11 +45,11 @@ const updateChatList = (chat_list, message, sender, callback) => {
       first_chat.newest_message = message
       chat_list.splice(i, 1)
       chat_list.unshift(first_chat)
-      callback(chat_list)
       wx.setStorage({
         data: chat_list,
         key: 'chat_list',
       })
+      callback(chat_list)
       return
     }
   }
@@ -61,6 +62,7 @@ const updateChatList = (chat_list, message, sender, callback) => {
  * 新建一个聊天
  */
 const createChat = (chat_list, message, sender, callback) => {
+  
   var new_chat = {}
   if (message !== null) {
     new_chat.messages = [message]
@@ -72,11 +74,12 @@ const createChat = (chat_list, message, sender, callback) => {
   getReq('/users/' + sender + '/', function (data) {
     new_chat.author = data
     chat_list.unshift(new_chat)
-    callback(chat_list)
     wx.setStorage({
       data: chat_list,
       key: 'chat_list',
     })
+    callback(chat_list)
+    
   })
 }
 

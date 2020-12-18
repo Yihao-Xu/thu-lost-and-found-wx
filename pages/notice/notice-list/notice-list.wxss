@@ -43,7 +43,7 @@
 .chat-cell-time{
   color: gray;
   font-size: smaller;
-  flex: 0 0;
+  /* flex: 0 0; */
   margin-left: auto;
 }
 

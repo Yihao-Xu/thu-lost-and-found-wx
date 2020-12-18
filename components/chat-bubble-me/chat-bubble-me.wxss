@@ -27,7 +27,7 @@
 }
 
 .chat-text{
-  background-color: white;
+  background-color: rgb(168, 235, 184);
   border-radius: 0.5em;
   max-width: 80%;
   min-width: 0;

@@ -12,7 +12,7 @@
 </view>
 <div class="input-box">
   <textarea class="input-textarea input" model:value="{{message}}" focus="{{inputFocus}}" auto-height
-    auto-focus></textarea>
+    auto-focus maxlength="150"></textarea>
   <van-button class="input-sendBtn input" bindtap="sendMsg" type="primary" size="small" bindtap="sendMessage">发送
   </van-button>
 </div>
