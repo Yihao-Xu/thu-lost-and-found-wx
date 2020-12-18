@@ -112,6 +112,7 @@ Page({
     var _this = this
     var app = getApp()
     var date = new Date()
+    if(this.data.message === '') return
     var data = {
       receiver: this.data.sender,
       message: this.data.message,
