@@ -119,9 +119,10 @@ Page({
     const that = this
     wx.chooseLocation({
       success(res) {
+        delete res.errMsg
         var path = 'infoData.found_location'
         that.setData({
-          [path]: res.name
+          [path]: res
         })
       }
     })

@@ -1,5 +1,10 @@
-const { putReq } = require("../../service/http")
-
+const {
+  putReq
+} = require("../../service/http")
+const {
+  checkContact
+} = require("../../utils/util")
+import Dialog from '@vant/weapp/dialog/dialog'
 // pages/personalInfoEditor/personalInfoEditor.js
 Page({
 
@@ -7,7 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    myInfo:{}
+    myInfo: {}
   },
 
   /**
@@ -18,7 +23,7 @@ Page({
       title: '编辑个人信息',
     })
     this.setData({
-      myInfo:wx.getStorageSync('myInfo')
+      myInfo: wx.getStorageSync('myInfo')
     })
   },
 
@@ -74,12 +79,41 @@ Page({
   /**
    * 提交修改
    */
-  release: function(){
+  release: function () {
+    if (this.data.myInfo.username == "") {
+      Dialog.alert({
+        title: "格式错误",
+        message: "用户名不能为空！"
+      })
+      return
+    }
+    if (this.data.myInfo.wechat_id !== "" && this.data.myInfo.wechat_id !== null && checkContact(this.data.myInfo.wechat_id, "WCT") === false) {
+      Dialog.alert({
+        title: "格式错误",
+        message: "微信号格式错误！"
+      })
+      return
+    }
+    if (this.data.myInfo.email !== "" && this.data.myInfo.email !== null && checkContact(this.data.myInfo.email, "EML") === false) {
+      Dialog.alert({
+        title: "格式错误",
+        message: "邮箱格式错误！"
+      })
+      return
+    }
+    if (this.data.myInfo.phone !== "" && this.data.myInfo.email !== null && checkContact(this.data.myInfo.phone, "PHN") === false) {
+      Dialog.alert({
+        title: "格式错误",
+        message: "手机号格式错误！"
+      })
+      return
+    }
+
     var id = this.data.myInfo.id
     var info = this.data.myInfo
     delete info.avatar
-    putReq("/users/"+id+'/', this.data.myInfo,function(data){
-      if(data == false) return
+    putReq("/users/" + id + '/', this.data.myInfo, function (data) {
+      if (data == false) return
       wx.setStorageSync('myInfo', data)
       wx.navigateBack({
         delta: 1,
@@ -88,11 +122,11 @@ Page({
 
   },
 
-  onChange:function(event){
+  onChange: function (event) {
     var key = event.target.dataset.key
     var path = "myInfo." + key
     this.setData({
-      [path] : event.detail
+      [path]: event.detail
     })
   }
 })

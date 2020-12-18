@@ -25,7 +25,7 @@
   </div>
   <div class="info">
     <div class="property-name info-item"><van-icon name="orders-o" class="icon"/>{{cardData.property.name}}</div>
-    <div class="found-location info-item"><van-icon name="location-o" class="icon"/>{{cardData.found_location}}</div>
+    <div class="found-location info-item"><van-icon name="location-o" class="icon"/>{{cardData.found_location.name}}</div>
     <div class="found-datetime info-item"><van-icon name="clock-o" class="icon"/>{{tools.timeTrans(cardData.found_datetime)}}</div>
   </div>
   <div class="images">

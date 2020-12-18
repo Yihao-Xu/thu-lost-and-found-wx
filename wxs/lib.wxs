@@ -1,24 +1,27 @@
 var timeTransform = function (time) {
   if (typeof (time) !== "string") return time
-  var res = ""
-  res += time.split('T')[0]
-  res += " "
-  var t = time.split('T')[1].split('Z')[0].split('.')[0].split(':')
-  res += t[0] + ":" + t[1]
-
+  if (time.search("T") !== -1) {
+    var res = ""
+    res += time.split('T')[0]
+    res += " "
+    var t = time.split('T')[1].split('Z')[0].split('.')[0].split(':')
+    res += t[0] + ":" + t[1]
+  }else{
+    var res = time
+  }
 
   var date = getDate()
   if (res.split('-')[0] === date.getFullYear().toString()) {
     res = res.substring(res.search('-') + 1, res.length)
   }
-  if (res.split('-')[0] === (date.getMonth() + 1).toString()) {
-    res = res.substring(res.search('-') + 1, res.length)
-  }
-  if (res.split(' ')[0] === date.getDate().toString()) {
+  if (res.split(' ')[0] === (date.getMonth()+1).toString() + '-' + date.getDate().toString()) {
     res = res.substring(res.search(' ') + 1, res.length)
   }
   return res
 }
+
+
+
 var acronymTransform = function (status) {
   switch (status) {
     case 'RET':
@@ -26,9 +29,11 @@ var acronymTransform = function (status) {
     case "OPN":
       return "发布中"
     case "CLS":
-      return "已关闭"
+      return "已下架"
     case "DFT":
       return "未发布"
+    case "PUB":
+      return "寻找中"
     case "PHN":
       return "手机"
     case "WCT":
@@ -36,6 +41,7 @@ var acronymTransform = function (status) {
     case "EML":
       return "邮箱"
   }
+  return status
 }
 
 module.exports = {

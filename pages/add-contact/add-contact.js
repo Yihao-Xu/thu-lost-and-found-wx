@@ -1,3 +1,6 @@
+const { checkContact } = require("../../utils/util")
+import Dialog from '@vant/weapp/dialog/dialog'
+import { acronymTrans } from '../../utils/util'
 // pages/add-contract/add-contract.js
 Page({
 
@@ -121,6 +124,29 @@ Page({
    * 用户提交并退出
    */
   release: function (event) {
+    if(this.data.name == ""){
+      Dialog.alert({
+        title:"格式错误",
+        message:"联系人姓名不能为空！"
+      })
+      return
+    }
+    if(this.data.method === ""){
+      Dialog.alert({
+        title:"格式错误",
+        message:"请填写联系方式！"
+      })
+      return
+    }
+    console.log(this.data.method)
+    console.log(acronymTrans(this.data.method))
+    if(checkContact(this.data.details, this.data.method) === false){
+      Dialog.alert({
+        title:"格式错误",
+        message:"您输入的" + acronymTrans(this.data.method) + "格式有误！"
+      })
+      return
+    }
     var contact = {
       name: this.data.name,
       details: this.data.details,

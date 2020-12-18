@@ -4,18 +4,18 @@
 <view>
   <van-cell-group title="拾取详情">
     <van-cell title="拾取时间" icon="clock-o" value="{{infoData.found_time}}" is-link bindtap="openCalendar" />
-    <van-cell title="拾取地点" icon="location-o" value="{{infoData.found_location}}" is-link bindtap="chooseLocation" />
+    <van-cell title="拾取地点" icon="location-o" value="{{infoData.found_location.name}}" is-link bindtap="chooseLocation" />
     <van-field label="详情描述" left-icon="description" value="{{infoData.describe}}" data-path="infoData.describe" bind:change="attributeChange" type="textarea" autosize
       placeholder="请输入对拾取过程的详情描述" />
   </van-cell-group>
   <van-cell-group title="联系方式">
-    <van-cell title="使用我的微信" wx:if="{{myInfo.wechat_id !== ''}}" label="{{myInfo.wechat_id}}">
+    <van-cell title="使用我的微信" wx:if="{{myInfo.wechat_id != null && myInfo.wechat_id != ''}}" label="{{myInfo.wechat_id}}">
         <van-switch size="24px" checked="{{wx_checked}}" data-key="wx" bind:change="checkedChange" active-color="#07c160"></van-switch>
     </van-cell>
-    <van-cell title="使用我的邮箱"  wx:if="{{myInfo.email !== ''}}" label="{{myInfo.email}}">
+    <van-cell title="使用我的邮箱"  wx:if="{{myInfo.email !== '' && myInfo.email !== null}}" label="{{myInfo.email}}">
         <van-switch size="24px" checked="{{email_checked}}" data-key="email" bind:change="checkedChange" active-color="#07c160"></van-switch>
     </van-cell>
-    <van-cell title="使用我的手机"  wx:if="{{myInfo.phone !== ''}}" label="{{myInfo.phone}}">
+    <van-cell title="使用我的手机"  wx:if="{{myInfo.phone !== '' && myInfo.phone !== null}}" label="{{myInfo.phone}}">
         <van-switch size="24px" checked="{{phone_checked}}" data-key="phone" bind:change="checkedChange" active-color="#07c160"></van-switch>
     </van-cell>
     <van-cell wx:for="{{contacts}}" label="{{tools.acronymTrans(item.method)}}" title="{{item.name}}" >

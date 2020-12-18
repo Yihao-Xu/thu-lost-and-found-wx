@@ -28,7 +28,9 @@ const onWsMessage = (data_recv, callback) => {
   if (chat_list == undefined) {
     chat_list = []
   }
-  var data = JSON.parse(data_recv)
+  if (typeof (data) !== Object) {
+    var data = JSON.parse(data_recv)
+  }
   console.log(data)
   updateChatList(chat_list, data, data.sender, callback)
 }
@@ -78,10 +80,71 @@ const createChat = (chat_list, message, sender, callback) => {
   })
 }
 
+const deleteObjFromArray = (array, obj) => {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i] === obj) {
+      array.splice(i, 1)
+      return array
+    }
+  }
+  return array
+}
+
+const checkPhone = (phone) => {
+  let phone_reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/
+  return phone_reg.test(phone)
+}
+
+const checkEmail = (email) => {
+  let email_reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/
+  return email_reg.test(email)
+}
+
+const checkWechat = (wechat) => {
+  let wechat_reg = /^[a-zA-Z]([-_a-zA-Z0-9]{5,19})+$/
+  return wechat_reg.test(wechat)
+}
+
+const checkContact = (contact, type) => {
+  switch(type){
+    case "WCT":
+      return checkWechat(contact)
+    case "PHN":
+      return checkPhone(contact)
+    case "EML":
+      return checkEmail(contact)
+  }
+  return false
+}
+
+const acronymTransform =(status) => {
+  switch (status) {
+    case 'RET':
+      return "已归还"
+    case "OPN":
+      return "发布中"
+    case "CLS":
+      return "已下架"
+    case "DFT":
+      return "未发布"
+    case "PUB":
+      return "寻找中"
+    case "PHN":
+      return "手机"
+    case "WCT":
+      return "微信"
+    case "EML":
+      return "邮箱"
+  }
+  return status
+}
 
 module.exports = {
   formatTime: formatTime,
   onWsMessage: onWsMessage,
   updateChatList: updateChatList,
-  createChat: createChat
+  createChat: createChat,
+  deleteObjFromArray: deleteObjFromArray,
+  checkContact: checkContact,
+  acronymTrans: acronymTransform
 }

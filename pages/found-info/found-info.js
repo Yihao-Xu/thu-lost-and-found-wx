@@ -5,8 +5,13 @@ const {
 } = require("../../lib/lib")
 const {
   getReq,
-  deleteReq
+  deleteReq,
+  putReq
 } = require("../../service/http")
+import Dialog from '@vant/weapp/dialog/dialog'
+import {
+  deleteObjFromArray
+} from '../../utils/util'
 
 // pages/found-info/found-info.js
 Page({
@@ -25,7 +30,12 @@ Page({
     actions: [{
       name: '修改'
     }, {
-      name: '删除'
+      name: '已归还',
+    }, {
+      name: '下架'
+    }, {
+      name: '删除',
+      color: '#ee0a24'
     }, {
       name: '转交（生成转交码）'
     }, {
@@ -45,19 +55,12 @@ Page({
     this.setData({
       myInfo: wx.getStorageSync('myInfo')
     })
-    var that = this
+    var _this = this
     getReq('/found-notices/' + options.id, function (data) {
-      that.setData({
+      _this.setData({
         infoData: data
       })
-      if (that.data.infoData.author.id !== that.data.myInfo.id) {
-        that.setData({
-          actions: [{
-            name: '举报',
-            color: '#ee0a24'
-          }]
-        })
-      }
+      _this.setActions()
     })
   },
 
@@ -135,16 +138,24 @@ Page({
    * 删除启事
    */
   delete: function () {
-    deleteReq('/found-notices/' + this.data.infoData.id + '/', function (data) {
-      wx.showToast({
-        title: '删除成功',
-        icon: 'success',
-        duration: 1500
+    Dialog.confirm({
+        title: "确认删除吗？",
+        message: "删除后的启事不可恢复，希望之后撤回可以使用下架功能"
       })
-      wx.navigateBack({
-        delta: 1,
+      .then(() => {
+        deleteReq('/found-notices/' + this.data.infoData.id + '/', function (data) {
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success',
+            duration: 1500
+          })
+          wx.navigateBack({
+            delta: 1,
+          })
+        })
       })
-    })
+      .catch(() => {})
+
   },
 
   /**
@@ -175,7 +186,16 @@ Page({
       case '修改':
         this.edit()
         break
-
+      case '已归还':
+        this.returned()
+        break
+      case '下架':
+        this.unrelease()
+        break
+      case '撤回归还':
+      case '撤回下架':
+        this.release()
+        break
     }
   },
 
@@ -195,5 +215,168 @@ Page({
     this.setData({
       moreShow: false
     })
+  },
+
+  /**
+   * 联系他人，转到聊天页面
+   */
+  contact: function (event) {
+    wx.navigateTo({
+      url: '/pages/notice/notice-info/notice-info?id=' + this.data.infoData.author.id,
+    })
+  },
+
+  /**
+   * 将启事下架
+   */
+  unrelease: function (event) {
+    var infoData = this.data.infoData
+    var _this = this
+    infoData.status = "CLS"
+    Dialog.confirm({
+        title: "下架启事",
+        message: "下架的启事将不会展示给他人，您可以“我的启事”中找到它。"
+      })
+      .then(() => {
+        putReq('/found-notices/' + this.data.id + '/', infoData, function () {
+          let path = 'infoData.status'
+          _this.setData({
+            [path]: "CLS"
+          })
+          _this.setActions()
+          wx.showToast({
+            title: '下架成功',
+          })
+        })
+      })
+  },
+
+  /**
+   * 将启事重新改为上架状态
+   */
+  release: function (event) {
+    var infoData = this.data.infoData
+    var _this = this
+    infoData.status = "PUB"
+    Dialog.confirm({
+        title: "恢复发布",
+        message: "恢复发布的启事可以再次被展示在首页中"
+      })
+      .then(() => {
+        putReq('/found-notices/' + this.data.id + '/', infoData, function () {
+          let path = 'infoData.status'
+          _this.setData({
+            [path]: "PUB"
+          })
+          _this.setActions()
+          wx.showToast({
+            title: '下架成功',
+          })
+        })
+      })
+  },
+
+  /**
+   * 用户将启事状态设置为“已归还”
+   */
+  returned: function () {
+    var infoData = this.data.infoData
+    var _this = this
+    infoData.status = "RET"
+    Dialog.confirm({
+        title: "已归还",
+        message: "完成的启事将不会再展示在首页，您可以在“我的启事”中找到它。"
+      })
+      .then(() => {
+        putReq('/found-notices/' + this.data.id + '/', infoData, function () {
+          let path = 'infoData.status'
+          _this.setData({
+            [path]: "RET"
+          })
+          _this.setActions()
+          wx.showToast({
+            title: '设置成功',
+          })
+        })
+      })
+  },
+
+  /**
+   * 设置上拉菜单 actions 的内容
+   */
+  setActions: function () {
+    if (this.data.infoData.author.id !== this.data.myInfo.id) {
+      this.setData({
+        actions: [{
+          name: '举报',
+          color: '#ee0a24'
+        }]
+      })
+    } else if (this.data.infoData.status === 'RET') {
+      this.setData({
+        actions: [{
+          name: '修改'
+        }, {
+          name: '下架'
+        }, {
+          name: '撤回归还'
+        }, {
+          name: '删除',
+          color: '#ee0a24'
+        }, {
+          name: '转交（生成转交码）'
+        }, {
+          name: '举报',
+          color: '#ee0a24'
+        }]
+      })
+    } else if (this.data.infoData.status === 'CLS') {
+      this.setData({
+        actions: [{
+          name: '修改'
+        }, {
+          name: '已归还',
+        }, {
+          name: '撤回下架'
+        }, {
+          name: '删除',
+          color: '#ee0a24'
+        }, {
+          name: '转交（生成转交码）'
+        }, {
+          name: '举报',
+          color: '#ee0a24'
+        }]
+      })
+    } else if (this.data.infoData.status === 'PUB') {
+      this.setData({
+        actions: [{
+          name: '修改'
+        }, {
+          name: '已归还',
+        }, {
+          name: '下架'
+        }, {
+          name: '删除',
+          color: '#ee0a24'
+        }, {
+          name: '转交（生成转交码）'
+        }, {
+          name: '举报',
+          color: '#ee0a24'
+        }]
+      })
+    }
+  },
+
+  /**
+   * 点击丢失地点打开地图
+   */
+  openMap: function(){
+    wx.openLocation({
+      latitude: this.data.infoData.found_location.latitude,
+      longitude: this.data.infoData.found_location.longitude,
+    })
   }
+
 })

@@ -2,7 +2,9 @@
 var rootDocument = 'https://xyh.iterator-traits.com'
 // var rootDocument = 'http://192.168.0.103:8000'
 // var app = getApp()
-var header ={"Authorization" : null}
+var header = {
+  "Authorization": null
+}
 
 function getReq(url, cb) {
   wx.showLoading({
@@ -10,18 +12,18 @@ function getReq(url, cb) {
   })
   wx.request({
     url: rootDocument + url,
-    method : 'GET',
+    method: 'GET',
     header: header,
-    success :function (res){
+    success: function (res) {
       wx.hideLoading()
       return typeof cb == "function" && cb(res.data)
     },
-    fail: function() {
+    fail: function () {
       wx.hideLoading()
       wx.showModal({
-        title : '网络错误',
-        content : '网络出错，请刷新重试',
-        showCancel : false
+        title: '网络错误',
+        content: '网络出错，请刷新重试',
+        showCancel: false
       })
       return typeof cb == "function" && cb(false)
     }
@@ -35,31 +37,31 @@ function postReq(url, data, cb) {
   })
   wx.request({
     url: rootDocument + url,
-    method : 'POST',
+    method: 'POST',
     header: header,
     data: data,
-    success :function (res){
+    success: function (res) {
       console.log(data)
       console.log(res.data)
-      if(res.statusCode >= 200 && res.statusCode < 300){//成功
+      if (res.statusCode >= 200 && res.statusCode < 300) { //成功
         wx.hideLoading()
         return typeof cb == "function" && cb(res.data)
-      }else{
+      } else {
         wx.showModal({
-          title:"请求错误",
-          content:JSON.stringify(res.data),
-          showCancel:false
+          title: "请求错误",
+          content: JSON.stringify(res.data),
+          showCancel: false
         })
         wx.hideLoading()
       }
 
     },
-    fail: function() {
+    fail: function () {
       wx.hideLoading()
       wx.showModal({
-        title : '网络错误',
-        content : '网络出错，请刷新重试',
-        showCancel : false
+        title: '网络错误',
+        content: '网络出错，请刷新重试',
+        showCancel: false
       })
       return typeof cb == "function" && cb(false)
     }
@@ -72,32 +74,32 @@ function login(data, cb) {
   })
   wx.request({
     url: rootDocument + '/auth/wechat/token/',
-    method : 'POST',
-    header:{},
+    method: 'POST',
+    header: {},
     data: data,
-    success :function (res){
+    success: function (res) {
       console.log(data)
       console.log(res.data)
-      if(res.statusCode >= 200 && res.statusCode < 300){//成功
+      if (res.statusCode >= 200 && res.statusCode < 300) { //成功
         wx.hideLoading()
         return typeof cb == "function" && cb(res.data)
-      }else{
+      } else {
         wx.showModal({
-          title:"请求错误",
-          content:JSON.stringify(res.data),
-          showCancel:false
+          title: "请求错误",
+          content: JSON.stringify(res.data),
+          showCancel: false
         })
         wx.hideLoading()
       }
-      
-      
+
+
     },
-    fail: function() {
+    fail: function () {
       wx.hideLoading()
       wx.showModal({
-        title : '网络错误',
-        content : '网络出错，请刷新重试',
-        showCancel : false
+        title: '网络错误',
+        content: '网络出错，请刷新重试',
+        showCancel: false
       })
       return typeof cb == "function" && cb(false)
     }
@@ -110,61 +112,61 @@ function putReq(url, data, cb) {
   })
   wx.request({
     url: rootDocument + url,
-    method : 'PUT',
+    method: 'PUT',
     header: header,
     data: data,
-    success :function (res){
+    success: function (res) {
       console.log(data)
       console.log(res.data)
-      if(res.statusCode >= 200 && res.statusCode < 300){//成功
+      if (res.statusCode >= 200 && res.statusCode < 300) { //成功
         wx.hideLoading()
         return typeof cb == "function" && cb(res.data)
-      }else{
+      } else {
         wx.showModal({
-          title:"请求错误",
-          content:JSON.stringify(res.data),
-          showCancel:false
+          title: "请求错误",
+          content: JSON.stringify(res.data),
+          showCancel: false
         })
         wx.hideLoading()
       }
     },
-    fail: function() {
+    fail: function () {
       wx.hideLoading()
       wx.showModal({
-        title : '网络错误',
-        content : '网络出错，请刷新重试',
-        showCancel : false
+        title: '网络错误',
+        content: '网络出错，请刷新重试',
+        showCancel: false
       })
       return typeof cb == "function" && cb(false)
     }
   })
 }
 
-function deleteReq(url, cb){
+function deleteReq(url, cb) {
   wx.showLoading({
     title: '加载中',
   })
   wx.request({
     url: rootDocument + url,
-    method : 'DELETE',
+    method: 'DELETE',
     header: header,
-    success :function (res){
+    success: function (res) {
       wx.hideLoading()
       return typeof cb == "function" && cb(res.data)
     },
-    fail: function() {
+    fail: function () {
       wx.hideLoading()
       wx.showModal({
-        title : '网络错误',
-        content : '网络出错，请刷新重试',
-        showCancel : false
+        title: '网络错误',
+        content: '网络出错，请刷新重试',
+        showCancel: false
       })
       return typeof cb == "function" && cb(false)
     }
   })
 }
 
-function uploadImage(url, filePath, name, cb){
+function uploadImage(url, filePath, name, cb) {
   wx.showLoading({
     title: '上传图片中',
   })
@@ -172,24 +174,23 @@ function uploadImage(url, filePath, name, cb){
     filePath: filePath,
     name: name,
     header: header,
-    url: rootDocument+url,
-    success(res){
-      if(res.code >= 200 && res.code < 300){
-        wx.showToast({
-          title: '上传成功',
-          icon: 'success',
-          duration: 1500
-        })
-      }else{
-        wx.showToast({
-          title: '上传失败',
-          icon: 'fail',
-          duration: 1500
-        })
-      }
-
+    url: rootDocument + url,
+    success(res) {
+      wx.showToast({
+        title: '上传成功',
+        icon: 'success',
+        duration: 1500
+      })
       cb(res)
+    },
+    fail(res) {
+      wx.showToast({
+        title: '上传失败',
+        icon: 'error',
+        duration: 1500
+      })
     }
+
   })
   wx.hideLoading()
 }
