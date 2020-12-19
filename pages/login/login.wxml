@@ -1,0 +1,9 @@
+<!--pages/login/login.wxml-->
+<view class="box">
+  <div class="logo-box">
+    <image class="logo" src='/image/found-on.png' mode="aspectFill"></image>
+    <text>紫荆寻物</text>
+  </div>
+  <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" class="login-button button">微信登录</button>
+  <button class="vertify-button button" bindtap="vertify">学生认证</button>
+</view>

@@ -1,5 +1,5 @@
 /* components/lost-card/lost-card.wxss */
-.head-photo{
+/* .head-photo{
   width: 96rpx;
   height: 96rpx;
   margin: 20rpx;
@@ -7,9 +7,78 @@
 .card-pic{
   display: block;
 }
-.card{
-  margin: 5rpx;
-}
 .tag{
-  margin: 0 10rpx 0 10rpx;
+  margin: 10px;
+} */
+
+.card{
+  /* width: 90%; */
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 3%;
+  box-shadow: 1px 2px 5px 2px #cac9c9;
+  border-radius: 10px;
+}
+
+.header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 5px;
+  border-bottom: 1px solid rgb(240, 235, 235);
+}
+
+.avatar{
+  width: 30px;
+  height: 30px;
+}
+
+.username{
+  margin-left: 0.5em;
+  color: gray;
+}
+
+.release-time{
+  margin-left: auto;
+  font-size: 15px;
+  color: gray;
+}
+
+.images{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.image-item{
+  width: 30%;
+  max-height: 100px;
+  margin:1%;
+}
+
+.info{
+  display: flex;
+  flex-direction: column;
+  padding: 5px ;
+}
+
+.icon{
+  margin-right: 1em;
+}
+
+.info-item{
+  margin: 2px 0;
+}
+
+.tags{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0 1.5px;
+}
+
+.tag{
+  margin: 2px 3.5px;
 }

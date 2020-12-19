@@ -1,25 +1,12 @@
 // pages/lost/lost.js
+const { getReq } = require("../../service/http")
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    lostList:[
-      {
-        avatar:"/image/avatar-liqi.jpg",
-        username:"李祁",
-        release_time:"今天11:02",
-        content:"今天咱丢失了一部苹果手机嗷",
-        image1:"/image/ip12-1.jpg",
-        image2:"/image/ip12-2.jpg",
-        image3:"/image/ip12-3.jpg",
-        object_name:"iPhone12 Pro",
-        location:"紫荆园食堂",
-        found_time:"10月31日下午",
-        tags:["蓝色","没有手机壳"]
-      },
-    ],
+    lostList:[],
     search_value:"",//搜索框的内容
   },
 
@@ -40,7 +27,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this
+    var app = getApp()
+    getReq('/lost-notices/?search=' + this.data.search_value,function(data){
+      that.setData({
+        lostList:data.results,
+        next:data.next
+      })
+    })
+    if(app.globalData.unread !== 0){
+      wx.showTabBarRedDot({
+        index: 2,
+      })
+    }
   },
 
   /**
@@ -61,14 +60,33 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    var that = this
+    getReq('/found-notices/?search=' + this.data.search_value,function(data){
+      that.setData({
+        foundList:data.results,
+        next:data.next
+      })
+    })
+    wx.stopPullDownRefresh()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if(this.data.next===null) return
+    var that = this
+    console.log(this.data.next)
+    var api = this.data.next.split("http://xyh.iterator-traits.com")[1]
+    var fl = this.data.foundList
+    getReq(api,function(data){
+      var nfl = fl.concat(data.results)
+      console.log(data.results)
+      that.setData({
+        foundList:nfl,
+        next:data.next
+      })
+    })
   },
 
   /**
@@ -82,6 +100,13 @@ Page({
    * 用户进行搜索
    */
   onSearch: function(){
+    var that = this
+    getReq('/lost-notices?search=' + this.data.search_value,function(data){
+      that.setData({
+        foundList:data.results,
+        next:data.next
+      })
+    })
   },
 
     /**
@@ -95,7 +120,7 @@ Page({
   
   new_lost:function(){
     wx.navigateTo({
-      url: '/pages/new-lost/new-lost',
+      url: '/pages/new-lost/types/types',
     })
   }
 })

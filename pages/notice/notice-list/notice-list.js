@@ -3,7 +3,9 @@ const {
 } = require("../../../service/http")
 
 const {
-  onWsMessage
+  onWsMessage,
+  clearUnread,
+  addUnread
 } = require('../../../utils/util')
 
 // pages/notice/notice-list/notice-list.js
@@ -13,27 +15,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    chat_list: [{
-      author: {
-        wechat_avatar: '/image/avatar-liqi.jpg',
-        id: 0,
-        username: '李祁'
-      },
-      sender: 0,
-      messages: [{
-        sender: 1,
-        reciver: 2,
-        message: "我累了，我不想写小程序了。",
-        time: "12:32"
-      }],
-      newest_message: {
-        sender: 1,
-        reciver: 2,
-        message: "我累了，我不想写小程序了。",
-        time: "12:32"
-      },
-      unread: 0,
-    }]
+    chat_list: []
   },
 
   /**
@@ -41,11 +23,13 @@ Page({
    */
   onLoad: function (options) {
     var _this = this
+    var app = getApp()
     this.setData({
-      chat_list: wx.getStorageSync('chat_list')
+      chat_list: app.globalData.chat_list
     })
     wx.onSocketMessage((result) => {
-      onWsMessage(result.data,function (cl) {
+      onWsMessage(result.data, function (cl) {
+        addUnread(-1, result.data)
         _this.setData({
           chat_list: cl
         })
@@ -64,7 +48,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var _this = this
+    wx.onSocketMessage((result) => {
+      onWsMessage(result.data, function (cl) {
+        addUnread(-1, result.data)
+        _this.setData({
+          chat_list: cl
+        })
+      })
+    })
+    var app = getApp()
+    if (app.globalData.unread !== 0) {
+      wx.showTabBarRedDot({
+        index: 2,
+      })
+    }
   },
 
   /**
@@ -107,6 +105,7 @@ Page({
    */
   enterInfo: function (event) {
     var sender = event.currentTarget.dataset.sender
+    clearUnread(sender)
     wx.navigateTo({
       url: '/pages/notice/notice-info/notice-info?sender=' + sender,
     })

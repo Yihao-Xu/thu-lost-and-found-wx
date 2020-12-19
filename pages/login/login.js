@@ -1,30 +1,22 @@
+// pages/login/login.js
 const {
-  getReq
-} = require("../../service/http");
+  putReq
+} = require('../../service/http')
 
-// pages/personalInfo/personalInfo.js
-var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
-    myInfo: {},
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
-    getReq('/users/me/', function (data) {
-      wx.setStorageSync('myInfo', data)
-      that.setData({
-        myInfo: data
-      })
-    })
+
   },
 
   /**
@@ -38,19 +30,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this
-    var app = getApp()
-    getReq('/users/me/', function (data) {
-      wx.setStorageSync('myInfo', data)
-      that.setData({
-        myInfo: data
-      })
-    })
-    if (app.globalData.unread !== 0) {
-      wx.showTabBarRedDot({
-        index: 2,
-      })
-    }
+
   },
 
   /**
@@ -88,15 +68,40 @@ Page({
 
   },
 
-  //进入编辑资料页面的函数
-  enterEditor: function (event) {
-    wx.navigateTo({
-      url: '/pages/personalInfoEditor/personalInfoEditor',
-    })
+  /**
+   * 点击获取用户信息按钮
+   */
+  bindGetUserInfo: function (event) {
+    var app = getApp()
+    if (event.detail.userInfo) {
+      app.globalData.userInfo = event.detail.userInfo
+      wx.setStorage({
+        data: event.detail.userInfo,
+        key: 'userInfo',
+      })
+      var myInfo = wx.getStorageSync('myInfo')
+      if (myInfo.wechat_avatar !== event.detail.userInfo.avatarUrl) {
+        myInfo.wechat_avatar = event.detail.userInfo.avatarUrl
+        if (myInfo.username == "微信用户") {
+          myInfo.username = event.detail.userInfo.nickName
+        }
+        wx.setStorage({
+          data: myInfo,
+          key: 'myInfo',
+        })
+        putReq('/users/' + myInfo.id + '/', myInfo, function (data) {
+          wx.showToast({
+            title: '信息更改成功',
+          })
+        })
+      }
+    }
   },
 
-  //进入认证界面
-  enterCertification: function (event) {
+  /**
+   * 进入清华学生认证
+   */
+  vertify: function (event) {
     wx.navigateToMiniProgram({
       appId: 'wx1ebe3b2266f4afe0',
       path: 'pages/index/index',
@@ -104,20 +109,6 @@ Page({
       extraData: {
         origin: "miniapp",
         type: "id.tsinghua"
-      }
-    })
-  },
-
-  /**
-   * 扫描二维码
-   */
-  scanQRCode: function (event) {
-    wx.scanCode({
-      onlyFromCamera: false,
-      scanType: ['qrCode'],
-      success(res) {
-        console.log(res)
-        console.log(res.result)
       }
     })
   }

@@ -62,15 +62,17 @@ const updateChatList = (chat_list, message, sender, callback) => {
  * 新建一个聊天
  */
 const createChat = (chat_list, message, sender, callback) => {
-  
+
   var new_chat = {}
   if (message !== null) {
     new_chat.messages = [message]
+
   } else {
     new_chat.messages = []
   }
   new_chat.sender = sender
   new_chat.newest_message = message
+
   getReq('/users/' + sender + '/', function (data) {
     new_chat.author = data
     chat_list.unshift(new_chat)
@@ -79,7 +81,7 @@ const createChat = (chat_list, message, sender, callback) => {
       key: 'chat_list',
     })
     callback(chat_list)
-    
+
   })
 }
 
@@ -93,6 +95,60 @@ const deleteObjFromArray = (array, obj) => {
   return array
 }
 
+/**
+ * 更新unread
+ */
+const addUnread = (cur_notice_info_sender, message) => {
+  var app = getApp()
+  if (cur_notice_info_sender === message.sender) return
+  if (typeof(message) != Object){
+    message = JSON.parse(message)
+  }
+  app.globalData.chat_list.find(item => item.sender == message.sender).unread++
+  app.globalData.chat_list.find(item => item.sender == message.sender).show_dot = true
+  console.log(app.globalData.chat_list.find(item => item.sender == message.sender).show_dot)
+  app.globalData.unread++
+  wx.setStorage({
+    data: app.globalData.chat_list,
+    key: 'chat_list',
+  })
+  wx.setStorage({
+    data: app.globalData.unread,
+    key: 'unread',
+  })
+  wx.showTabBarRedDot({
+    index: 2,
+    fail(){}
+  })
+}
+
+const clearUnread = (sender) => {
+  var app = getApp()
+  var read = app.globalData.chat_list.find(item => item.sender == sender).unread
+  console.log(read)
+  app.globalData.chat_list.find(item => item.sender == sender).unread = 0
+  app.globalData.chat_list.find(item => item.sender == sender).show_dot = false
+  app.globalData.unread -= read
+  wx.setStorage({
+    data: app.globalData.chat_list,
+    key: 'chat_list',
+  })
+  wx.setStorage({
+    data: app.globalData.unread,
+    key: 'unread',
+  })
+  if (app.globalData.unread == 0) {
+    console.log('hide')
+    wx.hideTabBarRedDot({
+      index: 2,
+      fail(){}
+    })
+  }
+}
+
+/**
+ * 检测联系方式是否合法
+ */
 const checkPhone = (phone) => {
   let phone_reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/
   return phone_reg.test(phone)
@@ -109,7 +165,7 @@ const checkWechat = (wechat) => {
 }
 
 const checkContact = (contact, type) => {
-  switch(type){
+  switch (type) {
     case "WCT":
       return checkWechat(contact)
     case "PHN":
@@ -120,7 +176,10 @@ const checkContact = (contact, type) => {
   return false
 }
 
-const acronymTransform =(status) => {
+/**
+ * 将缩写转换为中文
+ */
+const acronymTransform = (status) => {
   switch (status) {
     case 'RET':
       return "已归还"
@@ -149,5 +208,7 @@ module.exports = {
   createChat: createChat,
   deleteObjFromArray: deleteObjFromArray,
   checkContact: checkContact,
-  acronymTrans: acronymTransform
+  acronymTrans: acronymTransform,
+  addUnread: addUnread,
+  clearUnread: clearUnread
 }

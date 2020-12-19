@@ -1,20 +1,20 @@
 <!--components/lost-card/lost-card.wxml-->
-<i-card title="{{cardData.username}}" extra="{{cardData.release_time}}" thumb="{{cardData.avatar}}" class="card" bindtap="enterInfo"> 
-  <view slot="content">
-    <div style="width:100%;"><text>{{cardData.content}}</text></div>
-    <van-divider/>
-    <van-grid column-num="3" class="card-pic">
-      <van-grid-item><image style="width: 33%; height: 90px;" src="{{cardData.image1}}" /></van-grid-item>
-      <van-grid-item> <image style="width: 33%; height: 90px;" src="{{cardData.image2}}" /></van-grid-item>
-      <van-grid-item> <image style="width: 33%; height: 90px;" src="{{cardData.image3}}" /></van-grid-item>
-    </van-grid>
-    <van-cell-group>
-      <van-cell title="丢失物" value="{{cardData.object_name}}"></van-cell>
-      <van-cell title="丢失地点" value="{{cardData.location}}"></van-cell>
-      <van-cell title="丢失时间" value="{{cardData.found_time}}"></van-cell>
-    </van-cell-group>
-  </view>
-  <view slot="footer">
-    <van-tag wx:for="{{cardData.tags}}" type="primary" class="tag">{{item}}</van-tag>
-  </view>
-</i-card>
+<wxs module="tools" src="../../wxs/lib.wxs"></wxs>
+<view class="card" bindtap="enterInfo">
+  <div class="header">
+    <image class="avatar" src="{{cardData.author.wechat_avatar}}" mode="aspectFit" />
+    <div class="username">{{cardData.author.username}}</div>
+    <!-- <div class="release-time">{{tools.timeTrans(cardData.created_at)}}</div> -->
+  </div>
+  <div class="info">
+    <div class="property-name info-item"><van-icon name="orders-o" class="icon"/>{{cardData.property.name}}</div>
+    <div class="lost-location info-item"><van-icon name="location-o" class="icon"/>{{cardData.lost_location.name}}</div>
+    <div class="lost-datetime info-item"><van-icon name="clock-o" class="icon"/>{{tools.timeTrans(cardData.lost_datetime)}}</div>
+  </div>
+  <div class="images">
+    <image class="image-item" wx:for="{{cardData.images}}" src="{{item.url}}" mode="aspectFill" />
+  </div>
+  <div class="tags">
+    <van-tag wx:for="{{cardData.property.tags}}" color="{{item.color}}" class="tag" type="primary" size="medium" plain>{{item.name}}</van-tag>
+  </div>
+</view>

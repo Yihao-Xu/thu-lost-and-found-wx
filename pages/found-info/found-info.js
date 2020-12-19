@@ -222,7 +222,7 @@ Page({
    */
   contact: function (event) {
     wx.navigateTo({
-      url: '/pages/notice/notice-info/notice-info?id=' + this.data.infoData.author.id,
+      url: '/pages/notice/notice-info/notice-info?sender=' + this.data.infoData.author.id,
     })
   },
 

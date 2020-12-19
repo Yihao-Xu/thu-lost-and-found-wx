@@ -8,18 +8,25 @@ const {
 } = require('./service/http')
 
 const {
-  onWsMessage
+  onWsMessage,
+  addUnread
 } = require('./utils/util')
 
 App({
   onShow: function (options) {
-    /* 发送认证信息 */
+    /* 发送清华认证信息 */
     console.log(options.referrerInfo.extraData)
     var myInfo = wx.getStorageSync('myInfo')
     if (options.referrerInfo.extraData != undefined) {
       postReq('/users/' + myInfo.id + '/wechat_thu_auth/', options.referrerInfo.extraData, function (res) {})
     }
+    if (this.globalData.unread !== 0) {
+      wx.showTabBarRedDot({
+        index: 2,
+      })
+    }
   },
+
   onLaunch: function () {
     // 展示本地存储能力
     var _this = this
@@ -28,14 +35,28 @@ App({
     wx.setStorageSync('logs', logs)
     wx.getStorage({
       key: 'chat_list',
-      success(res){
+      success(res) {
         _this.globalData.chat_list = res.data
       },
-      fail(res){
+      fail(res) {
         wx.setStorage({
           data: [],
           key: 'chat_list',
         })
+      }
+    })
+    wx.getStorage({
+      key: 'unread',
+      success(res) {
+        _this.globalData.unread = res.data
+        if (res.data !== 0) {
+          wx.showTabBarRedDot({
+            index: 2,
+          })
+        }
+      },
+      fail() {
+        _this.globalData.unread = 0
       }
     })
 
@@ -48,9 +69,9 @@ App({
         login({
           code: res.code
         }, function (data) {
-          wx.showToast({
-            title: '登陆成功',
-          })
+          // wx.showToast({
+          //   title: '登陆成功',
+          // })
           that.globalData.access = data.access
           header.Authorization = "Bearer " + data.access
           // console.log(header.Authorization)
@@ -69,9 +90,12 @@ App({
               },
             })
             wx.onSocketMessage((result) => {
-              onWsMessage(result.data,function (chat_list) {})
+              onWsMessage(result.data, function (chat_list) {})
+              addUnread(-1, result.data)
             })
           })
+
+
           // 获取用户信息
           wx.getSetting({
             success: res => {
@@ -82,9 +106,11 @@ App({
                     // 可以将 res 发送给后台解码出 unionId
                     that.globalData.userInfo = res.userInfo
                     var myInfo = wx.getStorageSync('myInfo')
-                    if (myInfo.username !== res.userInfo.nickName || myInfo.wechat_avatar !== res.userInfo.avatarUrl) {
+                    if (myInfo.wechat_avatar !== res.userInfo.avatarUrl) {
                       myInfo.wechat_avatar = res.userInfo.avatarUrl
-                      myInfo.username = res.userInfo.nickName
+                      if (myInfo.username == "微信用户") {
+                        myInfo.username = res.userInfo.nickName
+                      }
                       wx.setStorage({
                         data: myInfo,
                         key: 'myInfo',
@@ -108,6 +134,8 @@ App({
             },
             fail: res => {}
           })
+
+
           console.log("finished!")
         })
 
@@ -120,6 +148,7 @@ App({
     userInfo: null,
     myInfo: {},
     access: "",
-    chat_list: []
+    chat_list: [],
+    unread: 0
   }
 })

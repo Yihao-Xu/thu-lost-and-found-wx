@@ -1,0 +1,38 @@
+/* pages/login/login.wxss */
+
+.box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.logo-box{
+  margin: 12vh 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo{
+  width: 70px;
+  height: 70px;
+}
+
+.button{
+  width: 80%;
+  height: 35px;
+  border-radius: 5px;
+  font-size: 14px;
+  background: #82318E linear-gradient(to right, #ac62b8, #82318E);
+  color: whitesmoke;
+}
+
+.login-button{
+  margin-top: 20vh;
+}
+
+.vertify-button{
+  margin-top: 5vh;
+}

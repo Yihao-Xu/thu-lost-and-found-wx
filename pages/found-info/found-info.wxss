@@ -6,8 +6,7 @@
   margin: 20rpx;
 }
 
-.object-name-text {
-}
+.object-name-text {}
 
 .sort-text {
   font-size: small;
@@ -18,18 +17,18 @@
   margin: 20px;
 }
 
-.header{
+.header {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-#headerInfo{
+#headerInfo {
   display: flex;
   flex-direction: column;
 }
 
-.moreBtn{
+.moreBtn {
   width: 30px;
   height: 30px;
   flex-basis: auto;
@@ -37,7 +36,7 @@
   margin-right: 10px;
 }
 
-.card-pic{
+.card-pic {
   display: flex;
   flex-direction: row;
 }
@@ -49,3 +48,8 @@
   flex-shrink: 0;
 }
 
+.description {
+  padding: 10px 1.5em 5px 1em;
+  font-size: 14px;
+  color: grey;
+}

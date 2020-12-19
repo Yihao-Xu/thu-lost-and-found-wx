@@ -12,7 +12,7 @@
 
   <!-- tag显示面板 -->
   <van-panel title="标签" desc="对物品的描述，会用于招领与寻物的匹配。" use-footer-slot>
-    <view style="min-height='100px'">
+    <view style="padding:10px;">
       <van-tag wx:for="{{infoData.property.tags}}" type="primary" plain closeable bind:close="deleteTag" data-index="{{index}}"
         class="tag" size="large">
         {{item.name}}</van-tag>

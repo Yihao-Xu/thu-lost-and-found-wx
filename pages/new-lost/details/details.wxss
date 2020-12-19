@@ -1,4 +1,4 @@
-/* pages/new-lost/new-lost.wxss */
+/* pages/new-found/details/details.wxss */
 .pic-uploader{
   margin: 30rpx;
 }
@@ -9,6 +9,3 @@
   bottom: 0px;
 }
 
-.tag{
-  margin: 10px;
-}

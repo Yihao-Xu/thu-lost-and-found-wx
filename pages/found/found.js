@@ -7,34 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    foundList:[
-      {
-        avatar:"/image/avatar-1.jpg",
-        username:"徐亦豪",
-        release_time:"今天11:02",
-        content:"今天咱捡到了一部苹果手机嗷",
-        image1:"/image/ip12-1.jpg",
-        image2:"/image/ip12-2.jpg",
-        image3:"/image/ip12-3.jpg",
-        object_name:"iPhone12 Pro",
-        location:"六教602",
-        found_time:"10月31日下午",
-        tags:["蓝色","没有手机壳"]
-      }, 
-      {
-        avatar:"/image/avatar-liqi.jpg",
-        username:"李祁",
-        release_time:"今天9:02",
-        content:"今天咱捡到了一顶帽子",
-        image1:"/image/greencap-1.jpg",
-        image2:"/image/greencap-2.jpg",
-        image3:"/image/greencap-3.jpg",
-        object_name:"帽子（绿）",
-        location:"五教5305",
-        found_time:"10月30日下午",
-        tags:["绿色","拥有神秘力量"]
-      }
-    ],
+    foundList:[],
     next:"",//下一页的内容
     search_value:"",//搜索框的内容
   },
@@ -43,13 +16,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
-    // getReq('/found-notices/',function(data){
-    //   that.setData({
-    //     foundList:data.results,
-    //     next:data.next
-    //   })
-    // })
+
   },
 
   /**
@@ -63,12 +30,18 @@ Page({
    */
   onShow: function () {
     var that = this
-    getReq('/found-notices/?search=' + this.data.search_value,function(data){
+    var app = getApp()
+    getReq('/found-notices/?status=PUB&search=' + this.data.search_value,function(data){
       that.setData({
         foundList:data.results,
         next:data.next
       })
     })
+    if(app.globalData.unread !== 0){
+      wx.showTabBarRedDot({
+        index: 2,
+      })
+    }
   },
 
   /**
@@ -90,7 +63,7 @@ Page({
    */
   onPullDownRefresh: function () {
     var that = this
-    getReq('/found-notices/?search=' + this.data.search_value,function(data){
+    getReq('/found-notices/?status=PUB&search=' + this.data.search_value,function(data){
       that.setData({
         foundList:data.results,
         next:data.next

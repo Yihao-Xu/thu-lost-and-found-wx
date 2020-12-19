@@ -3,7 +3,9 @@ const {
   onWsMessage,
   updateChatList,
   createChat,
-  formatTime
+  formatTime,
+  clearUnread,
+  addUnread
 } = require('../../../utils/util')
 Page({
 
@@ -24,7 +26,6 @@ Page({
     var _this = this
     var sender = Number(options.sender)
     var app = getApp()
-
     var chat = app.globalData.chat_list.find(item => item.sender == sender)
     if (chat == undefined) {
       createChat(app.globalData.chat_list, null, sender, function (cl) {})
@@ -33,8 +34,9 @@ Page({
       chat: app.globalData.chat_list.find(item => item.sender == sender),
       sender: sender
     })
-    this.pageScrollToBottom()
-
+    wx.setNavigationBarTitle({
+      title: this.data.chat.author.username,
+    })
 
     wx.getStorage({
       key: 'myInfo',
@@ -49,9 +51,9 @@ Page({
         _this.setData({
           chat: cl.find(item => item.sender == _this.data.sender)
         })
-        _this.pageScrollToBottom()
       })
     })
+
 
 
   },
@@ -60,7 +62,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.pageScrollToBottom()
   },
 
   /**
@@ -81,7 +83,10 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    wx.onSocketMessage((result) => {
+      onWsMessage(result.data,function (chat_list) {})
+      addUnread(-1, result.data)
+    })
   },
 
   /**
