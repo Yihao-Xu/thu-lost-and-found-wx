@@ -19,6 +19,10 @@ App({
     var myInfo = wx.getStorageSync('myInfo')
     if (options.referrerInfo.extraData != undefined) {
       postReq('/users/' + myInfo.id + '/wechat_thu_auth/', options.referrerInfo.extraData, function (res) {})
+      getReq('/users/me/', function (data) {
+        wx.setStorageSync('myInfo', data)
+        that.globalData.myInfo = data
+      })
     }
     if (this.globalData.unread !== 0) {
       wx.showTabBarRedDot({

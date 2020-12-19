@@ -1,5 +1,6 @@
 const { getReq } = require("../../service/http")
 const {timeTrans} = require("../../lib/lib")
+const { enterVerifiedPage } = require("../../utils/util")
 // pages/found/found.js
 Page({
 
@@ -121,8 +122,6 @@ Page({
   },
   
   new_found:function(){
-    wx.navigateTo({
-      url: '/pages/new-found/types/types',
-    })
+    enterVerifiedPage("/pages/new-found/types/types")
   }
 })

@@ -20,7 +20,9 @@
     "pages/new-lost/types/types",
     "pages/new-lost/attribute/attribute",
     "pages/new-lost/details/details",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/edit-lost/attribute/attribute",
+    "pages/edit-lost/details/details"
 
   ],
   "window": {

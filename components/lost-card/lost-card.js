@@ -21,7 +21,7 @@ Component({
   methods: {
     enterInfo: function (e) {
       wx.navigateTo({
-        url: '/pages/lost-info/lost-info?id=1',
+        url: '/pages/lost-info/lost-info?id='+this.data.cardData.id,
       })
     }
   }

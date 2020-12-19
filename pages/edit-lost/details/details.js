@@ -1,4 +1,4 @@
-// pages/new-found/details/details.js
+// pages/new-lost/details/details.js
 import Dialog from '@vant/weapp/dialog/dialog';
 import {
   getReq,
@@ -13,8 +13,10 @@ Page({
    */
   data: {
     infoData: {},
-    calendarShow: false,
-    date: new Date().getTime(),
+    start_calendar_show: false,
+    end_calendar_show: false,
+    start_date: new Date().getTime(),
+    end_date: new Date().getTime(),
     maxDate: new Date().getTime(),
     formatter: function (type, value) {
       if (type === 'year') {
@@ -142,7 +144,7 @@ Page({
     wx.chooseLocation({
       success(res) {
         delete res.errMsg
-        var path = 'infoData.found_location'
+        var path = 'infoData.lost_location'
         that.setData({
           [path]: res
         })
@@ -160,7 +162,7 @@ Page({
     const {
       file
     } = event.detail
-    uploadImage('/found-notices/upload-image/', file.url, 'rua.jpg', function (r) {
+    uploadImage('/lost-notices/upload-image/', file.url, 'rua.jpg', function (r) {
       var imgs = that.data.infoData.images
       var path = 'infoData.images'
       imgs.push({
@@ -185,14 +187,24 @@ Page({
   },
 
   //打开日期选择器
-  openCalendar: function (event) {
+  openStartCalendar: function (event) {
     this.setData({
-      calendarShow: true
+      start_calendar_show: true
     })
   },
-  calendarClose: function (event) {
+  openEndCalendar: function (event) {
     this.setData({
-      calendarShow: false
+      end_calendar_show: true
+    })
+  },
+  startCalendarClose: function (event) {
+    this.setData({
+      start_calendarShow: false
+    });
+  },
+  endCalendarClose: function (event) {
+    this.setData({
+      end_calendarShow: false
     });
   },
   formatter: function (type, value) {
@@ -235,7 +247,7 @@ Page({
       second: second
     }
   },
-  calendarConfirm: function (event) {
+  startCalendarConfirm: function (event) {
     const {
       year,
       month,
@@ -243,26 +255,44 @@ Page({
       hours,
       minute,
     } = this.getYMDHMS(event.detail)
-    var ft = 'infoData.found_datetime'
+    var ft = 'infoData.est_lost_start_datetime'
     this.setData({
-      date: event.detail,
+      start_date: event.detail,
       [ft]: year + '-' + month + '-' + date + ' ' + hours + ':' + minute,
-      calendarShow: false
+      start_calendar_show: false
+    })
+  },
+  endCalendarConfirm: function (event) {
+    const {
+      year,
+      month,
+      date,
+      hours,
+      minute,
+    } = this.getYMDHMS(event.detail)
+    var ft = 'infoData.est_lost_end_datetime'
+    this.setData({
+      end_date: event.detail,
+      [ft]: year + '-' + month + '-' + date + ' ' + hours + ':' + minute,
+      end_calendar_show: false
     })
   },
   calendarCancel: function (event) {
     this.setData({
-      calendarShow: false
+      start_calendar_show: false,
+      end_calendar_show: false
     })
   },
+
+
   release: function (event) {
     Dialog.confirm({
         title: '确认提交',
-        message: '您确认要提交招领启事吗？',
+        message: '您确认要提交寻物启事吗？',
       })
       .then(() => {
 
-        putReq('/found-notices/'+ this.data.infoData.id + '/', this.data.infoData, function (res) {
+        putReq('/lost-notices/'+ this.data.infoData.id + '/', this.data.infoData, function (res) {
           //返回首页
           wx.navigateBack({
             delta: 2,

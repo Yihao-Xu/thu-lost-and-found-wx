@@ -9,7 +9,7 @@
   <div class="info">
     <div class="property-name info-item"><van-icon name="orders-o" class="icon"/>{{cardData.property.name}}</div>
     <div class="lost-location info-item"><van-icon name="location-o" class="icon"/>{{cardData.lost_location.name}}</div>
-    <div class="lost-datetime info-item"><van-icon name="clock-o" class="icon"/>{{tools.timeTrans(cardData.lost_datetime)}}</div>
+    <div class="lost-datetime info-item"><van-icon name="clock-o" class="icon"/>{{tools.timeTrans(cardData.est_lost_start_datetime)}} 至 {{tools.timeTrans(cardData.est_lost_end_datetime)}}</div>
   </div>
   <div class="images">
     <image class="image-item" wx:for="{{cardData.images}}" src="{{item.url}}" mode="aspectFill" />

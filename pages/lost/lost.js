@@ -1,5 +1,6 @@
 // pages/lost/lost.js
 const { getReq } = require("../../service/http")
+const { enterVerifiedPage } = require("../../utils/util")
 Page({
 
   /**
@@ -119,8 +120,6 @@ Page({
   },
   
   new_lost:function(){
-    wx.navigateTo({
-      url: '/pages/new-lost/types/types',
-    })
+    enterVerifiedPage("/pages/new-lost/types/types")
   }
 })

@@ -1,0 +1,39 @@
+<!--pages/new-lost/new-lost.wxml-->
+<wxs src="../../../wxs/lib.wxs" module="tools"></wxs>
+<view>
+  <van-cell-group title="拾取详情">
+    <van-cell title="最早丢失时间" icon="clock-o" value="{{infoData.est_lost_start_datetime}}" is-link
+      bindtap="openStartCalendar" />
+    <van-cell title="最晚丢失时间" icon="clock-o" value="{{infoData.est_lost_end_datetime}}" is-link bindtap="openEndCalendar" />
+    <van-cell title="丢失地点" icon="location-o" value="{{infoData.lost_location.name}}" is-link bindtap="chooseLocation" />
+    <van-field label="详情描述" left-icon="description" value="{{infoData.description}}" data-path="infoData.description" bind:change="attributeChange" type="textarea" autosize
+      placeholder="请输入对拾取过程的详情描述" />
+  </van-cell-group>
+  <van-cell-group title="联系方式">
+    <van-cell wx:for="{{infoData.contacts}}" label="{{tools.acronymTrans(item.method)}}" title="{{item.name}}"><van-icon slot="right-icon" name="/image/delete.png" size="23px" class="contacts-delete-icon" bindtap="deleteContact" data-index="{{index}}"></van-icon>{{item.details}}</van-cell>
+    <van-cell title="添加联系方式" bind:click="addNewContact">
+      <van-icon slot="right-icon" name="/image/add.png" size="25px"></van-icon>
+    </van-cell>
+  </van-cell-group>
+
+  <van-cell-group title="物品图片">
+    <van-uploader class="pic-uploader" file-list="{{infoData.images}}" max-count="3" bind:after-read="afterRead" bind:delete="deleteImage">
+    </van-uploader>
+  </van-cell-group>
+
+  <!-- 日期选择器 弹出层 -->
+  <van-popup position="bottom" round model:show="{{ start_calendar_show }}" bind:close="startCalendarClose">
+    <van-datetime-picker title="丢失日期" type="datetime" value="{{start_date}}" max-date="{{maxDate}}"
+      bind:confirm="startCalendarConfirm" bind:cancel="calendarCancel" formatter="{{formatter}}" />
+  </van-popup>
+  <van-popup position="bottom" round model:show="{{ end_calendar_show }}" bind:close="endCalendarClose">
+    <van-datetime-picker title="丢失日期" type="datetime" value="{{end_date}}" max-date="{{maxDate}}"
+      bind:confirm="endCalendarConfirm" bind:cancel="calendarCancel" formatter="{{formatter}}" />
+  </van-popup>
+
+  <van-button block type="primary" class="release-btn" bindtap="release">提交寻物启事</van-button>
+
+  <van-dialog id="van-dialog" />
+
+
+</view>

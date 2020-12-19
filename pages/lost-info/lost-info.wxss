@@ -1,18 +1,55 @@
 /* pages/lost-info/lost-info.wxss */
 
 .title-pic {
-  max-height: 96rpx;
-  max-width: 96rpx;
+  max-height: 120rpx;
+  max-width: 120rpx;
   margin: 20rpx;
 }
 
-.object-name-text {
-  position: relative;
-  top: 20rpx;
-}
+.object-name-text {}
 
 .sort-text {
-  position: relative;
   font-size: small;
   color: gray;
+}
+
+.button {
+  margin: 20px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#headerInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.moreBtn {
+  width: 30px;
+  height: 30px;
+  flex-basis: auto;
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.card-pic {
+  display: flex;
+  flex-direction: row;
+}
+
+.image {
+  width: 32%;
+  height: 120px;
+  margin: 0px 1px;
+  flex-shrink: 0;
+}
+
+.description {
+  padding: 10px 1.5em 5px 1em;
+  font-size: 14px;
+  color: grey;
 }

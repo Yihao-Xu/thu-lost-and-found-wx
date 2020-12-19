@@ -101,7 +101,7 @@ const deleteObjFromArray = (array, obj) => {
 const addUnread = (cur_notice_info_sender, message) => {
   var app = getApp()
   if (cur_notice_info_sender === message.sender) return
-  if (typeof(message) != Object){
+  if (typeof (message) != Object) {
     message = JSON.parse(message)
   }
   app.globalData.chat_list.find(item => item.sender == message.sender).unread++
@@ -118,7 +118,7 @@ const addUnread = (cur_notice_info_sender, message) => {
   })
   wx.showTabBarRedDot({
     index: 2,
-    fail(){}
+    fail() {}
   })
 }
 
@@ -141,7 +141,7 @@ const clearUnread = (sender) => {
     console.log('hide')
     wx.hideTabBarRedDot({
       index: 2,
-      fail(){}
+      fail() {}
     })
   }
 }
@@ -201,6 +201,29 @@ const acronymTransform = (status) => {
   return status
 }
 
+const enterVerifiedPage = (url) => {
+  var myInfo = wx.getStorageSync('myInfo')
+  wx.getSetting({
+    success: res => {
+      if (!res.authSetting['scope.userInfo'] || !myInfo.is_verified) {
+        wx.navigateTo({
+          url: '/pages/login/login',
+        })
+      } else {
+        wx.navigateTo({
+          url: url,
+        })
+      }
+    },
+    fail: res => {
+      wx.navigateTo({
+        url: url,
+      })
+    }
+  })
+
+}
+
 module.exports = {
   formatTime: formatTime,
   onWsMessage: onWsMessage,
@@ -210,5 +233,6 @@ module.exports = {
   checkContact: checkContact,
   acronymTrans: acronymTransform,
   addUnread: addUnread,
-  clearUnread: clearUnread
+  clearUnread: clearUnread,
+  enterVerifiedPage: enterVerifiedPage
 }

@@ -10,7 +10,7 @@ const {
 } = require("../../service/http")
 import Dialog from '@vant/weapp/dialog/dialog'
 import {
-  deleteObjFromArray
+  deleteObjFromArray, enterVerifiedPage
 } from '../../utils/util'
 
 // pages/found-info/found-info.js
@@ -221,9 +221,7 @@ Page({
    * 联系他人，转到聊天页面
    */
   contact: function (event) {
-    wx.navigateTo({
-      url: '/pages/notice/notice-info/notice-info?sender=' + this.data.infoData.author.id,
-    })
+    enterVerifiedPage('/pages/notice/notice-info/notice-info?sender=' + this.data.infoData.author.id)
   },
 
   /**
