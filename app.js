@@ -14,6 +14,9 @@ const {
 
 App({
   onShow: function (options) {
+    if (options.scene === 1154) {
+      return
+    }
     /* 发送清华认证信息 */
     console.log(options.referrerInfo.extraData)
     var myInfo = wx.getStorageSync('myInfo')
@@ -31,7 +34,13 @@ App({
     }
   },
 
-  onLaunch: function () {
+  onLaunch: function (event) {
+    console.log(event.scene)
+    if (event.scene === 1154) {
+      this.globalData.scene = event.scene
+      return
+    }
+
     // 展示本地存储能力
     var _this = this
     var logs = wx.getStorageSync('logs') || []
@@ -98,8 +107,10 @@ App({
               },
             })
             wx.onSocketMessage((result) => {
-              onWsMessage(result.data, function (chat_list) {addUnread(-1, result.data)})
-              
+              onWsMessage(result.data, function (chat_list) {
+                addUnread(-1, result.data)
+              })
+
             })
           })
 
@@ -157,6 +168,7 @@ App({
     myInfo: {},
     access: "",
     chat_list: [],
-    unread: 0
+    unread: 0,
+    scene: 0
   }
 })

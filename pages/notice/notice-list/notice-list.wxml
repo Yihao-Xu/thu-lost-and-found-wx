@@ -4,7 +4,7 @@
   <div class='chat-cell' wx:for="{{chat_list}}" data-sender="{{item.sender}}" bindtap="enterInfo">
     <div class="chat-cell-avatar-box">
       <image src="{{item.author.wechat_avatar}}" class="chat-cell-avatar" mode="aspectFill"></image>
-      <i class="red-dot" wx:if="{{item.show_dot}}"></i>
+      <i class="red-dot" wx:for="{{item.show_dot_array}}"></i>
     </div>
     <div class="chat-cell-right-part">
       <div class="chat-cell-name-time">

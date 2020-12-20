@@ -49,6 +49,10 @@ Page({
    */
   onShow: function () {
     var _this = this
+    var app = getApp()
+    this.setData({
+      chat_list: app.globalData.chat_list
+    })
     wx.onSocketMessage((result) => {
       onWsMessage(result.data, function (cl) {
         addUnread(-1, result.data)

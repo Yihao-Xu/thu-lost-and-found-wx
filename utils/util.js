@@ -66,8 +66,12 @@ const createChat = (chat_list, message, sender, callback) => {
   var new_chat = {}
   if (message !== null) {
     new_chat.messages = [message]
+    new_chat.show_dot = true
+    new_chat.show_dot_array = [1]
   } else {
     new_chat.messages = []
+    new_chat.show_dot = false
+    new_chat.show_dot_array = []
   }
   new_chat.unread = 0
   new_chat.sender = sender
@@ -107,6 +111,7 @@ const addUnread = (cur_notice_info_sender, message) => {
   console.log(app.globalData.chat_list)
   app.globalData.chat_list.find(item => item.sender == message.sender).unread++
   app.globalData.chat_list.find(item => item.sender == message.sender).show_dot = true
+  app.globalData.chat_list.find(item => item.sender == message.sender).show_dot_array = [1]
   console.log(app.globalData.chat_list.find(item => item.sender == message.sender).show_dot)
   app.globalData.unread++
   wx.setStorage({
@@ -129,6 +134,7 @@ const clearUnread = (sender) => {
   
   app.globalData.chat_list.find(item => item.sender == sender).unread = 0
   app.globalData.chat_list.find(item => item.sender == sender).show_dot = false
+  app.globalData.chat_list.find(item => item.sender == sender).show_dot_array = []
   app.globalData.unread -= read
   wx.setStorage({
     data: app.globalData.chat_list,

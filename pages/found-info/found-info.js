@@ -10,7 +10,8 @@ const {
 } = require("../../service/http")
 import Dialog from '@vant/weapp/dialog/dialog'
 import {
-  deleteObjFromArray, enterVerifiedPage
+  deleteObjFromArray,
+  enterVerifiedPage
 } from '../../utils/util'
 
 // pages/found-info/found-info.js
@@ -37,24 +38,31 @@ Page({
       name: '删除',
       color: '#ee0a24'
     }, {
-      name: '转交（生成转交码）'
-    }, {
+    //   name: '转交（生成转交码）'
+    // }, {
       name: '举报',
       color: '#ee0a24'
-    }]
+    }],
+    scene: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.data.id = options.id
-    wx.setNavigationBarTitle({
-      title: '招领启事详情',
-    })
+    var app = getApp()
     this.setData({
-      myInfo: wx.getStorageSync('myInfo')
+      scene: app.globalData.scene
     })
+    if (this.data.scene !== 1154) {
+      this.data.id = options.id
+      wx.setNavigationBarTitle({
+        title: '招领启事详情',
+      })
+      this.setData({
+        myInfo: wx.getStorageSync('myInfo')
+      })
+    }
     var _this = this
     getReq('/found-notices/' + options.id, function (data) {
       _this.setData({
@@ -76,7 +84,7 @@ Page({
    */
   onShow: function () {
     var _this = this
-    getReq('/found-notices/' + options.id, function (data) {
+    getReq('/found-notices/' + this.data.id, function (data) {
       _this.setData({
         infoData: data
       })
@@ -309,9 +317,9 @@ Page({
   /**
    * 用户进入举报页面
    */
-  report: function(id, title, type, user){
+  report: function (id, title, type, user) {
     wx.navigateTo({
-      url: '/pages/report/report?id=' + id + '&title=' + title + '&type=' + type + "&user=" +user,
+      url: '/pages/report/report?id=' + id + '&title=' + title + '&type=' + type + "&user=" + user,
     })
   },
 
@@ -338,8 +346,8 @@ Page({
           name: '删除',
           color: '#ee0a24'
         }, {
-          name: '转交（生成转交码）'
-        }, {
+        //   name: '转交（生成转交码）'
+        // }, {
           name: '举报',
           color: '#ee0a24'
         }]
@@ -356,8 +364,8 @@ Page({
           name: '删除',
           color: '#ee0a24'
         }, {
-          name: '转交（生成转交码）'
-        }, {
+        //   name: '转交（生成转交码）'
+        // }, {
           name: '举报',
           color: '#ee0a24'
         }]
@@ -374,8 +382,8 @@ Page({
           name: '删除',
           color: '#ee0a24'
         }, {
-          name: '转交（生成转交码）'
-        }, {
+        //   name: '转交（生成转交码）'
+        // }, {
           name: '举报',
           color: '#ee0a24'
         }]
@@ -386,7 +394,7 @@ Page({
   /**
    * 点击丢失地点打开地图
    */
-  openMap: function(){
+  openMap: function () {
     wx.openLocation({
       latitude: this.data.infoData.found_location.latitude,
       longitude: this.data.infoData.found_location.longitude,

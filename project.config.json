@@ -39,7 +39,7 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.13.1",
+  "libVersion": "2.12.2",
   "appid": "wx37691919cf7de37e",
   "projectname": "ZJ_lost_found_THU",
   "debugOptions": {

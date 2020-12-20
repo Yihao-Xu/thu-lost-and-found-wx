@@ -45,7 +45,7 @@
       value="{{item.details}}"></van-cell>
   </van-cell-group>
   <van-action-sheet show="{{moreShow}}" actions="{{actions}}" bind:select="onSelect" bind:close="onClose"></van-action-sheet>
-  <van-button wx:if="{{myInfo.id !== infoData.author.id}}" type="primary" class="button" bindtap="contact" block>是我的？联系拾到者</van-button>
+  <van-button wx:if="{{myInfo.id !== infoData.author.id && scene !== 1154}}" type="primary" class="button" bindtap="contact" block>是我的？联系拾到者</van-button>
   <van-dialog id="van-dialog" />
   <!-- <van-button wx:if="{{myInfo.id === infoData.author.id}}" type="primary" class="button" block bindtap="edit">编辑启事
   </van-button>

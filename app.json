@@ -26,7 +26,8 @@
     "pages/report/report",
     "pages/new-lost/matching/matching",
     "pages/my-notice/my-found/my-found",
-    "pages/my-notice/my-lost/my-lost"
+    "pages/my-notice/my-lost/my-lost",
+    "pages/test-page/test"
   ],
   "window": {
     "navigationBarTextStyle": "white",
