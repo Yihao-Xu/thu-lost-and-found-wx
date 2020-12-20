@@ -1,0 +1,19 @@
+<!--pages/report/report.wxml-->
+<view>
+  <van-cell-group>
+    <van-cell title="举报启事" value="{{notice_title}}"></van-cell>
+    <van-cell title="举报类型" model:value="{{report_type}}" bindtap="openPicker" is-link></van-cell>
+    <van-panel title="举报详情">
+      <view class="description">
+        <textarea model:value="{{description}}" maxlength="150" class="textarea"></textarea>
+      </view>
+    </van-panel>
+  </van-cell-group>
+  <van-button class="button" type="primary" block bindtap="release">提交举报</van-button>
+</view>
+
+<van-popup show="{{picker_show}}" bind:close="closePicker" round position="bottom">
+  <van-picker show-toolbar title="举报类型" columns="{{ columns }}" bind:cancel="closePicker" bind:confirm="onConfirm" />
+</van-popup>
+
+<van-dialog id="van-dialog" />

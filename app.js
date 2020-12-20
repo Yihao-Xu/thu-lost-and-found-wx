@@ -60,6 +60,10 @@ App({
         }
       },
       fail() {
+        wx.setStorage({
+          data: 0,
+          key: 'unread',
+        })
         _this.globalData.unread = 0
       }
     })
@@ -94,8 +98,8 @@ App({
               },
             })
             wx.onSocketMessage((result) => {
-              onWsMessage(result.data, function (chat_list) {})
-              addUnread(-1, result.data)
+              onWsMessage(result.data, function (chat_list) {addUnread(-1, result.data)})
+              
             })
           })
 

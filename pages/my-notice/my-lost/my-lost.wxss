@@ -1,0 +1,17 @@
+/* pages/lost/lost.wxss */
+.add-btn{
+  position: fixed;
+  right: 20rpx;
+  bottom: 20rpx;
+}
+
+.lost-card{
+  position: relative;
+  margin: 10px 3.5%;
+}
+
+.lost-list{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+}

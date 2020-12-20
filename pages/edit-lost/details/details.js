@@ -141,12 +141,18 @@ Page({
    */
   chooseLocation: function () {
     const that = this
+    var lost_location = that.data.infoData.lost_location
+    if(lost_location.locations.length >= 10){
+      return
+    }
     wx.chooseLocation({
       success(res) {
         delete res.errMsg
         var path = 'infoData.lost_location'
+
+        lost_location.locations.push(res)
         that.setData({
-          [path]: res
+          [path]: lost_location
         })
       }
     })
@@ -359,6 +365,19 @@ Page({
     contacts.splice(index, 1)
     this.setData({
       [path]:contacts
+    })
+  },
+
+  /**
+   * 删除地点
+   */
+  deleteLocation: function(event){
+    var index = event.currentTarget.dataset.index
+    var lost_location = this.data.infoData.lost_location
+    lost_location.locations.splice(index, 1)
+    var path = "infoData.lost_location"
+    this.setData({
+      [path]: lost_location
     })
   }
 })

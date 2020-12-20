@@ -11,8 +11,8 @@
     <van-cell title="手机" value="{{myInfo.phone}}"></van-cell>
   </van-cell-group>
   <van-cell-group title="我的启事" class="cell-group">
-    <van-cell title="我的寻物启事"></van-cell>
-    <van-cell title="我的招领启事"></van-cell>
+    <van-cell title="我的寻物启事" is-link link-type="navigateTo" url="/pages/my-notice/my-lost/my-lost"></van-cell>
+    <van-cell title="我的招领启事" is-link link-type="navigateTo" url="/pages/my-notice/my-found/my-found"></van-cell>
   </van-cell-group>
   <van-cell-group title="学生/教工认证" class="cell-group">
     <van-cell title="认证：" value="未认证" wx:if="{{myInfo.is_verified==false}}"></van-cell>

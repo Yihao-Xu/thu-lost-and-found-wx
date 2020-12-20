@@ -1,0 +1,13 @@
+/* pages/report/report.wxss */
+
+.description{
+  padding: 0 1em 1em 1em;
+}
+
+.textarea{
+  font-size: 14px;
+}
+
+.button{
+  margin: 1px;
+}

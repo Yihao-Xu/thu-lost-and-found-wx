@@ -1,0 +1,67 @@
+/* pages/new-lost/matching/matching.wxss */
+
+.page-box{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20vh;
+}
+
+.header-back-button{
+  width: 80%;
+  height: 35px;
+  border-radius: 5px;
+  font-size: 14px;
+  background: #82318E linear-gradient(to right, #ac62b8, #82318E);
+  color: whitesmoke;
+}
+
+.header-text{
+  margin-top: 2vh;
+  font-size: 12px;
+}
+
+.matching-list{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10vh;
+}
+
+.matching-card{
+  background-color: white;
+  box-shadow: 1px 2px 5px 2px #cac9c9;
+  border-radius: 5px;
+  padding: 1em 1em 0.5em 1em;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 80%;
+}
+
+.images{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.image-item{
+  width: 30%;
+  max-height: 100px;
+  margin:1%;
+}
+
+.bottom-text{
+  font-size: 14px;
+  color: gray;
+  margin-bottom: 10vh;
+}

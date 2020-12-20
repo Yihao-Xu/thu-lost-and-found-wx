@@ -176,6 +176,7 @@ Page({
   onSelect: function (event) {
     switch (event.detail.name) {
       case '举报':
+        this.report(this.data.infoData.id, this.data.infoData.property.name, 'lost', this.data.infoData.author.id)
         break
       case '转交（生成转交码）':
         createQrCode('pages/lost-info/lost-info', '?id=' + this.data.id)
@@ -300,6 +301,15 @@ Page({
   },
 
   /**
+   * 用户进入举报页面
+   */
+  report: function(id, title, type, user){
+    wx.navigateTo({
+      url: '/pages/report/report?id=' + id + '&title=' + title + '&type=' + type + "&user=" +user,
+    })
+  },
+
+  /**
    * 设置上拉菜单 actions 的内容
    */
   setActions: function () {
@@ -364,10 +374,11 @@ Page({
   /**
    * 点击丢失地点打开地图
    */
-  openMap: function(){
+  openMap: function(event){
+    const location = event.currentTarget.dataset.location
     wx.openLocation({
-      latitude: this.data.infoData.lost_location.latitude,
-      longitude: this.data.infoData.lost_location.longitude,
+      latitude: location.latitude,
+      longitude: location.longitude,
     })
   }
 

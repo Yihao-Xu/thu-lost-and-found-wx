@@ -8,11 +8,7 @@ Page({
   data: {
     type:"",
     name:"",
-    template:{
-      '姓名':'',
-      '院系':'',
-      '卡号':'',
-    },
+    template:{},
     description:"",
     tags: ["test1", "test2"],
     tagDialogShow: false,
@@ -31,6 +27,25 @@ Page({
       key: 'cur-template',
       success(res){
         that.setData({template:res.data})
+
+        wx.getStorage({
+          key: 'myInfo',
+          success: (myInfo)=>{
+            if('卡号' in res.data.fields && that.data.type==="校园卡"){
+              var path = "template.fields.卡号"
+              that.setData({
+                [path]: myInfo.data.student_id
+              })
+            }
+            if('院系' in res.data.fields){
+              var path = "template.fields.院系"
+              that.setData({
+                [path]: myInfo.data.department
+              })
+            }
+          }
+        })
+
       }
     })
     console.log(wx.getStorage({
@@ -39,6 +54,9 @@ Page({
     wx.setNavigationBarTitle({
       title: '填写'+this.data.type+'特征',
     })
+
+
+    
   },
 
   /**

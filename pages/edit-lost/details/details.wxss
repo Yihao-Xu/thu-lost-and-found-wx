@@ -3,13 +3,11 @@
   margin: 30rpx;
 }
 
-.release-btn{
-  position: fixed;
-  width: 100%;
-  bottom: 0px;
+.release-btn {
+  margin: 1px;
 }
 
-.contacts-delete-icon{
-  margin: 5px;
+.icon-button{
+  margin-left: 5px;
 }
 

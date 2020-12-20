@@ -13,7 +13,7 @@ Page({
   data: {
     infoData: {
       lost_time: "",
-      lost_location: "",
+      lost_location: {locations:[]},
       describe: "",
       picList: [
 
@@ -46,7 +46,7 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '拾取详情',
+      title: '丢失详情',
     })
     this.setData({
       myInfo: wx.getStorageSync("myInfo")
@@ -119,12 +119,18 @@ Page({
    */
   chooseLocation: function () {
     const that = this
+    var lost_location = that.data.infoData.lost_location
+    if(lost_location.locations.length >= 10){
+      return
+    }
     wx.chooseLocation({
       success(res) {
         delete res.errMsg
         var path = 'infoData.lost_location'
+
+        lost_location.locations.push(res)
         that.setData({
-          [path]: res
+          [path]: lost_location
         })
       }
     })
@@ -326,12 +332,9 @@ Page({
         //api提交启事
         var that = this
         postReq('/lost-notices/', this.data.upData, function (res) {
-          //返回首页
-          wx.navigateBack({
-            delta: 3,
-            success: (res) => {},
-            fail: (res) => {},
-            complete: (res) => {},
+          //去匹配页面
+          wx.navigateTo({
+            url: '/pages/new-lost/matching/matching',
           })
         })
 
@@ -392,6 +395,18 @@ Page({
     this.setData({
       contacts:contacts
     })
-  }
+  },
 
+  /**
+   * 删除地点
+   */
+  deleteLocation: function(event){
+    var index = event.currentTarget.dataset.index
+    var lost_location = this.data.infoData.lost_location
+    lost_location.locations.splice(index, 1)
+    var path = "infoData.lost_location"
+    this.setData({
+      [path]: lost_location
+    })
+  }
 })

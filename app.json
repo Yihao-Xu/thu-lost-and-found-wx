@@ -22,8 +22,11 @@
     "pages/new-lost/details/details",
     "pages/login/login",
     "pages/edit-lost/attribute/attribute",
-    "pages/edit-lost/details/details"
-
+    "pages/edit-lost/details/details",
+    "pages/report/report",
+    "pages/new-lost/matching/matching",
+    "pages/my-notice/my-found/my-found",
+    "pages/my-notice/my-lost/my-lost"
   ],
   "window": {
     "navigationBarTextStyle": "white",

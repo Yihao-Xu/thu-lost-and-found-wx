@@ -176,6 +176,7 @@ Page({
   onSelect: function (event) {
     switch (event.detail.name) {
       case '举报':
+        this.report(this.data.infoData.id, this.data.infoData.property.name, 'found', this.data.infoData.author.id)
         break
       case '转交（生成转交码）':
         createQrCode('pages/found-info/found-info', '?id=' + this.data.id)
@@ -297,6 +298,15 @@ Page({
           })
         })
       })
+  },
+
+  /**
+   * 用户进入举报页面
+   */
+  report: function(id, title, type, user){
+    wx.navigateTo({
+      url: '/pages/report/report?id=' + id + '&title=' + title + '&type=' + type + "&user=" +user,
+    })
   },
 
   /**

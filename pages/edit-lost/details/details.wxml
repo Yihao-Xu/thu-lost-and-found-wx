@@ -5,12 +5,16 @@
     <van-cell title="最早丢失时间" icon="clock-o" value="{{infoData.est_lost_start_datetime}}" is-link
       bindtap="openStartCalendar" />
     <van-cell title="最晚丢失时间" icon="clock-o" value="{{infoData.est_lost_end_datetime}}" is-link bindtap="openEndCalendar" />
-    <van-cell title="丢失地点" icon="location-o" value="{{infoData.lost_location.name}}" is-link bindtap="chooseLocation" />
+    <van-cell title="可能丢失地点" icon="location-o" is-link bindtap="chooseLocation" />
+    <van-cell icon="location-o" wx:for="{{infoData.lost_location.locations}}" value="{{item.name}}">
+      <van-icon slot="right-icon" name="/image/delete.png" size="23px" class="icon-button"
+        bindtap="deleteLocation" data-index="{{index}}"></van-icon>
+    </van-cell>
     <van-field label="详情描述" left-icon="description" value="{{infoData.description}}" data-path="infoData.description" bind:change="attributeChange" type="textarea" autosize
       placeholder="请输入对拾取过程的详情描述" />
   </van-cell-group>
   <van-cell-group title="联系方式">
-    <van-cell wx:for="{{infoData.contacts}}" label="{{tools.acronymTrans(item.method)}}" title="{{item.name}}"><van-icon slot="right-icon" name="/image/delete.png" size="23px" class="contacts-delete-icon" bindtap="deleteContact" data-index="{{index}}"></van-icon>{{item.details}}</van-cell>
+    <van-cell wx:for="{{infoData.contacts}}" label="{{tools.acronymTrans(item.method)}}" title="{{item.name}}"><van-icon slot="right-icon" name="/image/delete.png" size="23px" class="icon-button" bindtap="deleteContact" data-index="{{index}}"></van-icon>{{item.details}}</van-cell>
     <van-cell title="添加联系方式" bind:click="addNewContact">
       <van-icon slot="right-icon" name="/image/add.png" size="25px"></van-icon>
     </van-cell>
