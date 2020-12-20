@@ -75,7 +75,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var _this = this
+    getReq('/lost-notices/' + options.id, function (data) {
+      _this.setData({
+        infoData: data
+      })
+      _this.setActions()
+    })
   },
 
   /**

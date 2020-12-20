@@ -222,8 +222,24 @@ const enterVerifiedPage = (url) => {
       })
     }
   })
-
 }
+
+const propertyBlankCheck = (data, callback) =>{
+  console.log(data)
+  if(data.name ===""||data.name=== undefined){
+    callback('物品名称')
+    return false
+  }
+  for(var key in data.attributes){
+    if(data.attributes[key] === '' || data.attributes[key] === undefined){
+      callback(key)
+      return false
+    }
+  }
+  return true
+}
+
+
 
 module.exports = {
   formatTime: formatTime,
@@ -235,5 +251,6 @@ module.exports = {
   acronymTrans: acronymTransform,
   addUnread: addUnread,
   clearUnread: clearUnread,
-  enterVerifiedPage: enterVerifiedPage
+  enterVerifiedPage: enterVerifiedPage,
+  propertyBlankCheck: propertyBlankCheck
 }

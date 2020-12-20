@@ -2,9 +2,9 @@
 <wxs src="../../../wxs/lib.wxs" module="tools"></wxs>
 <view>
   <van-cell-group title="拾取详情">
-    <van-cell title="最早丢失时间" icon="clock-o" value="{{infoData.est_lost_start_datetime}}" is-link
+    <van-cell title="最早丢失时间" icon="clock-o" value="{{tools.timeTrans(infoData.est_lost_start_datetime)}}" is-link
       bindtap="openStartCalendar" />
-    <van-cell title="最晚丢失时间" icon="clock-o" value="{{infoData.est_lost_end_datetime}}" is-link bindtap="openEndCalendar" />
+    <van-cell title="最晚丢失时间" icon="clock-o" value="{{tools.timeTrans(infoData.est_lost_end_datetime)}}" is-link bindtap="openEndCalendar" />
     <van-cell title="可能丢失地点" icon="location-o" is-link bindtap="chooseLocation" />
     <van-cell icon="location-o" wx:for="{{infoData.lost_location.locations}}" value="{{item.name}}">
       <van-icon slot="right-icon" name="/image/delete.png" size="23px" class="icon-button"

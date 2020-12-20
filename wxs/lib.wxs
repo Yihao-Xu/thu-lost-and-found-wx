@@ -18,6 +18,7 @@ var briefTime = function (time) {
   }
   if (time.split(' ')[0] === (date.getMonth() + 1).toString() + '-' + date.getDate().toString()) {
     time = time.substring(time.search(' ') + 1, time.length)
+    time = '今天 ' + time
   }
   if(time.search(':') !== -1){
     time = time.split(":")[0] + ":" + time.split(":")[1]

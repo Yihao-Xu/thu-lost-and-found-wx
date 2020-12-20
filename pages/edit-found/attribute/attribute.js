@@ -1,5 +1,8 @@
 // pages/new-found/attribute/attribute.js
 import Dialog from '@vant/weapp/dialog/dialog';
+import {
+  propertyBlankCheck
+} from '../../../utils/util';
 Page({
 
   /**
@@ -90,6 +93,14 @@ Page({
    */
   enterNext: function () {
     // 将填写的内容存入localstorage
+    if (!propertyBlankCheck(this.data.infoData.property, function (content) {
+      Dialog.alert({
+        message: content + '不能为空。'
+      })
+    })) {
+    return
+  }
+
     wx.setStorage({
       data: this.data.infoData,
       key: 'cur-notices',

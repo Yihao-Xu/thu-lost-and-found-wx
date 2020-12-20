@@ -292,12 +292,16 @@ Page({
 
 
   release: function (event) {
+
+    if(this.blankCheck(this.data.infoData) === false){
+      return
+    }
+
     Dialog.confirm({
         title: '确认提交',
         message: '您确认要提交寻物启事吗？',
       })
       .then(() => {
-
         putReq('/lost-notices/'+ this.data.infoData.id + '/', this.data.infoData, function (res) {
           //返回首页
           wx.navigateBack({
@@ -378,6 +382,35 @@ Page({
     var path = "infoData.lost_location"
     this.setData({
       [path]: lost_location
+    })
+  },
+
+  /**
+   * 提交前检查用户有没有未填的项目
+   */
+  blankCheck: function(data){
+    if(data.est_lost_start_datetime == undefined){
+      this.popupDialog("最早丢失时间")
+      return false
+    }else if(data.est_lost_end_datetime == undefined){
+      this.popupDialog("最晚丢失时间")
+      return false
+    }else if(data.lost_location.locations.length === 0){
+      this.popupDialog("可能丢失地点")
+      return  false
+    }else if(data.contacts.length === 0){
+      this.popupDialog("联系方式")
+      return false
+    }
+    return true
+  },
+
+  /**
+   * 弹一个弹窗，提示用户XX还没填写
+   */
+  popupDialog: function(content){
+    Dialog.alert({
+      message:content+' 还未填写'
     })
   }
 })

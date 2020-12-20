@@ -26,6 +26,6 @@
       <van-field placeholder="请输入标签名称" model:value="{{tag}}" style="position:relative;width:60%;"></van-field>
     </van-cell-group>
   </van-dialog>
-
+  <van-dialog id="van-dialog"></van-dialog>
   <van-button type="primary" block class="button" bindtap="enterNext">下一步</van-button>
 </view>

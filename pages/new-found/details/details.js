@@ -294,6 +294,11 @@ Page({
         this.setData({
           upData: data
         })
+
+        if(this.blankCheck(data) == false){
+          return
+        }
+
         //api提交启事
         var that = this
         postReq('/found-notices/', this.data.upData, function (res) {
@@ -362,6 +367,33 @@ Page({
     contacts.splice(index, 1)
     this.setData({
       contacts:contacts
+    })
+  },
+
+    /**
+   * 提交前检查用户有没有未填的项目
+   */
+  blankCheck: function(data){
+    console.log(data)
+    if(data.found_datetime == undefined || data.found_datetime == ""){
+      this.popupDialog("拾取时间")
+      return false
+    }else if(data.found_location === "" || data.found_location.name == ""){
+      this.popupDialog("拾取地点")
+      return  false
+    }else if(data.contacts.length === 0){
+      this.popupDialog("联系方式")
+      return false
+    }
+    return true
+  },
+
+  /**
+   * 弹一个弹窗，提示用户XX还没填写
+   */
+  popupDialog: function(content){
+    Dialog.alert({
+      message:content+' 还未填写'
     })
   }
 

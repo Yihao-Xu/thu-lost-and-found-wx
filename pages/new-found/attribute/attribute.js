@@ -1,20 +1,23 @@
 // pages/new-found/attribute/attribute.js
 import Dialog from '@vant/weapp/dialog/dialog';
+import {
+  propertyBlankCheck
+} from '../../../utils/util';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    type:"",
-    name:"",
-    template:{
-      '姓名':'',
-      '院系':'',
-      '卡号':'',
+    type: "",
+    name: "",
+    template: {
+      '姓名': '',
+      '院系': '',
+      '卡号': '',
     },
-    description:"",
-    tags: ["test1", "test2"],
+    description: "",
+    tags: [],
     tagDialogShow: false,
     tag: ""
   },
@@ -24,20 +27,22 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      type:options.type,
+      type: options.type,
     })
     const that = this
     wx.getStorage({
       key: 'cur-template',
-      success(res){
-        that.setData({template:res.data})
+      success(res) {
+        that.setData({
+          template: res.data
+        })
       }
     })
     console.log(wx.getStorage({
       key: 'cur-template',
     }))
     wx.setNavigationBarTitle({
-      title: '填写'+this.data.type+'特征',
+      title: '填写' + this.data.type + '特征',
     })
   },
 
@@ -93,7 +98,7 @@ Page({
   /**
    * 上交填写的内容，并进入丢失详情页面
    */
-  enterNext:function(){
+  enterNext: function () {
     // 将填写的内容存入localstorage
     var property = {}
     property.template = this.data.template.name
@@ -101,6 +106,13 @@ Page({
     property.name = this.data.name
     property.tags = this.data.tags
     property.description = this.data.description
+    if (!propertyBlankCheck(property, function (content) {
+        Dialog.alert({
+          message: content + '不能为空。'
+        })
+      })) {
+      return
+    }
     console.log(property)
     wx.setStorage({
       data: property,
@@ -112,7 +124,7 @@ Page({
   },
 
   addTag: function (event) {
-    if (event.detail === "confirm" && this.data.tag!=="") {
+    if (event.detail === "confirm" && this.data.tag !== "") {
       var ts = this.data.tags
       ts.push(this.data.tag)
       this.setData({
@@ -121,7 +133,7 @@ Page({
         tag: "",
 
       })
-    }else{
+    } else {
       this.setData({
         tagDialogShow: false,
         tag: "",
@@ -138,19 +150,19 @@ Page({
   },
   deleteTag: function (event) {
     var ts = this.data.tags
-    ts.splice(event.currentTarget.dataset.index,1)
+    ts.splice(event.currentTarget.dataset.index, 1)
     this.setData({
-      tags:ts
+      tags: ts
     })
   },
   // wx双向绑定不支持深度路径，只能利用函数来改变值
-  attributeChange: function(event){
+  attributeChange: function (event) {
     var key = event.currentTarget.dataset.key
     var path = 'template.fields.' + key
     console.log(path)
     console.log(event.detail)
     this.setData({
-      [path]:event.detail
+      [path]: event.detail
     })
   }
 })

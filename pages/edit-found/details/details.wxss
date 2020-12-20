@@ -4,12 +4,10 @@
 }
 
 .release-btn{
-  position: fixed;
-  width: 100%;
-  bottom: 0px;
+  margin-left: 1px;
 }
 
 .contacts-delete-icon{
-  margin: 5px;
+  margin-left: 5px;
 }
 
