@@ -76,7 +76,8 @@
     "van-action-sheet": "@vant/weapp/action-sheet/index",
     "van-icon": "@vant/weapp/icon/index",
     "chat-bubble-opp": "components/chat-bubble-opp/chat-bubble-opp",
-    "chat-bubble-me": "components/chat-bubble-me/chat-bubble-me"
+    "chat-bubble-me": "components/chat-bubble-me/chat-bubble-me",
+    "chat-bubble-matching": "components/chat-bubble-matching/chat-bubble-matching"
   },
   "tabBar": {
     "color": "#000000",

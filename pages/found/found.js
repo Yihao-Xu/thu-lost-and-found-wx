@@ -104,7 +104,7 @@ Page({
    */
   onSearch: function(){
     var that = this
-    getReq('/found-notices?search=' + this.data.search_value,function(data){
+    getReq('/found-notices/?status=PUB&search=' + this.data.search_value,function(data){
       that.setData({
         foundList:data.results,
         next:data.next

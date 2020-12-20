@@ -13,7 +13,9 @@ Page({
   data: {
     infoData: {
       lost_time: "",
-      lost_location: {locations:[]},
+      lost_location: {
+        locations: []
+      },
       describe: "",
       picList: [
 
@@ -38,7 +40,7 @@ Page({
     email_checked: false,
     myInfo: {},
     images: [],
-    contacts:[]
+    contacts: []
   },
 
   /**
@@ -72,7 +74,9 @@ Page({
         if (res.data !== null) {
           var contacts = that.data.contacts
           contacts.push(res.data)
-          that.setData({contacts:contacts})
+          that.setData({
+            contacts: contacts
+          })
           wx.setStorageSync('new-contact', null)
         }
       }
@@ -120,14 +124,14 @@ Page({
   chooseLocation: function () {
     const that = this
     var lost_location = that.data.infoData.lost_location
-    if(lost_location.locations.length >= 10){
+    if (lost_location.locations.length >= 10) {
       return
     }
     wx.chooseLocation({
       success(res) {
         delete res.errMsg
         var path = 'infoData.lost_location'
-
+        if (res.name === "" || res.name === undefined) return
         lost_location.locations.push(res)
         that.setData({
           [path]: lost_location
@@ -330,7 +334,7 @@ Page({
           upData: data
         })
 
-        if(this.blankCheck(data) == false){
+        if (this.blankCheck(data) == false) {
           return
         }
 
@@ -384,7 +388,7 @@ Page({
   /**
    * 跳转到添加联系方式页面
    */
-  addNewContact:function(event){
+  addNewContact: function (event) {
     wx.navigateTo({
       url: '/pages/add-contact/add-contact',
     })
@@ -393,19 +397,19 @@ Page({
   /**
    * 删除联系方式
    */
-  deleteContact: function(event){
+  deleteContact: function (event) {
     var index = event.currentTarget.dataset.index
     var contacts = this.data.contacts
     contacts.splice(index, 1)
     this.setData({
-      contacts:contacts
+      contacts: contacts
     })
   },
 
   /**
    * 删除地点
    */
-  deleteLocation: function(event){
+  deleteLocation: function (event) {
     var index = event.currentTarget.dataset.index
     var lost_location = this.data.infoData.lost_location
     lost_location.locations.splice(index, 1)
@@ -418,17 +422,17 @@ Page({
   /**
    * 提交前检查用户有没有未填的项目
    */
-  blankCheck: function(data){
-    if(data.est_lost_start_datetime == undefined){
+  blankCheck: function (data) {
+    if (data.est_lost_start_datetime == undefined) {
       this.popupDialog("最早丢失时间")
       return false
-    }else if(data.est_lost_end_datetime == undefined){
+    } else if (data.est_lost_end_datetime == undefined) {
       this.popupDialog("最晚丢失时间")
       return false
-    }else if(data.lost_location.locations.length === 0){
+    } else if (data.lost_location.locations.length === 0) {
       this.popupDialog("可能丢失地点")
-      return  false
-    }else if(data.contacts.length === 0){
+      return false
+    } else if (data.contacts.length === 0) {
       this.popupDialog("联系方式")
       return false
     }
@@ -438,9 +442,9 @@ Page({
   /**
    * 弹一个弹窗，提示用户XX还没填写
    */
-  popupDialog: function(content){
+  popupDialog: function (content) {
     Dialog.alert({
-      message:content+' 还未填写'
+      message: content + ' 还未填写'
     })
   }
 })

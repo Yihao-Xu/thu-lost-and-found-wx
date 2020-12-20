@@ -149,7 +149,7 @@ Page({
       success(res) {
         delete res.errMsg
         var path = 'infoData.lost_location'
-
+        if(res.name ==="" || res.name === undefined) return
         lost_location.locations.push(res)
         that.setData({
           [path]: lost_location

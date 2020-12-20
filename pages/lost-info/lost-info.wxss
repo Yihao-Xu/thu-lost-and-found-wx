@@ -39,6 +39,7 @@
 .card-pic {
   display: flex;
   flex-direction: row;
+  padding: 0 10px 10px 10px;
 }
 
 .image {
@@ -52,4 +53,8 @@
   padding: 10px 1.5em 5px 1em;
   font-size: 14px;
   color: grey;
+}
+
+.van-cell__value {
+  min-width: 65%;
 }

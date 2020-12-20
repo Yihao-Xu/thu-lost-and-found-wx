@@ -6,9 +6,9 @@
     <!-- <image src="/image/scanCode.png" class="scan-btn" bindtap="scanQRCode"></image> -->
   </div>
   <van-cell-group title="我的联系方式" class="cell-group">
-    <van-cell title="微信号" value="{{myInfo.wechat_id}}"></van-cell>
-    <van-cell title="邮箱" value="{{myInfo.email}}"></van-cell>
-    <van-cell title="手机" value="{{myInfo.phone}}"></van-cell>
+    <van-cell class="cell" title="微信号" value="{{myInfo.wechat_id}}"></van-cell>
+    <van-cell class="cell" title="邮箱" value="{{myInfo.email}}"></van-cell>
+    <van-cell class="cell" title="手机" value="{{myInfo.phone}}"></van-cell>
   </van-cell-group>
   <van-cell-group title="我的启事" class="cell-group">
     <van-cell title="我的寻物启事" is-link link-type="navigateTo" url="/pages/my-notice/my-lost/my-lost"></van-cell>

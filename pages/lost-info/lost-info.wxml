@@ -15,7 +15,8 @@
     <van-cell title="最早丢失时间" icon="clock-o" value="{{tools.timeTrans(infoData.est_lost_start_datetime)}}"></van-cell>
     <van-cell title="最晚丢失时间" icon="clock-o" value="{{tools.timeTrans(infoData.est_lost_end_datetime)}}"></van-cell>
     <van-cell title="可能丢失地点" icon="location-o" value="{{infoData.lost_location.name}}"></van-cell>
-    <van-cell wx:for="{{infoData.lost_location.locations}}" value="{{item.name}}" is-link data-location="{{item}}" bindtap="openMap"></van-cell>
+    <van-cell wx:for="{{infoData.lost_location.locations}}" value="{{item.name}}" is-link data-location="{{item}}"
+      bindtap="openMap"></van-cell>
     <van-cell title="丢失者" icon="contact" value="{{infoData.author.username}}"></van-cell>
     <van-panel title="丢失详情" wx:if="{{infoData.description !== ''}}">
       <view class="description">{{infoData.description}}</view>
@@ -36,17 +37,20 @@
     </van-panel>
   </van-cell-group>
   <view>
-    <div class="card-pic">
-      <image wx:for="{{infoData.images}}" class="image" src="{{item.url}}" bindtap="showPicture" data-index="{{index}}"
-        data-currentUrl="{{item.url}}" mode="aspectFill" />
-
-    </div>
+    <van-panel title="图片">
+      <div class="card-pic">
+        <image wx:for="{{infoData.images}}" class="image" src="{{item.url}}" bindtap="showPicture"
+          data-index="{{index}}" data-currentUrl="{{item.url}}" mode="aspectFill" />
+      </div>
+    </van-panel>
   </view>
   <van-cell-group title="联系方式">
     <van-cell wx:for="{{infoData.contacts}}" title="{{item.name}}" label="{{tools.acronymTrans(item.method)}}"
       value="{{item.details}}"></van-cell>
   </van-cell-group>
-  <van-action-sheet show="{{moreShow}}" actions="{{actions}}" bind:select="onSelect" bind:close="onClose"></van-action-sheet>
-  <van-button wx:if="{{myInfo.id !== infoData.author.id && scene !== 1154}}" type="primary" class="button" bindtap="contact" block>我有线索？联系失主</van-button>
+  <van-action-sheet show="{{moreShow}}" actions="{{actions}}" bind:select="onSelect" bind:close="onClose">
+  </van-action-sheet>
+  <van-button wx:if="{{myInfo.id !== infoData.author.id && scene !== 1154}}" type="primary" class="button"
+    bindtap="contact" block>我有线索？联系失主</van-button>
   <van-dialog id="van-dialog" />
 </view>

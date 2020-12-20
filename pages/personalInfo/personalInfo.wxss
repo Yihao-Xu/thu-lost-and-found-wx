@@ -1,39 +1,45 @@
 /* pages/personalInfo/personalInfo.wxss */
-.head-photo{
+.head-photo {
   width: 128rpx;
   height: 128rpx;
   margin-right: 25px;
   border-radius: 10%;
 }
-.username{
+
+.username {
   font-size: large;
   color: black;
 }
 
-.userId{
+.userId {
   font-size: medium;
   color: gray;
 }
 
-.head-info{
-  display : flex;
+.head-info {
+  display: flex;
   flex-direction: row;
   align-items: center;
   padding: 25px 25px 10px 25px;
 }
 
-.scan-btn{
+.scan-btn {
   margin-left: auto;
   margin-right: 10px;
   width: 30px;
   height: 30px;
 }
 
-.cell-group{
+.cell-group {
   position: relative;
 }
 
-.button{
+.button {
   position: relative;
   margin: 1px;
+}
+
+
+.van-cell__value {
+  min-width: 70%;
 }

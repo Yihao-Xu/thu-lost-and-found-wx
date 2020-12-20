@@ -13,7 +13,8 @@
   </div>
   <van-cell-group title="拾取情况">
     <van-cell title="拾取时间" icon="clock-o" value="{{tools.timeTrans(infoData.found_datetime)}}"></van-cell>
-    <van-cell title="拾取地点" icon="location-o" value="{{infoData.found_location.name}}" is-link bindtap="openMap"></van-cell>
+    <van-cell title="拾取地点" icon="location-o" value="{{infoData.found_location.name}}" is-link bindtap="openMap">
+    </van-cell>
     <van-cell title="拾取者" icon="contact" value="{{infoData.author.username}}"></van-cell>
     <van-panel title="拾取详情" wx:if="{{infoData.description !== ''}}">
       <view class="description">{{infoData.description}}</view>
@@ -34,18 +35,21 @@
     </van-panel>
   </van-cell-group>
   <view>
-    <div class="card-pic">
-      <image wx:for="{{infoData.images}}" class="image" src="{{item.url}}" bindtap="showPicture" data-index="{{index}}"
-        data-currentUrl="{{item.url}}" mode="aspectFill" />
-
-    </div>
+    <van-panel title="图片" class="image-panel">
+      <div class="card-pic">
+        <image wx:for="{{infoData.images}}" class="image" src="{{item.url}}" bindtap="showPicture"
+          data-index="{{index}}" data-currentUrl="{{item.url}}" mode="aspectFill" />
+      </div>
+    </van-panel>
   </view>
   <van-cell-group title="联系方式">
     <van-cell wx:for="{{infoData.contacts}}" title="{{item.name}}" label="{{tools.acronymTrans(item.method)}}"
       value="{{item.details}}"></van-cell>
   </van-cell-group>
-  <van-action-sheet show="{{moreShow}}" actions="{{actions}}" bind:select="onSelect" bind:close="onClose"></van-action-sheet>
-  <van-button wx:if="{{myInfo.id !== infoData.author.id && scene !== 1154}}" type="primary" class="button" bindtap="contact" block>是我的？联系拾到者</van-button>
+  <van-action-sheet show="{{moreShow}}" actions="{{actions}}" bind:select="onSelect" bind:close="onClose">
+  </van-action-sheet>
+  <van-button wx:if="{{myInfo.id !== infoData.author.id && scene !== 1154}}" type="primary" class="button"
+    bindtap="contact" block>是我的？联系拾到者</van-button>
   <van-dialog id="van-dialog" />
   <!-- <van-button wx:if="{{myInfo.id === infoData.author.id}}" type="primary" class="button" block bindtap="edit">编辑启事
   </van-button>

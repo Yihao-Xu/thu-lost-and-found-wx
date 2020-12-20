@@ -1,0 +1,36 @@
+/* components/chat-bubble-matching/chat-bubble-matching.wxss */
+.chat-box{
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 10px 0 ;
+}
+
+.chat-avatar{
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  margin: 5px;
+}
+
+.chat-left-part{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-end; */
+  align-items: flex-end;
+  min-width: 0;
+}
+
+.chat-time{
+  font-size: smaller;
+}
+
+.chat-text{
+  background-color: rgb(168, 235, 184);
+  border-radius: 0.5em;
+  max-width: 80%;
+  min-width: 0;
+  min-height: 1em;
+  padding: 0.5em 1em 0.5em 1em;
+  flex: 1 0;
+}

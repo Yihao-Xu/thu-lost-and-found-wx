@@ -30,7 +30,7 @@ Page({
   onShow: function () {
     var that = this
     var app = getApp()
-    getReq('/lost-notices/?search=' + this.data.search_value,function(data){
+    getReq('/lost-notices/?status=PUB&search=' + this.data.search_value,function(data){
       that.setData({
         lostList:data.results,
         next:data.next
@@ -62,7 +62,7 @@ Page({
    */
   onPullDownRefresh: function () {
     var that = this
-    getReq('/found-notices/?search=' + this.data.search_value,function(data){
+    getReq('/found-notices/?status=PUB&search=' + this.data.search_value,function(data){
       that.setData({
         foundList:data.results,
         next:data.next
@@ -102,7 +102,7 @@ Page({
    */
   onSearch: function(){
     var that = this
-    getReq('/lost-notices?search=' + this.data.search_value,function(data){
+    getReq('/lost-notices/?status=PUB&search=' + this.data.search_value,function(data){
       that.setData({
         foundList:data.results,
         next:data.next
