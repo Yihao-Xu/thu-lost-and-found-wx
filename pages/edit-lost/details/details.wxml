@@ -11,7 +11,7 @@
         bindtap="deleteLocation" data-index="{{index}}"></van-icon>
     </van-cell>
     <van-field label="详情描述" left-icon="description" value="{{infoData.description}}" data-path="infoData.description" bind:change="attributeChange" type="textarea" autosize
-      placeholder="请输入对拾取过程的详情描述" />
+      placeholder="请输入对拾取过程的详情描述" maxlength="{{tools.desc_length}}"/>
   </van-cell-group>
   <van-cell-group title="联系方式">
     <van-cell wx:for="{{infoData.contacts}}" label="{{tools.acronymTrans(item.method)}}" title="{{item.name}}"><van-icon slot="right-icon" name="/image/delete.png" size="23px" class="icon-button" bindtap="deleteContact" data-index="{{index}}"></van-icon>{{item.details}}</van-cell>

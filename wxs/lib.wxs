@@ -20,7 +20,7 @@ var briefTime = function (time) {
     time = time.substring(time.search(' ') + 1, time.length)
     time = '今天 ' + time
   }
-  if(time.search(':') !== -1){
+  if (time.search(':') !== -1) {
     time = time.split(":")[0] + ":" + time.split(":")[1]
   }
   return time
@@ -48,8 +48,15 @@ var acronymTransform = function (status) {
   return status
 }
 
+var attr_length = 30
+var desc_length = 150
+var tag_length = 10
+
 module.exports = {
   acronymTrans: acronymTransform,
   timeTrans: timeTransform,
-  briefTime: briefTime
+  briefTime: briefTime,
+  attr_length: attr_length,
+  desc_length: desc_length,
+  tag_length: tag_length
 }

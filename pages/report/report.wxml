@@ -1,11 +1,12 @@
 <!--pages/report/report.wxml-->
+<wxs src="../../wxs/lib.wxs" module="tools"></wxs>
 <view>
   <van-cell-group>
     <van-cell title="举报启事" value="{{notice_title}}"></van-cell>
     <van-cell title="举报类型" model:value="{{report_type}}" bindtap="openPicker" is-link></van-cell>
     <van-panel title="举报详情">
       <view class="description">
-        <textarea model:value="{{description}}" maxlength="150" class="textarea"></textarea>
+        <textarea model:value="{{description}}" maxlength="{{tools.desc_length}}" class="textarea"></textarea>
       </view>
     </van-panel>
   </van-cell-group>

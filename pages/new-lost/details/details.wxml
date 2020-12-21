@@ -12,7 +12,7 @@
         bindtap="deleteLocation" data-index="{{index}}"></van-icon>
     </van-cell>
     <van-field label="详情描述" left-icon="description" value="{{infoData.describe}}" data-path="infoData.describe"
-      bind:change="attributeChange" type="textarea" autosize placeholder="请输入对丢失过程的详情描述" />
+      bind:change="attributeChange" type="textarea" autosize placeholder="请输入对丢失过程的详情描述" maxlength="{{tools.desc_length}}"/>
   </van-cell-group>
   <van-cell-group title="联系方式">
     <van-cell title="使用我的微信" wx:if="{{myInfo.wechat_id != null && myInfo.wechat_id != ''}}"
