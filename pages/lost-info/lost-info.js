@@ -319,9 +319,7 @@ Page({
    * 用户进入举报页面
    */
   report: function (id, title, type, user) {
-    wx.navigateTo({
-      url: '/pages/report/report?id=' + id + '&title=' + title + '&type=' + type + "&user=" + user,
-    })
+    enterVerifiedPage('/pages/report/report?id=' + id + '&title=' + title + '&type=' + type + "&user=" + user)
   },
 
   /**

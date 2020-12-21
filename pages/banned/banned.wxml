@@ -1,0 +1,9 @@
+<!--pages/banned/banned.wxml-->
+<view class="page-box">
+  <div class="info-box">
+    <image src="/image/ban.png" class="ban-logo" mode="aspectFit"></image>
+    <div class="text">您的账号涉嫌违规，无法登陆</div>
+    <div class="text">如有异议请致信管理员</div>
+    <div class="text email">管理员邮箱：yihao.xu@126com</div>
+  </div>
+</view>

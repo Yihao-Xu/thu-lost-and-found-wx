@@ -27,7 +27,8 @@
     "pages/new-lost/matching/matching",
     "pages/my-notice/my-found/my-found",
     "pages/my-notice/my-lost/my-lost",
-    "pages/test-page/test"
+    "pages/test-page/test",
+    "pages/banned/banned"
   ],
   "window": {
     "navigationBarTextStyle": "white",

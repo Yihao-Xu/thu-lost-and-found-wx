@@ -96,12 +96,14 @@ Page({
         })
       }
     }
+    this.back()
   },
 
   /**
    * 进入清华学生认证
    */
   vertify: function (event) {
+    var _this = this
     wx.navigateToMiniProgram({
       appId: 'wx1ebe3b2266f4afe0',
       path: 'pages/index/index',
@@ -109,6 +111,31 @@ Page({
       extraData: {
         origin: "miniapp",
         type: "id.tsinghua"
+      },
+      success: res =>{
+        _this.back()
+      }
+    })
+  },
+
+  /**
+   * 判断是否应该离开本页面
+   */
+  back: function(){
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getStorage({
+            key: 'myInfo',
+            success: res =>{
+              if(res.data.is_verified){
+                wx.navigateBack({
+                  delta: 1,
+                })
+              }
+            }
+          })
+        }
       }
     })
   }

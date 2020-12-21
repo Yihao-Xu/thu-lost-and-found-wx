@@ -1,0 +1,18 @@
+/* pages/banned/banned.wxss */
+.info-box{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.ban-logo{
+  margin: 10vh 0 10vh 0 ;
+  width: 200px;
+  height: 200px;
+}
+
+.email{
+  color: gray;
+  font-size: small;
+}

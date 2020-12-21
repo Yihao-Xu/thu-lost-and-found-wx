@@ -96,6 +96,12 @@ App({
             wx.setStorageSync('myInfo', data)
             that.globalData.myInfo = data
 
+            if(!data.is_active){
+              wx.redirectTo({
+                url: '/pages/banned/banned',
+              })
+            }
+            
             //连接webSocket
             wx.connectSocket({
               url: 'wss://xyh.iterator-traits.com/ws/chat/' + that.globalData.myInfo.id + '/',
