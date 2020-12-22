@@ -84,12 +84,14 @@ const createChat = (chat_list, message, sender, callback) => {
   new_chat.newest_message = message
 
   getReq('/users/' + sender + '/', function (data) {
+    console.log('create chat get req')
     new_chat.author = data
     chat_list.unshift(new_chat)
     wx.setStorage({
       data: chat_list,
       key: 'chat_list',
     })
+    console.log('create chat call back')
     callback(chat_list)
 
   })

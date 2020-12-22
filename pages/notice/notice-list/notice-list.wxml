@@ -5,6 +5,7 @@
     <div class="chat-cell-avatar-box">
       <image src="{{item.author.wechat_avatar}}" class="chat-cell-avatar" mode="aspectFill"></image>
       <i class="red-dot" wx:for="{{item.show_dot_array}}"></i>
+      <!-- <i class="red-dot" style="background-color:{{item.show_dot?red:white}};"></i> -->
     </div>
     <div class="chat-cell-right-part">
       <div class="chat-cell-name-time">

@@ -23,7 +23,8 @@ Page({
     bubble_list_bottom_val: 100,
     input_up: false,
     bubble_height: '100vh',
-    scroll_into_view:''
+    scroll_into_view: '',
+    scroll_height:(wx.getSystemInfoSync().windowHeight) + 'px'
   },
 
   /**
@@ -35,15 +36,26 @@ Page({
     var app = getApp()
     var chat = app.globalData.chat_list.find(item => item.sender == sender)
     if (chat == undefined) {
-      createChat(app.globalData.chat_list, null, sender, function (cl) {})
+      createChat(app.globalData.chat_list, null, sender, function (cl) {
+        _this.setData({
+          chat: app.globalData.chat_list.find(item => item.sender == sender),
+          sender: sender
+        })
+        wx.setNavigationBarTitle({
+          title: _this.data.chat.author.username,
+        })
+      })
+    } else {
+      _this.setData({
+        chat: app.globalData.chat_list.find(item => item.sender == sender),
+        sender: sender
+      })
+      wx.setNavigationBarTitle({
+        title: _this.data.chat.author.username,
+      })
     }
-    this.setData({
-      chat: app.globalData.chat_list.find(item => item.sender == sender),
-      sender: sender
-    })
-    wx.setNavigationBarTitle({
-      title: this.data.chat.author.username,
-    })
+
+
 
     wx.getStorage({
       key: 'myInfo',
@@ -143,7 +155,6 @@ Page({
       })
       _this.pageScrollToBottom()
     })
-
   },
 
   /**
@@ -169,9 +180,10 @@ Page({
     //   bubble_list_bottom_val: 100 + event.detail.height
     // })
     // this.pageScrollToBottom()
+    var windowSize = wx.getSystemInfoSync().windowHeight
     this.setData({
       input_bottom_val: event.detail.height,
-      bubble_height: event.detail.height +'px'
+      scroll_height: (windowSize - event.detail.height - 100) + 'px'
     })
     this.pageScrollToBottom()
 
@@ -182,9 +194,10 @@ Page({
    * 输入框失焦
    */
   inputBlur: function (event) {
+    var windowSize = wx.getSystemInfoSync().windowHeight
     this.setData({
       input_bottom_val: 0,
-      bubble_list_bottom_val: 100,
+      scroll_height: (windowSize - 100 ) + 'px'
     })
   }
 

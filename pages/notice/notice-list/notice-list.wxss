@@ -27,6 +27,7 @@
 .chat-cell-avatar-box{
   padding: 5px;
   display: flex;
+  width: 60px;
 }
 
 .chat-cell-avatar{

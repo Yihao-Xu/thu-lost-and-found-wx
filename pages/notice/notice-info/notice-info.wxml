@@ -1,7 +1,7 @@
 <!--pages/notice/notice-info/notice-info.wxml-->
 <wxs src="../../../wxs/lib.wxs" module="tools"></wxs>
 <view class="box">
-  <scroll-view class="bubble-list" scroll-y="{{true}}" scroll-into-view="{{scroll_into_view}}">
+  <scroll-view class="bubble-list" scroll-y="{{true}}" scroll-into-view="{{scroll_into_view}}" style="height:{{scroll_height}};">
     <div wx:for="{{chat.messages}}" wx:key="time" id="msg-{{index}}">
       <chat-bubble-matching wx:if="{{item.sender == 1}}" matching_data="{{item.matching_data}}" time="{{item.time}}"></chat-bubble-matching>
       <chat-bubble-opp wx:elif="{{item.sender == sender}}" username="{{chat.author.username}}"
