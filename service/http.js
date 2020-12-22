@@ -1,5 +1,5 @@
 // var rootDocument = 'xyh.iterator-traits.com'
-var rootDocument = 'https://xyh.iterator-traits.com'
+var rootDocument = 'https://xyh.iterator-traits.com/api/v1'
 // var rootDocument = 'http://192.168.0.103:8000'
 // var app = getApp()
 var header = {

@@ -37,6 +37,12 @@ const onWsMessage = (data_recv, callback) => {
 }
 
 const updateChatList = (chat_list, message, sender, callback) => {
+  // 对系统信息做适配
+  if(sender === 1 && 'sender' in message){
+    message.matching_data = JSON.parse(message.message)
+    message.message = "您的寻物启事 "+message.matching_data.found_notice_name+" 有新的匹配。"
+  }
+  
   // 寻找list中对应的chat
   for (var i = 0; i < chat_list.length; i++) {
     if (chat_list[i].sender == sender) {

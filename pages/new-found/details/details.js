@@ -116,16 +116,65 @@ Page({
    * 选择地点
    */
   chooseLocation: function () {
+    console.log('choose')
     const that = this
-    wx.chooseLocation({
-      success(res) {
-        delete res.errMsg
-        var path = 'infoData.found_location'
-        that.setData({
-          [path]: res
+    wx.getSetting({
+      success(res){
+        console.log(res)
+        if(!res.authSetting['scope.userLocation']){
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success(){
+              wx.chooseLocation({
+                success(res) {
+                  delete res.errMsg
+                  var path = 'infoData.found_location'
+                  that.setData({
+                    [path]: res
+                  })
+                },
+                fail(res){
+                  console.log(res)
+                }
+              })
+            },
+            fail(){
+              console.log("failed!")
+            }
+          })
+        }else{
+          wx.chooseLocation({
+            success(res) {
+              delete res.errMsg
+              var path = 'infoData.found_location'
+              that.setData({
+                [path]: res
+              })
+            },
+            fail(res){
+              console.log(res)
+            }
+          })
+        }
+      },
+      fail(res){
+        console.log(res)
+        console.log('get setting failed!')
+        wx.chooseLocation({
+          success(res) {
+            delete res.errMsg
+            var path = 'infoData.found_location'
+            that.setData({
+              [path]: res
+            })
+          },
+          fail(res){
+            console.log(res)
+          }
         })
       }
     })
+    console.log('finish')
   },
 
   // 用户上传图片前校验是否是图片

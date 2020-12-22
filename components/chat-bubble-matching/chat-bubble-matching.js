@@ -4,14 +4,14 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    matching_data: Object
+    matching_data: Object,
+    time: String
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-
   },
 
   /**
@@ -20,7 +20,7 @@ Component({
   methods: {
     enterFoundNotice: function(){
       wx.navigateTo({
-        url: '/pages/found-info/found-info?id='+this.matching_data.found_notice_id,
+        url: '/pages/found-info/found-info?id='+this.properties.matching_data.found_notice,
       })
     }
   }

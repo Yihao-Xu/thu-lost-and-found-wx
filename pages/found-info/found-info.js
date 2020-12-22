@@ -393,10 +393,11 @@ Page({
    * 点击丢失地点打开地图
    */
   openMap: function () {
-    wx.openLocation({
-      latitude: this.data.infoData.found_location.latitude,
-      longitude: this.data.infoData.found_location.longitude,
-    })
+    // wx.openLocation({
+    //   latitude: this.data.infoData.found_location.latitude,
+    //   longitude: this.data.infoData.found_location.longitude,
+    // })
+    wx.openLocation(this.data.infoData.found_location)
   }
 
 })

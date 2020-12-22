@@ -389,10 +389,7 @@ Page({
    */
   openMap: function (event) {
     const location = event.currentTarget.dataset.location
-    wx.openLocation({
-      latitude: location.latitude,
-      longitude: location.longitude,
-    })
+    wx.openLocation(location)
   }
 
 })

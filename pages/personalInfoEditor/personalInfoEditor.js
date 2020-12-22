@@ -101,7 +101,7 @@ Page({
       })
       return
     }
-    if (this.data.myInfo.phone !== "" && this.data.myInfo.email !== null && checkContact(this.data.myInfo.phone, "PHN") === false) {
+    if (this.data.myInfo.phone !== "" && this.data.myInfo.phone !== null && checkContact(this.data.myInfo.phone, "PHN") === false) {
       Dialog.alert({
         title: "格式错误",
         message: "手机号格式错误！"

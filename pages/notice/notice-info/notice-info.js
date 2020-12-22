@@ -7,6 +7,8 @@ const {
   clearUnread,
   addUnread
 } = require('../../../utils/util')
+
+
 Page({
 
   /**
@@ -16,7 +18,12 @@ Page({
     chat: {},
     myInfo: {},
     sender: {},
-    message: ""
+    message: "",
+    input_bottom_val: 0,
+    bubble_list_bottom_val: 100,
+    input_up: false,
+    bubble_height: '100vh',
+    scroll_into_view:''
   },
 
   /**
@@ -84,7 +91,7 @@ Page({
    */
   onUnload: function () {
     wx.onSocketMessage((result) => {
-      onWsMessage(result.data,function (chat_list) {})
+      onWsMessage(result.data, function (chat_list) {})
       addUnread(-1, result.data)
     })
   },
@@ -117,7 +124,7 @@ Page({
     var _this = this
     var app = getApp()
     var date = new Date()
-    if(this.data.message === '') return
+    if (this.data.message === '') return
     var data = {
       receiver: this.data.sender,
       message: this.data.message,
@@ -143,11 +150,42 @@ Page({
    * 滚动到页面最下端
    */
   pageScrollToBottom: function () {
-    wx.createSelectorQuery().select('.box').boundingClientRect(function (rect) {
-      wx.pageScrollTo({
-        scrollTop: rect.bottom + 50000
-      })
-    }).exec()
+    // wx.createSelectorQuery().select('.box').boundingClientRect(function (rect) {
+    //   wx.pageScrollTo({
+    //     scrollTop: rect.bottom + 5000
+    //   })
+    // }).exec()
+    this.setData({
+      scroll_into_view: 'msg-' + (this.data.chat.messages.length - 1)
+    })
+  },
+
+  /**
+   * 输入框聚焦
+   */
+  inputFocus: function (event) {
+    var query = wx.createSelectorQuery()
+    // this.setData({
+    //   bubble_list_bottom_val: 100 + event.detail.height
+    // })
+    // this.pageScrollToBottom()
+    this.setData({
+      input_bottom_val: event.detail.height,
+      bubble_height: event.detail.height +'px'
+    })
+    this.pageScrollToBottom()
+
+
+  },
+
+  /**
+   * 输入框失焦
+   */
+  inputBlur: function (event) {
+    this.setData({
+      input_bottom_val: 0,
+      bubble_list_bottom_val: 100,
+    })
   }
 
 })

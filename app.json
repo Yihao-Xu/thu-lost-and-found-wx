@@ -110,5 +110,10 @@
         "selectedIconPath": "image/mine-on.png"
       }
     ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用展示"
+    }
   }
 }

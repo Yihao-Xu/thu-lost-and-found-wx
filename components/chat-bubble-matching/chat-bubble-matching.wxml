@@ -1,10 +1,13 @@
 <!--components/chat-bubble-matching/chat-bubble-matching.wxml-->
 <wxs module="tools" src="../../wxs/lib.wxs"></wxs>
 <view class="chat-box">
-  <div class="chat-left-part">
-    <div class="chat-time">系统通知 {{time}}</div>
-    <div class="chat-text" bindtap="enterFoundNotice">您发布的寻物启事 <p class="notice-name">{{matching_data.lost_notice_name}}</p> 有相似的招领启事 <p class="notice-name">{{matching_data.found_notice_name}}</p> 点击本消息可以查看此招领启事。
+  <image src="{{avatar}}" class="chat-avatar"></image>
+  <div class="chat-right-part">
+    <div class="chat-time">系统通知 {{tools.timeTrans(time)}}</div>
+    <div class="chat-text" bindtap="enterFoundNotice">您发布的寻物启事 <p class="notice-name">{{matching_data.lost_notice_name}}
+      </p> 有相似的招领启事 <p class="notice-name">{{matching_data.found_notice_name}},</p>
+      匹配度为{{matching_data.matching_degree}}。点击本消息可以查看此招领启事。
     </div>
   </div>
-  <image src="{{avatar}}" class="chat-avatar"></image>
+
 </view>
