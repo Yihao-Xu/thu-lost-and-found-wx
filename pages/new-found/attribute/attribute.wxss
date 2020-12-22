@@ -1,10 +1,10 @@
 /* pages/new-found/attribute/attribute.wxss */
 
-.page{
+/* .page{
   padding: 5vh 5vw;
   background-color: white;
   min-height: 90vh;
-}
+} */
 
 .button{
   margin: 20px;

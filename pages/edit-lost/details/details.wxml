@@ -1,6 +1,6 @@
 <!--pages/new-lost/new-lost.wxml-->
 <wxs src="../../../wxs/lib.wxs" module="tools"></wxs>
-<view class="page">
+<view class="page padding-page">
   <van-cell-group title="拾取详情">
     <van-cell title="最早丢失时间" icon="clock-o" value="{{tools.timeTrans(infoData.est_lost_start_datetime)}}" is-link
       bindtap="openStartCalendar" />

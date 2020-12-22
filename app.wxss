@@ -12,3 +12,21 @@ page{
   background: rgb(240, 239, 240);
 }
 
+.padding-page{
+  background:white;
+  min-height: 100vh;
+  padding: 3vh 5vw;
+}
+
+/*普通按钮，这里调节颜色*/
+.normal-button{
+  background: #82318E linear-gradient(to right, #ac62b8, #82318E);
+  color: whitesmoke;
+}
+
+.desc-text{
+  border-left-width: 7px;
+  border-left-style: solid;
+  border-left-color: #82318E;
+}
+

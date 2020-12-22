@@ -17,7 +17,7 @@
     </van-cell>
     <van-cell title="拾取者" icon="contact" value="{{infoData.author.username}}"></van-cell>
     <van-panel title="拾取详情" wx:if="{{infoData.description !== ''}}">
-      <view class="description">{{infoData.description}}</view>
+      <view class="description desc-text">{{infoData.description}}</view>
     </van-panel>
   </van-cell-group>
 
@@ -31,7 +31,7 @@
     </van-cell>
     <van-cell title="状态" icon="info-o" value="{{tools.acronymTrans(infoData.status)}}"></van-cell>
     <van-panel title="物品详情" wx:if="{{infoData.property.description !== ''}}">
-      <view class="description">{{infoData.property.description}}</view>
+      <view class="description desc-text">{{infoData.property.description}}</view>
     </van-panel>
   </van-cell-group>
   <view>

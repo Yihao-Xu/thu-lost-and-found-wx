@@ -342,8 +342,9 @@ Page({
         var that = this
         postReq('/lost-notices/', this.data.upData, function (res) {
           //去匹配页面
+          console.log(res)
           wx.redirectTo({
-            url: '/pages/new-lost/matching/matching',
+            url: '/pages/new-lost/matching/matching?type=lost_notice&id='+res.id,
           })
         })
 

@@ -190,6 +190,11 @@ Page({
    */
   onSelect: function (event) {
     switch (event.detail.name) {
+      case '查看匹配启事':
+        wx.navigateTo({
+          url: '/pages/new-lost/matching/matching?type=lost_notice&id=' + this.data.infoData.id,
+        })
+        break
       case '举报':
         this.report(this.data.infoData.id, this.data.infoData.property.name, 'lost', this.data.infoData.author.id)
         break
@@ -336,6 +341,8 @@ Page({
     } else if (this.data.infoData.status === 'RET') {
       this.setData({
         actions: [{
+          name: '查看匹配启事'
+        }, {
           name: '修改'
         }, {
           name: '下架'
@@ -352,6 +359,8 @@ Page({
     } else if (this.data.infoData.status === 'CLS') {
       this.setData({
         actions: [{
+          name: '查看匹配启事'
+        }, {
           name: '修改'
         }, {
           name: '已归还',
@@ -368,6 +377,8 @@ Page({
     } else if (this.data.infoData.status === 'PUB') {
       this.setData({
         actions: [{
+          name: '查看匹配启事'
+        }, {
           name: '修改'
         }, {
           name: '已归还',

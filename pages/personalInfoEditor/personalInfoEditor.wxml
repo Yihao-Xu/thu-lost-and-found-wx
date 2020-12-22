@@ -1,12 +1,12 @@
 <!--pages/personalInfoEditor/personalInfoEditor.wxml-->
-<view>
+<view class="padding-page">
   <van-cell-group>
-    <van-field label="昵称" maxlength="15" value="{{myInfo.username}}" input-align="right" data-key="username" bind:change="onChange"></van-field>
-    <van-field label="微信号" maxlength="25" value="{{myInfo.wechat_id}}" input-align="right" data-key="wechat_id" bind:change="onChange"></van-field>
-    <van-field label="邮箱" maxlength="50" value="{{myInfo.email}}" input-align="right" data-key="email" bind:change="onChange"></van-field>
-    <van-field label="手机" maxlength="11" value="{{myInfo.phone}}" input-align="right" data-key="phone" bind:change="onChange"></van-field>
+    <van-field label="昵称" maxlength="15" value="{{myInfo.username}}" input-align="right" data-key="username" bind:change="onChange" placeholder="请输入昵称"></van-field>
+    <van-field label="微信号" maxlength="25" value="{{myInfo.wechat_id}}" input-align="right" data-key="wechat_id" bind:change="onChange" placeholder="请输入微信号"></van-field>
+    <van-field label="邮箱" maxlength="50" value="{{myInfo.email}}" input-align="right" data-key="email" bind:change="onChange" placeholder="请输入邮箱"></van-field>
+    <van-field label="手机" maxlength="11" value="{{myInfo.phone}}" input-align="right" data-key="phone" bind:change="onChange" placeholder="请输入手机"></van-field>
   </van-cell-group>
-  <van-button type="primary" bindtap="release" block style="margin:20px;">提交修改</van-button>
+  <van-button type="primary" bindtap="release" block style="margin:20px;" round>提交修改</van-button>
   <van-dialog id="van-dialog" />
 </view>
 

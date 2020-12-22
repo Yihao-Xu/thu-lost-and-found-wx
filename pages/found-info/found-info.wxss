@@ -39,13 +39,13 @@
 .card-pic {
   display: flex;
   flex-direction: row;
-  padding: 0 10px 10px 10px;
+  padding: 0 1vw 10px 1vw;
 }
 
 .image {
-  width: 32%;
-  height: 120px;
-  margin: 0px 1px;
+  width: 30vw;
+  height: 30vw;
+  margin: 0px 1vw;
   flex-shrink: 0;
 }
 
