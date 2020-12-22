@@ -40,7 +40,7 @@
     <van-panel title="图片">
       <div class="card-pic">
         <image wx:for="{{infoData.images}}" class="image" src="{{item.url}}" bindtap="showPicture"
-          data-index="{{index}}" data-currentUrl="{{item.url}}" mode="aspectFill" />
+          data-index="{{index}}" data-currenturl="{{item.url}}" mode="aspectFill" />
       </div>
     </van-panel>
   </view>

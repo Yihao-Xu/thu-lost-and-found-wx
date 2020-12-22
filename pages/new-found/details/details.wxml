@@ -1,7 +1,7 @@
 <!--pages/new-found/details/details.wxml-->
 <!--pages/new-lost/new-lost.wxml-->
 <wxs src="../../../wxs/lib.wxs" module="tools"></wxs>
-<view>
+<view class="page">
   <van-cell-group title="拾取详情">
     <van-cell title="拾取时间" icon="clock-o" value="{{infoData.found_time}}" is-link bindtap="openCalendar" />
     <van-cell title="拾取地点" icon="location-o" value="{{infoData.found_location.name}}" is-link bindtap="chooseLocation" />
@@ -36,7 +36,7 @@
       max-date="{{maxDate}}" bind:confirm="calendarConfirm" bind:cancel="calendarCancel" formatter="{{formatter}}" />
   </van-popup>
 
-  <van-button block type="primary" class="release-btn" bindtap="release">提交招领启事</van-button>
+  <van-button block type="primary" class="release-btn" bindtap="release" round>提交招领启事</van-button>
 
   <van-dialog id="van-dialog" />
 

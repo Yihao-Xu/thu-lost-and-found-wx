@@ -11,3 +11,8 @@
   margin-left: 5px;
 }
 
+.page{
+  padding: 5vh 5vw;
+  background-color: white;
+  min-height: 90vh;
+}

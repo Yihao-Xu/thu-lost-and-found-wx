@@ -1,7 +1,7 @@
 <!--pages/new-lost/details/details.wxml-->
 <!--pages/new-lost/new-lost.wxml-->
 <wxs src="../../../wxs/lib.wxs" module="tools"></wxs>
-<view>
+<view class="page">
   <van-cell-group title="拾取详情">
     <van-cell title="最早丢失时间" icon="clock-o" value="{{infoData.est_lost_start_time}}" is-link
       bindtap="openStartCalendar" />
@@ -54,7 +54,7 @@
       bind:confirm="endCalendarConfirm" bind:cancel="calendarCancel" formatter="{{formatter}}" />
   </van-popup>
 
-  <van-button block type="primary" class="release-btn" bindtap="release">提交寻物启事</van-button>
+  <van-button block type="primary" class="release-btn" bindtap="release" round>提交寻物启事</van-button>
 
   <van-dialog id="van-dialog" />
 

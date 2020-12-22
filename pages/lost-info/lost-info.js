@@ -144,7 +144,7 @@ Page({
   showPicture: function (e) {
     var urlArray = this.data.infoData.images.map(a => a.url)
     wx.previewImage({
-      current: e.currentUrl,
+      current: e.currentTarget.dataset.currenturl,
       urls: urlArray
     })
   },
