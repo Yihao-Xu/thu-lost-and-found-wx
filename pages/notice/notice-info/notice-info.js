@@ -35,8 +35,8 @@ Page({
     var _this = this
     var sender = Number(options.sender)
     var app = getApp()
-    var chat = app.globalData.chat_list.find(item => item.sender == sender)
-    if (chat == undefined) {
+    var chat = app.globalData.chat_list.find(item => item.sender === sender)
+    if (chat === undefined) {
       createChat(app.globalData.chat_list, null, sender, function (cl) {
         _this.setData({
           chat: app.globalData.chat_list.find(item => item.sender == sender),

@@ -38,8 +38,8 @@ Page({
         wx.getStorage({
           key: 'myInfo',
           success: (myInfo) => {
-            if ('卡号' in res.data.fields && that.data.type === "校园卡") {
-              var path = "template.fields.卡号"
+            if ('学号' in res.data.fields) {
+              var path = "template.fields.学号"
               that.setData({
                 [path]: myInfo.data.student_id
               })

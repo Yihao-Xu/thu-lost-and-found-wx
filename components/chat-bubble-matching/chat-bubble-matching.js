@@ -5,7 +5,8 @@ Component({
    */
   properties: {
     matching_data: Object,
-    time: String
+    time: String,
+    avatar: String
   },
 
   /**

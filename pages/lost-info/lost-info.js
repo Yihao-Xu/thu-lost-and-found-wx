@@ -54,11 +54,11 @@ Page({
   onLoad: function (options) {
     var app = getApp()
     this.setData({
-      scene: app.globalData.scene
+      scene: app.globalData.scene,
+      id: this.options.id
     })
 
     if (this.data.scene !== 1154) {
-      this.data.id = options.id
       wx.setNavigationBarTitle({
         title: '寻物启事详情',
       })
@@ -66,13 +66,13 @@ Page({
         myInfo: wx.getStorageSync('myInfo')
       })
     }
-    var _this = this
-    getReq('/lost-notices/' + options.id, function (data) {
-      _this.setData({
-        infoData: data
-      })
-      _this.setActions()
-    })
+    // var _this = this
+    // getReq('/lost-notices/' + options.id+'/', function (data) {
+    //   _this.setData({
+    //     infoData: data
+    //   })
+    //   _this.setActions()
+    // })
   },
 
   /**
@@ -87,7 +87,7 @@ Page({
    */
   onShow: function () {
     var _this = this
-    getReq('/lost-notices/' + this.data.id, function (data) {
+    getReq('/lost-notices/' + this.data.id +'/', function (data) {
       _this.setData({
         infoData: data
       })

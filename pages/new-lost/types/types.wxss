@@ -8,6 +8,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 75%;
+  align-items: flex-start;
+  align-content: flex-start;
 }
 
 .grid-item{

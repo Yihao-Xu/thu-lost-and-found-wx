@@ -4,18 +4,22 @@
     <button class="header-back-button button" bindtap="back">返回首页</button>
     <text class="header-text">下面可能是您想要的启事</text>
     <text class="header-text">后续有相似的启事，我们将会在小程序内的通知您</text>
+    <text class="header-text" wx:if="{{matching_list.length === 0}}">服务器正在为您匹配相似的启事</text>
+    <text class="header-text" wx:if="{{matching_list.length === 0}}">您可以稍后刷新，或者在启事详情中的“更多”按钮中进入本界面。</text>
   </div>
 
   <div class="matching-list">
     <block wx:for="{{matching_list}}">
-      <div class="matching-card" wx:if="{{item.matching_degree >= min_matching_degree}}" bindtap="enterNotice" data-id="{{item.found_notice}}">
+      <div class="matching-card" wx:if="{{item.matching_degree >= min_matching_degree}}" bindtap="enterNotice"
+        data-id="{{item.found_notice}}">
         <div class="matching-notice-name">
           <van-icon name="send-gift-o" /> {{item.found_property_name}}</div>
         <div class="matching-notice-description">
           <van-icon name="orders-o" /> {{item.found_notice_description}}
         </div>
         <div class="images">
-          <image class="image-item" wx:for="{{item.found_notice_images}}" wx:for-item="img_item" src="{{img_item.url}}" mode="aspectFill" />
+          <image class="image-item" wx:for="{{item.found_notice_images}}" wx:for-item="img_item" src="{{img_item.url}}"
+            mode="aspectFill" />
         </div>
       </div>
     </block>

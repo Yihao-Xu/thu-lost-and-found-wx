@@ -1,0 +1,35 @@
+<!--pages/help/help.wxml-->
+<view class="page">
+  <div class="text-box">
+    <text class="title">紫荆寻物THU使用帮助</text>
+    <text class="normal-text">紫荆寻物THU是面向清华师生的一款失物招领&寻物启事发布平台，致力于为清华师生提供一个更好的寻物平台。</text>
+    <text class="title">使用人群</text>
+    <text class="normal-text">本软件面向清华师生，在未认证的情况下，只能浏览招领/寻物启事。进行了微信授权和清华学生认证之后，才能使用发布启事、站内聊天等深度功能。在能够接入清华学生认证之前，暂时不需要学生认证即刻体验小程序。</text>
+    <text class="title">浏览启事</text>
+    <text class="normal-text">在本软件中，可以浏览招领启事和寻物启事，点击对应启事的卡片即可进入启事详情。</text>
+    <div class="image-box"></div>
+    <text class="title">启事详情及互动操作</text>
+    <text class="normal-text">在启事中，可以看到启事的地点、时间、物品等信息。点击右上角的按钮后，可以进行举报、收藏、更改状态（仅自己的启事）等操作。</text>
+    <image src="/image/启事操作.png" mode='widthFix'></image>
+    <text class="title">分享启事到朋友圈（Android）</text>
+    <text class="normal-text">在寻物/招领启事中，点击右上角的图标，可以分享到朋友圈，由于微信的限制，该功能现在只能Android手机使用。</text>
+    <image src="/image/分享流程.png" mode="widthFix"></image>
+    <text class="title">站内聊天</text>
+    <text class="normal-text">点击启事的最底下的按钮，可以和启事发布者进行站内对话。</text>
+    <text class="normal-text">本软件提供了一个简易的站内聊天功能，能发送基本的文字，并在小程序内对新消息进行提示。</text>
+    <text class="title">发布启事</text>
+    <text class="normal-text">点击启事列表页面右下角的“+”按钮，可以进入启事发布页面。</text>
+    <text class="normal-text">在启事发布页面，需要经过“物品种类选择”、“物品详情填写”、“拾取/丢失详情填写”三个步骤，填写完后便可以发布。</text>
+    <text class="title">启事匹配</text>
+    <text class="normal-text">当失主发布了寻物启事后，会进入一个匹配页面，其中包含了所有可能匹配的启事。这个页面可以在之后从启事详情右上角的按钮中进入。发布之后新出现的相似的启事，将会由站内系统通知或邮件通知（需要用户在个人信息页面填写自己的邮箱）。</text>
+    <text class="title">个人页面</text>
+    <text class="normal-text">用户点击导航栏中的“我的”，可以进入个人页面，在这个页面中用户可以查看和编辑自己的信息，同时查看自己已发布、浏览和收藏的启事</text>
+    <text class="title">个人信息</text>
+    <text class="normal-text">个人信息包括自己的昵称、头像以及三种联系方式，联系方式可以更改，并设置是否对他人显示。</text>
+    <text class="normal-text">在聊天界面点击他人头像，可以进入他人的个人主页，可以看到上述的5个信息以及用户是否进行学生认证。</text>
+    <text class="title">举报和封禁</text>
+    <text class="normal-text">在启事详情页面，用户可以对启事进行举报，填写举报内容和举报类型后即可举报该启事。举报将会被管理员审核，当管理员审核通过之后，被封禁的用户将无法进入小程序。</text>
+    <text class="title">启事的归还、下架与删除</text>
+    <text class="normal-text">用户可以对自己发布的启事进行归还、下架与删除的操作。将启事设置为归还和下架之后，将不会再进行匹配，也不会展示给他人，但是可以在个人信息页面看到，并执行撤销操作。删除的启事将无法恢复。</text>
+  </div>
+</view>

@@ -1,0 +1,23 @@
+/* pages/help/help.wxss */
+.page{
+  width: 100vw;
+  min-height: 100vh;
+  padding: 2vh 7vw;
+
+}
+
+.text-box{
+  width: 84vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.title{
+  font-size: 20px;
+  font-weight: bold;
+  margin: 15px 0 5px 0;
+}
+
+.normal-text{
+  font-size: 13px;
+}

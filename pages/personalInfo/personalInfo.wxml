@@ -20,6 +20,9 @@
     <van-cell title="认证：" value="未认证" wx:if="{{myInfo.is_verified==false}}"></van-cell>
     <van-cell title="认证：" value="已认证" wx:if="{{myInfo.is_verified===true}}"></van-cell>
   </van-cell-group>
+  <van-cell-group title="关于">
+    <van-cell title="使用帮助" is-link link-type="navigateTo" url="/pages/help/help"></van-cell>
+  </van-cell-group>
   <div class="button" wx:if="{{myInfo.is_verified===false}}">
     <van-button  color="linear-gradient(to right, #8d3f99, #82318E)" class="button" block bindtap="enterCertification" round>前往认证</van-button>
   </div>

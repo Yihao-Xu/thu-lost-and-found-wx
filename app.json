@@ -27,11 +27,12 @@
     "pages/new-lost/matching/matching",
     "pages/my-notice/my-found/my-found",
     "pages/my-notice/my-lost/my-lost",
-    "pages/test-page/test",
     "pages/banned/banned",
     "pages/my-notice/my-collection/my-collection",
     "pages/my-notice/my-footprint/my-footprint",
-    "pages/others-info/others-info"
+    "pages/others-info/others-info",
+    "pages/help/help",
+    "pages/about/about"
   ],
   "window": {
     "navigationBarTextStyle": "white",

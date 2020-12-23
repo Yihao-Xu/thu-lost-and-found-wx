@@ -63,6 +63,13 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    var _this = this
+    getReq('/matching-entries/?' + this.data.type + '_id=' + this.data.id, function (res) {
+      _this.setData({
+        matching_list: res.results
+      })
+      wx.stopPullDownRefresh({})
+    })
 
   },
 

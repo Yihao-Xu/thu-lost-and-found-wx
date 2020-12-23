@@ -23,7 +23,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    id: 1,
+    id: 0,
     infoData: {},
     activeNames: "0",
     gallery_show: false,
@@ -52,10 +52,11 @@ Page({
   onLoad: function (options) {
     var app = getApp()
     this.setData({
-      scene: app.globalData.scene
+      scene: app.globalData.scene,
+      id:options.id
     })
     if (this.data.scene !== 1154) {
-      this.data.id = options.id
+      
       wx.setNavigationBarTitle({
         title: '招领启事详情',
       })
@@ -63,13 +64,13 @@ Page({
         myInfo: wx.getStorageSync('myInfo')
       })
     }
-    var _this = this
-    getReq('/found-notices/' + options.id, function (data) {
-      _this.setData({
-        infoData: data
-      })
-      _this.setActions()
-    })
+    // var _this = this
+    // getReq('/found-notices/' + options.id+'/', function (data) {
+    //   _this.setData({
+    //     infoData: data
+    //   })
+    //   _this.setActions()
+    // })
   },
 
   /**
@@ -84,7 +85,7 @@ Page({
    */
   onShow: function () {
     var _this = this
-    getReq('/found-notices/' + this.data.id, function (data) {
+    getReq('/found-notices/' + this.data.id +'/', function (data) {
       _this.setData({
         infoData: data
       })
@@ -136,7 +137,7 @@ Page({
   onShareTimeline: function () {
     return {
       title: '紫荆寻物',
-      query: 'id=' + this.data.id
+      query: 'id=' + this.data.infoData.id
     }
   },
 
@@ -338,8 +339,8 @@ Page({
    */
   setActions: function () {
     var _this = this
-
-    if (this.data.infoData.author.id !== this.data.myInfo.id) {
+    var app = getApp()
+    if (app.globalData.scene===1154||this.data.infoData.author.id !== this.data.myInfo.id) {
       this.setData({
         actions: [{
           name: '举报',

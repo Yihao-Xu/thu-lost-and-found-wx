@@ -83,7 +83,7 @@ const createChat = (chat_list, message, sender, callback) => {
   new_chat.sender = sender
   new_chat.newest_message = message
 
-  getReq('/users/' + sender + '/', function (data) {
+  getReq('/users/' + sender + '/simple-info/', function (data) {
     new_chat.author = data
     chat_list.unshift(new_chat)
     wx.setStorage({
@@ -99,7 +99,7 @@ const createChat = (chat_list, message, sender, callback) => {
  */
 const updateChatAuthor = (chat_list, sender, callback) => {
   var app = getApp()
-  getReq('/users/' + sender + '/', function (data) {
+  getReq('/users/' + sender + '/simple-info/', function (data) {
     app.globalData.chat_list.find(item => item.sender == sender).author = data
     wx.setStorage({
       data: chat_list,
@@ -233,7 +233,7 @@ const enterVerifiedPage = (url) => {
   var myInfo = wx.getStorageSync('myInfo')
   wx.getSetting({
     success: res => {
-      if (!res.authSetting['scope.userInfo'] || !myInfo.is_verified) {
+      if (!res.authSetting['scope.userInfo'] /*|| !myInfo.is_verified*/) {
         wx.navigateTo({
           url: '/pages/login/login',
         })

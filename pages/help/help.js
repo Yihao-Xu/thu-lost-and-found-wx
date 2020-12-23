@@ -1,34 +1,19 @@
-// pages/others-info/others-info.js
-const{getReq} = require('../../service/http')
-
+// pages/help/help.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    others_info:{}
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var _this = this
-    var id = options.id
-    getReq('/users/'+id+'/simple-info/', function (data) {
-      if(!data.email_visible&&data.email!==''&&data.email!==null){
-        data.email = '***********'
-      }
-      if(!data.phone_visible&&data.phone!==''&&data.phone!=null){
-        data.phone='**********'
-      }
-      if(!data.wechat_visible&&data.wechat_id!==''&&data.wechat_id!=null){
-        data.wechat_id='**********'
-      }
-      _this.setData({
-        others_info: data
-      })
+    wx.setNavigationBarTitle({
+      title: '使用帮助',
     })
   },
 

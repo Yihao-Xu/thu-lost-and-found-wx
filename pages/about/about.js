@@ -1,4 +1,4 @@
-// pages/test-page/test.js
+// pages/about/about.js
 Page({
 
   /**
@@ -61,18 +61,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    return {
-      title: '紫荆寻物',
-      path: 'pages/test-page/test'
-    }
-  },
 
-    /**
-   * 用户分享到朋友圈
-   */
-  onShareTimeline: function () {
-    return {
-      title: '紫荆寻物'
-    }
-  },
+  }
 })

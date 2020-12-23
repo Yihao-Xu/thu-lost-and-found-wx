@@ -3,7 +3,7 @@
 <view class="box">
   <scroll-view class="bubble-list" scroll-y="{{true}}" scroll-into-view="{{scroll_into_view}}" style="height:{{scroll_height}};">
     <div wx:for="{{chat.messages}}" wx:key="time" id="msg-{{index}}">
-      <chat-bubble-matching wx:if="{{item.sender == 1}}" matching_data="{{item.matching_data}}" time="{{item.time}}"></chat-bubble-matching>
+      <chat-bubble-matching wx:if="{{item.sender == 1}}" matching_data="{{item.matching_data}}" time="{{item.time}}" avatar="{{chat.author.wechat_avatar}}"></chat-bubble-matching>
       <chat-bubble-opp wx:elif="{{item.sender == sender}}" username="{{chat.author.username}}"
         time="{{tools.timeTrans(item.time)}}" text="{{item.message}}" avatar="{{chat.author.wechat_avatar}}" userid="{{chat.sender}}" />
       <chat-bubble-me wx:elif="{{item.sender != sender}}" username="{{myInfo.username}}"

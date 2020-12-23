@@ -147,10 +147,13 @@ Page({
                 this.setData({
                   is_verified: true
                 })
-                wx.navigateBack({
-                  delta: 1,
-                })
+                // wx.navigateBack({
+                //   delta: 1,
+                // })
               }
+              wx.navigateBack({
+                delta: 1,
+              })
             }
           })
         }

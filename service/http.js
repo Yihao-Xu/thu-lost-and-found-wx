@@ -86,7 +86,8 @@ function login(data, cb) {
       } else {
         wx.showModal({
           title: "请求错误",
-          content: JSON.stringify(res.data),
+          // content: JSON.stringify(res.data),
+          content: "服务器错误，请稍后再试",
           showCancel: false
         })
         wx.hideLoading()
@@ -124,7 +125,8 @@ function putReq(url, data, cb) {
       } else {
         wx.showModal({
           title: "请求错误",
-          content: JSON.stringify(res.data),
+          // content: JSON.stringify(res.data),
+          content: "服务器错误，请稍后再试",
           showCancel: false
         })
         wx.hideLoading()
