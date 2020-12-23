@@ -35,14 +35,14 @@
     </van-panel>
   </van-cell-group>
   <view>
-    <van-panel title="图片" class="image-panel">
+    <van-panel title="图片" class="image-panel" wx:if="{{infoData.images.length !== 0}}">
       <div class="card-pic">
         <image wx:for="{{infoData.images}}" class="image" src="{{item.url}}" bindtap="showPicture"
           data-index="{{index}}" data-currenturl="{{item.url}}" mode="aspectFill" />
       </div>
     </van-panel>
   </view>
-  <van-cell-group title="联系方式">
+  <van-cell-group title="联系方式" wx:if="{{infoData.contacts.length !== 0}}">
     <van-cell wx:for="{{infoData.contacts}}" title="{{item.name}}" label="{{tools.acronymTrans(item.method)}}"
       value="{{item.details}}"></van-cell>
   </van-cell-group>
@@ -51,8 +51,4 @@
   <van-button wx:if="{{myInfo.id !== infoData.author.id && scene !== 1154}}" type="primary" class="button"
     bindtap="contact" block>是我的？联系拾到者</van-button>
   <van-dialog id="van-dialog" />
-  <!-- <van-button wx:if="{{myInfo.id === infoData.author.id}}" type="primary" class="button" block bindtap="edit">编辑启事
-  </van-button>
-  <van-button wx:if="{{myInfo.id === infoData.author.id}}" type="danger" class="button" block bindtap="delete">删除启事
-  </van-button> -->
 </view>

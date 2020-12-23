@@ -5,14 +5,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    id:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({id:options.id})
+    
   },
 
   /**
@@ -41,7 +42,7 @@ Page({
    */
   onUnload: function () {
     wx.redirectTo({
-      url: '/pages/banned/banned',
+      url: '/pages/banned/banned?id=' + this.data.id,
     })
   },
 

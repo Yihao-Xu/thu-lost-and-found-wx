@@ -96,9 +96,9 @@ App({
             wx.setStorageSync('myInfo', data)
             that.globalData.myInfo = data
 
-            if (!data.is_active) {
+            if (!data.is_active||data.status === 'SUS') {
               wx.redirectTo({
-                url: '/pages/banned/banned',
+                url: '/pages/banned/banned?id=' + data.id,
               })
             }
 

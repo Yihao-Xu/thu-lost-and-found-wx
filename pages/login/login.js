@@ -9,14 +9,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    is_verified: false,
+    has_wechat_user_info: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.back()
   },
 
   /**
@@ -112,7 +113,7 @@ Page({
         origin: "miniapp",
         type: "id.tsinghua"
       },
-      success: res =>{
+      success: res => {
         _this.back()
       }
     })
@@ -121,14 +122,31 @@ Page({
   /**
    * 判断是否应该离开本页面
    */
-  back: function(){
+  back: function () {
+    var _this = this
+    wx.getStorage({
+      key: 'myInfo',
+      success: res => {
+        if (res.data.is_verified) {
+          this.setData({
+            is_verified: true
+          })
+        }
+      }
+    })
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
+          _this.setData({
+            has_wechat_user_info: true
+          })
           wx.getStorage({
             key: 'myInfo',
-            success: res =>{
-              if(res.data.is_verified){
+            success: res => {
+              if (res.data.is_verified) {
+                this.setData({
+                  is_verified: true
+                })
                 wx.navigateBack({
                   delta: 1,
                 })

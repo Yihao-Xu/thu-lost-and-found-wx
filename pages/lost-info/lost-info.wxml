@@ -37,14 +37,14 @@
     </van-panel>
   </van-cell-group>
   <view>
-    <van-panel title="图片">
+    <van-panel title="图片" wx:if="{{infoData.images.length !== 0}}">
       <div class="card-pic">
         <image wx:for="{{infoData.images}}" class="image" src="{{item.url}}" bindtap="showPicture"
           data-index="{{index}}" data-currenturl="{{item.url}}" mode="aspectFill" />
       </div>
     </van-panel>
   </view>
-  <van-cell-group title="联系方式">
+  <van-cell-group title="联系方式" wx:if="{{infoData.contacts.length !== 0}}">
     <van-cell wx:for="{{infoData.contacts}}" title="{{item.name}}" label="{{tools.acronymTrans(item.method)}}"
       value="{{item.details}}"></van-cell>
   </van-cell-group>
