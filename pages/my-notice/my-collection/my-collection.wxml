@@ -1,0 +1,20 @@
+<!--pages/my-notice/my-collection/my-collection.wxml-->
+<view>
+  <van-tabs color="#82318E" swipeable>
+    <van-tab title="招领启事">
+      <view>
+        <div class="list">
+          <found-card wx:for="{{my_found_collection}}" cardData="{{item}}" class="card"></found-card>
+        </div>
+      </view>
+    </van-tab>
+
+    <van-tab title="寻物启事">
+      <view>
+        <div class="list">
+          <lost-card wx:for="{{my_lost_collection}}" cardData="{{item}}" class="card"></lost-card>
+        </div>
+      </view>
+    </van-tab>
+  </van-tabs>
+</view>

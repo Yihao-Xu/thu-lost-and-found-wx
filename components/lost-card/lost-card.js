@@ -1,5 +1,5 @@
 // components/lost-card/lost-card.js
-
+const { addFootprint } = require("../../utils/util")
 Component({
   /**
    * 组件的属性列表
@@ -23,6 +23,7 @@ Component({
       wx.navigateTo({
         url: '/pages/lost-info/lost-info?id='+this.data.cardData.id,
       })
+      addFootprint(this.properties.cardData, 'lost')
     }
   }
 })

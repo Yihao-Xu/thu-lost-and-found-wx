@@ -1,5 +1,5 @@
 const {
-  getReq
+  getReq, uploadImage, postReq,putReq
 } = require("../../service/http");
 
 // pages/personalInfo/personalInfo.js
@@ -12,6 +12,10 @@ Page({
   data: {
     userInfo: {},
     myInfo: {},
+    sheet_show: false,
+    sheet_actions: [{
+      name: '更换头像'
+    }]
   },
 
   /**
@@ -118,6 +122,59 @@ Page({
       success(res) {
         console.log(res)
         console.log(res.result)
+      }
+    })
+  },
+
+  /**
+   * 用户打开下拉菜单
+   */
+  openSheet: function () {
+    this.setData({
+      sheet_show: true
+    })
+  },
+
+  /**
+   * 下拉菜单关闭
+   */
+  sheetClose: function () {
+    this.setData({
+      sheet_show: false
+    })
+  },
+
+  /**
+   * 选择下拉菜单项
+   */
+  sheetSelect: function (event) {
+    switch (event.detail.name) {
+      case '更换头像':
+        this.changeAvatar()
+        break
+    }
+  },
+
+  /**
+   * 用户更换头像
+   */
+  changeAvatar: function () {
+    var _this = this
+    var myInfo = _this.data.myInfo
+    wx.chooseImage({
+      count: 1,
+      success: res =>{
+        uploadImage('/users/upload-avatar/',res.tempFilePaths[0], {id:myInfo.id}, 'avatar.jpg', function(res){
+          myInfo.wechat_avatar = JSON.parse(res.data).url[0]
+          _this.setData({
+            myInfo:myInfo
+          })
+          putReq('/users/' + myInfo.id + '/', myInfo, function (data) {
+            wx.showToast({
+              title: '头像更改成功',
+            })
+          })
+        })
       }
     })
   }

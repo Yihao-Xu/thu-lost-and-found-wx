@@ -5,7 +5,8 @@ const {
   createChat,
   formatTime,
   clearUnread,
-  addUnread
+  addUnread,
+  updateChatAuthor
 } = require('../../../utils/util')
 
 
@@ -44,14 +45,23 @@ Page({
         wx.setNavigationBarTitle({
           title: _this.data.chat.author.username,
         })
+        _this.pageScrollToBottom()
       })
     } else {
-      _this.setData({
-        chat: app.globalData.chat_list.find(item => item.sender == sender),
-        sender: sender
-      })
-      wx.setNavigationBarTitle({
-        title: _this.data.chat.author.username,
+      updateChatAuthor(app.globalData.chat_list,sender,function(cl){
+        app.globalData.chat_list = cl
+        wx.setStorage({
+          data: app.globalData.chat_list,
+          key: 'chat_list',
+        })
+        _this.setData({
+          chat: app.globalData.chat_list.find(item => item.sender == sender),
+          sender: sender
+        })
+        wx.setNavigationBarTitle({
+          title: _this.data.chat.author.username,
+        })
+        _this.pageScrollToBottom()
       })
     }
 
@@ -81,7 +91,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.pageScrollToBottom()
+ 
   },
 
   /**

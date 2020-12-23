@@ -1,0 +1,17 @@
+<!--pages/others-info/others-info.wxml-->
+<view class="page">
+  <div class="head-info">
+    <image class="head-photo" src="{{others_info.wechat_avatar}}" mode="cover" bindtap="openSheet"></image>
+    <text class="username" block>{{others_info.username}}</text>
+    <!-- <image src="/image/scanCode.png" class="scan-btn" bindtap="scanQRCode"></image> -->
+  </div>
+  <van-cell-group title="联系方式" class="cell-group">
+    <van-cell class="cell" title="微信号" value="{{others_info.wechat_id}}"></van-cell>
+    <van-cell class="cell" title="邮箱" value="{{others_info.email}}"></van-cell>
+    <van-cell class="cell" title="手机" value="{{others_info.phone}}"></van-cell>
+  </van-cell-group>
+  <van-cell-group title="学生/教工认证" class="cell-group">
+    <van-cell title="认证：" value="未认证" wx:if="{{others_info.is_verified==false}}"></van-cell>
+    <van-cell title="认证：" value="已认证" wx:if="{{others_info.is_verified===true}}"></van-cell>
+  </van-cell-group>
+</view>

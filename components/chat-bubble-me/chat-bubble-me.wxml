@@ -5,5 +5,5 @@
     <div class="chat-time">{{username}} {{time}}</div>
     <div class="chat-text">{{text}}</div>
   </div>
-  <image src="{{avatar}}" class="chat-avatar"></image>
+  <image src="{{avatar}}" class="chat-avatar" bindtap="enterInfo"></image>
 </view>

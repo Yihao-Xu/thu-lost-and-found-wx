@@ -151,7 +151,7 @@ Page({
     const {
       file
     } = event.detail
-    uploadImage('/lost-notices/upload-image/', file.url, 'rua.jpg', function (r) {
+    uploadImage('/lost-notices/upload-image/', file.url, {}, 'rua.jpg', function (r) {
       var imgs = that.data.images
       console.log(r)
       console.log(typeof (r.data))

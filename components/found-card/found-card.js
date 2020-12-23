@@ -1,3 +1,5 @@
+const { addFootprint } = require("../../utils/util")
+
 // components/found-card/found-card.js
 Component({
   /**
@@ -22,6 +24,7 @@ Component({
       wx.navigateTo({
         url: '/pages/found-info/found-info?id='+this.data.cardData.id,
       })
+      addFootprint(this.properties.cardData, 'found')
     }
   }
 })

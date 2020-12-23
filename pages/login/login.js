@@ -81,7 +81,7 @@ Page({
         key: 'userInfo',
       })
       var myInfo = wx.getStorageSync('myInfo')
-      if (myInfo.wechat_avatar !== event.detail.userInfo.avatarUrl) {
+      if (myInfo.wechat_avatar === null || myInfo.wechat_avatar === "") {
         myInfo.wechat_avatar = event.detail.userInfo.avatarUrl
         if (myInfo.username == "微信用户") {
           myInfo.username = event.detail.userInfo.nickName

@@ -160,7 +160,7 @@ Page({
     const {
       file
     } = event.detail
-    uploadImage('/found-notices/upload-image/', file.url, 'rua.jpg', function (r) {
+    uploadImage('/found-notices/upload-image/', file.url, {}, 'rua.jpg', function (r) {
       var imgs = that.data.infoData.images
       var path = 'infoData.images'
       imgs.push({

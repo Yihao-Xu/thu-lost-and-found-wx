@@ -188,7 +188,7 @@ Page({
     const {
       file
     } = event.detail
-    uploadImage('/found-notices/upload-image/', file.url, 'rua.jpg', function (r) {
+    uploadImage('/found-notices/upload-image/', file.url, {}, 'rua.jpg', function (r) {
       var imgs = that.data.images
       console.log(r)
       console.log(typeof (r.data))

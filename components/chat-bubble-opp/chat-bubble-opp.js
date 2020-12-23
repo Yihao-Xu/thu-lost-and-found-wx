@@ -8,7 +8,9 @@ Component({
     time:String,
     bubbleColor: String,
     text: String,
-    username: String
+    userid: Number,
+    username: String,
+
   },
 
   /**
@@ -22,6 +24,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    enterInfo: function(){
+      console.log(this.properties.text)
+      console.log(this.properties.userid)
+      wx.navigateTo({
+        url: '/pages/others-info/others-info?id='+ this.properties.userid,
+      })
+    }
   }
 })

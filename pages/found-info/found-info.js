@@ -11,7 +11,9 @@ const {
 import Dialog from '@vant/weapp/dialog/dialog'
 import {
   deleteObjFromArray,
-  enterVerifiedPage
+  enterVerifiedPage,
+  addCollection,
+  deleteCollection
 } from '../../utils/util'
 
 // pages/found-info/found-info.js
@@ -38,8 +40,6 @@ Page({
       name: '删除',
       color: '#ee0a24'
     }, {
-    //   name: '转交（生成转交码）'
-    // }, {
       name: '举报',
       color: '#ee0a24'
     }],
@@ -189,6 +189,7 @@ Page({
    * 上拉菜单选择
    */
   onSelect: function (event) {
+    var _this = this
     switch (event.detail.name) {
       case '举报':
         this.report(this.data.infoData.id, this.data.infoData.property.name, 'found', this.data.infoData.author.id)
@@ -211,6 +212,16 @@ Page({
       case '撤回归还':
       case '撤回下架':
         this.release()
+        break
+      case '收藏':
+        addCollection(this.data.infoData, 'found', function () {
+          _this.setActions()
+        })
+        break
+      case '取消收藏':
+        deleteCollection(this.data.infoData, 'found', function () {
+          _this.setActions()
+        })
         break
     }
   },
@@ -326,17 +337,23 @@ Page({
    * 设置上拉菜单 actions 的内容
    */
   setActions: function () {
+    var _this = this
+
     if (this.data.infoData.author.id !== this.data.myInfo.id) {
       this.setData({
         actions: [{
           name: '举报',
           color: '#ee0a24'
+        }, {
+          name: '收藏'
         }]
       })
     } else if (this.data.infoData.status === 'RET') {
       this.setData({
         actions: [{
           name: '修改'
+        }, {
+          name: '收藏'
         }, {
           name: '下架'
         }, {
@@ -345,8 +362,8 @@ Page({
           name: '删除',
           color: '#ee0a24'
         }, {
-        //   name: '转交（生成转交码）'
-        // }, {
+          //   name: '转交（生成转交码）'
+          // }, {
           name: '举报',
           color: '#ee0a24'
         }]
@@ -356,6 +373,8 @@ Page({
         actions: [{
           name: '修改'
         }, {
+          name: '收藏'
+        }, {
           name: '已归还',
         }, {
           name: '撤回下架'
@@ -363,8 +382,8 @@ Page({
           name: '删除',
           color: '#ee0a24'
         }, {
-        //   name: '转交（生成转交码）'
-        // }, {
+          //   name: '转交（生成转交码）'
+          // }, {
           name: '举报',
           color: '#ee0a24'
         }]
@@ -374,6 +393,8 @@ Page({
         actions: [{
           name: '修改'
         }, {
+          name: '收藏'
+        }, {
           name: '已归还',
         }, {
           name: '下架'
@@ -381,13 +402,30 @@ Page({
           name: '删除',
           color: '#ee0a24'
         }, {
-        //   name: '转交（生成转交码）'
-        // }, {
+          //   name: '转交（生成转交码）'
+          // }, {
           name: '举报',
           color: '#ee0a24'
         }]
       })
     }
+
+    wx.getStorage({
+      key: 'my_found_collection',
+      success(res) {
+        var actions = _this.data.actions
+        if (res.data.find(item => item.id === _this.data.infoData.id)) {
+          actions.find(item => item.name === "收藏").name = '取消收藏'
+        } else {
+          if (actions.find(item => item.name === "取消收藏")) {
+            actions.find(item => item.name === "取消收藏").name = '收藏'
+          }
+        }
+        _this.setData({
+          actions: actions
+        })
+      }
+    })
   },
 
   /**

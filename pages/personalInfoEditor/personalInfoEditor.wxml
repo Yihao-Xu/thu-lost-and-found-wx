@@ -6,6 +6,11 @@
     <van-field label="邮箱" maxlength="50" value="{{myInfo.email}}" input-align="right" data-key="email" bind:change="onChange" placeholder="请输入邮箱"></van-field>
     <van-field label="手机" maxlength="11" value="{{myInfo.phone}}" input-align="right" data-key="phone" bind:change="onChange" placeholder="请输入手机"></van-field>
   </van-cell-group>
+  <van-checkbox-group class="checkbox-box">
+    <van-checkbox value="{{myInfo.wechat_visible}}" checked-color="#82318E" bind:change="checkboxChange">微信号</van-checkbox>
+    <van-checkbox value="{{myInfo.email_visible}}" checked-color="#82318E" bind:change="checkboxChange">邮箱</van-checkbox>
+    <van-checkbox value="{{myInfo.phone_visible}}" checked-color="#82318E" bind:change="checkboxChange">手机</van-checkbox>
+  </van-checkbox-group>
   <van-button type="primary" bindtap="release" block style="margin:20px;" round>提交修改</van-button>
   <van-dialog id="van-dialog" />
 </view>

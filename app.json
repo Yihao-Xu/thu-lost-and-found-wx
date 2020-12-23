@@ -28,7 +28,10 @@
     "pages/my-notice/my-found/my-found",
     "pages/my-notice/my-lost/my-lost",
     "pages/test-page/test",
-    "pages/banned/banned"
+    "pages/banned/banned",
+    "pages/my-notice/my-collection/my-collection",
+    "pages/my-notice/my-footprint/my-footprint",
+    "pages/others-info/others-info"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -78,7 +81,11 @@
     "van-icon": "@vant/weapp/icon/index",
     "chat-bubble-opp": "components/chat-bubble-opp/chat-bubble-opp",
     "chat-bubble-me": "components/chat-bubble-me/chat-bubble-me",
-    "chat-bubble-matching": "components/chat-bubble-matching/chat-bubble-matching"
+    "chat-bubble-matching": "components/chat-bubble-matching/chat-bubble-matching",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index"
   },
   "tabBar": {
     "color": "#000000",

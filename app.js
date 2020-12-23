@@ -76,6 +76,42 @@ App({
         _this.globalData.unread = 0
       }
     })
+    wx.getStorage({
+      key:"my_found_footprint",
+      fail(){
+        wx.setStorage({
+          data: [],
+          key: 'my_found_footprint',
+        })
+      }
+    })
+    wx.getStorage({
+      key:"my_lost_footprint",
+      fail(){
+        wx.setStorage({
+          data: [],
+          key: 'my_lost_footprint',
+        })
+      }
+    })
+    wx.getStorage({
+      key:"my_found_collection",
+      fail(){
+        wx.setStorage({
+          data: [],
+          key: 'my_found_collection',
+        })
+      }
+    })
+    wx.getStorage({
+      key:"my_lost_collection",
+      fail(){
+        wx.setStorage({
+          data: [],
+          key: 'my_lost_collection',
+        })
+      }
+    })
 
 
     // 登录
@@ -131,7 +167,7 @@ App({
                     // 可以将 res 发送给后台解码出 unionId
                     that.globalData.userInfo = res.userInfo
                     var myInfo = wx.getStorageSync('myInfo')
-                    if (myInfo.wechat_avatar !== res.userInfo.avatarUrl) {
+                    if (myInfo.wechat_avatar === null || myInfo.wechat_avatar === '') {
                       myInfo.wechat_avatar = res.userInfo.avatarUrl
                       if (myInfo.username == "微信用户") {
                         myInfo.username = res.userInfo.nickName

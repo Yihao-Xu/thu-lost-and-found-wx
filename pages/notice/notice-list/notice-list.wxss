@@ -34,6 +34,7 @@
   width: 50px;
   height: 50px;
   flex: 0 0 50px;
+  border-radius: 100%;
 }
 
 .red-dot{

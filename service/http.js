@@ -166,13 +166,14 @@ function deleteReq(url, cb) {
   })
 }
 
-function uploadImage(url, filePath, name, cb) {
+function uploadImage(url, filePath, data, name, cb) {
   wx.showLoading({
     title: '上传图片中',
   })
   wx.uploadFile({
     filePath: filePath,
     name: name,
+    formData: data,
     header: header,
     url: rootDocument + url,
     success(res) {

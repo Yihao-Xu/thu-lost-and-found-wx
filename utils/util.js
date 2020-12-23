@@ -38,11 +38,11 @@ const onWsMessage = (data_recv, callback) => {
 
 const updateChatList = (chat_list, message, sender, callback) => {
   // 对系统信息做适配
-  if(sender === 1 && 'sender' in message){
+  if (sender === 1 && 'sender' in message) {
     message.matching_data = JSON.parse(message.message)
-    message.message = "您的寻物启事 "+message.matching_data.found_notice_name+" 有新的匹配。"
+    message.message = "您的寻物启事 " + message.matching_data.found_notice_name + " 有新的匹配。"
   }
-  
+
   // 寻找list中对应的chat
   for (var i = 0; i < chat_list.length; i++) {
     if (chat_list[i].sender == sender) {
@@ -84,17 +84,30 @@ const createChat = (chat_list, message, sender, callback) => {
   new_chat.newest_message = message
 
   getReq('/users/' + sender + '/', function (data) {
-    console.log('create chat get req')
     new_chat.author = data
     chat_list.unshift(new_chat)
     wx.setStorage({
       data: chat_list,
       key: 'chat_list',
     })
-    console.log('create chat call back')
     callback(chat_list)
-
   })
+}
+
+/**
+ * 更新聊天对象的信息
+ */
+const updateChatAuthor = (chat_list, sender, callback) => {
+  var app = getApp()
+  getReq('/users/' + sender + '/', function (data) {
+    app.globalData.chat_list.find(item => item.sender == sender).author = data
+    wx.setStorage({
+      data: chat_list,
+      key: 'chat_list',
+    })
+    callback(chat_list)
+  })
+
 }
 
 const deleteObjFromArray = (array, obj) => {
@@ -139,7 +152,7 @@ const addUnread = (cur_notice_info_sender, message) => {
 const clearUnread = (sender) => {
   var app = getApp()
   var read = app.globalData.chat_list.find(item => item.sender == sender).unread
-  
+
   app.globalData.chat_list.find(item => item.sender == sender).unread = 0
   app.globalData.chat_list.find(item => item.sender == sender).show_dot = false
   app.globalData.chat_list.find(item => item.sender == sender).show_dot_array = []
@@ -238,14 +251,14 @@ const enterVerifiedPage = (url) => {
   })
 }
 
-const propertyBlankCheck = (data, callback) =>{
+const propertyBlankCheck = (data, callback) => {
   console.log(data)
-  if(data.name ===""||data.name=== undefined){
+  if (data.name === "" || data.name === undefined) {
     callback('物品名称')
     return false
   }
-  for(var key in data.attributes){
-    if(data.attributes[key] === '' || data.attributes[key] === undefined){
+  for (var key in data.attributes) {
+    if (data.attributes[key] === '' || data.attributes[key] === undefined) {
       callback(key)
       return false
     }
@@ -253,6 +266,109 @@ const propertyBlankCheck = (data, callback) =>{
   return true
 }
 
+/**
+ * 将帖子加入历史记录
+ */
+const addFootprint = (notice, type) => {
+  if (type === 'found') {
+    wx.getStorage({
+      key: 'my_found_footprint',
+      success(res) {
+        var my_found_footprint = res.data
+        my_found_footprint.unshift(notice)
+        wx.setStorage({
+          key: "my_found_footprint",
+          data: my_found_footprint
+        })
+      }
+    })
+  } else if (type === 'lost') {
+    wx.getStorage({
+      key: 'my_lost_footprint',
+      success(res) {
+        var my_lost_footprint = res.data
+        my_lost_footprint.unshift(notice)
+        wx.setStorage({
+          key: "my_lost_footprint",
+          data: my_lost_footprint
+        })
+      }
+    })
+  }
+}
+
+/**
+ * 收藏和删除收藏
+ */
+const addCollection = (notice, type, callback) => {
+  if (type === 'found') {
+    wx.getStorage({
+      key: 'my_found_collection',
+      success(res) {
+        var my_found_collection = res.data
+        my_found_collection.unshift(notice)
+        wx.setStorage({
+          key: "my_found_collection",
+          data: my_found_collection
+        })
+        callback(my_found_collection)
+      }
+    })
+  } else if (type === 'lost') {
+    wx.getStorage({
+      key: 'my_lost_collection',
+      success(res) {
+        var my_lost_collection = res.data
+        my_lost_collection.unshift(notice)
+        wx.setStorage({
+          key: "my_lost_collection",
+          data: my_lost_collection
+        })
+        callback(my_lost_collection)
+      }
+    })
+  }
+}
+
+const deleteCollection = (notice, type, callback) => {
+  if (type === 'found') {
+    wx.getStorage({
+      key: 'my_found_collection',
+      success(res) {
+        var my_found_collection = res.data
+        for (var i = 0; i < my_found_collection.length; i++) {
+          if (my_found_collection[i].id === notice.id) {
+            my_found_collection.splice(i, 1)
+            break
+          }
+        }
+        wx.setStorage({
+          key: "my_found_collection",
+          data: my_found_collection
+        })
+        callback(my_found_collection)
+      }
+    })
+  } else if (type === 'lost') {
+    wx.getStorage({
+      key: 'my_lost_collection',
+      success(res) {
+        var my_lost_collection = res.data
+        for (var i = 0; i < my_lost_collection.length; i++) {
+          if (my_lost_collection[i].id === notice.id) {
+            my_lost_collection.splice(i, 1)
+            break
+          }
+        }
+        wx.setStorage({
+          key: "my_lost_collection",
+          data: my_lost_collection
+        })
+        callback(my_lost_collection)
+      }
+    })
+  }
+}
 
 
 module.exports = {
@@ -266,5 +382,9 @@ module.exports = {
   addUnread: addUnread,
   clearUnread: clearUnread,
   enterVerifiedPage: enterVerifiedPage,
-  propertyBlankCheck: propertyBlankCheck
+  propertyBlankCheck: propertyBlankCheck,
+  updateChatAuthor: updateChatAuthor,
+  addFootprint: addFootprint,
+  addCollection: addCollection,
+  deleteCollection: deleteCollection
 }

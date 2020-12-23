@@ -1,0 +1,11 @@
+/* pages/my-notice/my-footprint/my-footprint.wxss */
+.card{
+  position: relative;
+  margin: 10px 3.5%;
+}
+
+.list{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+}
