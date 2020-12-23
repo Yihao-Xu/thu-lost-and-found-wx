@@ -6,7 +6,7 @@
     <van-field label="联系号码" model:value="{{details}}" maxlength="50"></van-field>
     <van-cell title="联系方式" value="{{tools.acronymTrans(method)}}" bindtap="sheetShow" is-link></van-cell>
   </van-cell-group>
-  <van-button type="primary" bindtap="release" style="margin:20px;" block round>添加联系方式</van-button>
+  <van-button  color="linear-gradient(to right, #8d3f99, #82318E)" bindtap="release" style="margin:20px;" block round>添加联系方式</van-button>
 </view>
 <van-action-sheet show="{{sheetOnShow}}" actions="{{actions}}" bind:close="onClose" bind:select="onSelect">
 </van-action-sheet>

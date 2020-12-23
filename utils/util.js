@@ -370,6 +370,15 @@ const deleteCollection = (notice, type, callback) => {
   }
 }
 
+/**
+ * 将Object中的value设置为空字符串
+ */
+const clearObjectValue = (object) =>{
+  for(var key in object){
+    object[key] = ""
+  }
+  return object
+}
 
 module.exports = {
   formatTime: formatTime,
@@ -386,5 +395,6 @@ module.exports = {
   updateChatAuthor: updateChatAuthor,
   addFootprint: addFootprint,
   addCollection: addCollection,
-  deleteCollection: deleteCollection
+  deleteCollection: deleteCollection,
+  clearObjectValue:clearObjectValue
 }

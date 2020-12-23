@@ -1,18 +1,26 @@
 <!--pages/personalInfoEditor/personalInfoEditor.wxml-->
 <view class="padding-page">
   <van-cell-group>
-    <van-field label="昵称" maxlength="15" value="{{myInfo.username}}" input-align="right" data-key="username" bind:change="onChange" placeholder="请输入昵称"></van-field>
-    <van-field label="微信号" maxlength="25" value="{{myInfo.wechat_id}}" input-align="right" data-key="wechat_id" bind:change="onChange" placeholder="请输入微信号"></van-field>
-    <van-field label="邮箱" maxlength="50" value="{{myInfo.email}}" input-align="right" data-key="email" bind:change="onChange" placeholder="请输入邮箱"></van-field>
-    <van-field label="手机" maxlength="11" value="{{myInfo.phone}}" input-align="right" data-key="phone" bind:change="onChange" placeholder="请输入手机"></van-field>
+    <van-field label="昵称" maxlength="15" value="{{myInfo.username}}" input-align="right" data-key="username"
+      bind:change="onChange" placeholder="请输入昵称"></van-field>
+    <van-field label="微信号" maxlength="25" value="{{myInfo.wechat_id}}" input-align="right" data-key="wechat_id"
+      bind:change="onChange" placeholder="请输入微信号"></van-field>
+    <van-field label="邮箱" maxlength="50" value="{{myInfo.email}}" input-align="right" data-key="email"
+      bind:change="onChange" placeholder="请输入邮箱"></van-field>
+    <van-field label="手机" maxlength="11" value="{{myInfo.phone}}" input-align="right" data-key="phone"
+      bind:change="onChange" placeholder="请输入手机"></van-field>
   </van-cell-group>
-  <van-checkbox-group class="checkbox-box">
-    <van-checkbox value="{{myInfo.wechat_visible}}" checked-color="#82318E" bind:change="checkboxChange">微信号</van-checkbox>
-    <van-checkbox value="{{myInfo.email_visible}}" checked-color="#82318E" bind:change="checkboxChange">邮箱</van-checkbox>
-    <van-checkbox value="{{myInfo.phone_visible}}" checked-color="#82318E" bind:change="checkboxChange">手机</van-checkbox>
-  </van-checkbox-group>
-  <van-button type="primary" bindtap="release" block style="margin:20px;" round>提交修改</van-button>
+  <div class="checkbox-area">
+    <text class="checkbox-area-text">联系方式是否在个人主页对他人可见</text>
+    <div class="checkbox-box">
+      <van-checkbox value="{{myInfo.wechat_visible}}" checked-color="#82318E" data-key="wechat_visible"
+        bind:change="checkboxChange">微信号</van-checkbox>
+      <van-checkbox value="{{myInfo.email_visible}}" checked-color="#82318E" data-key="email_visible"
+        bind:change="checkboxChange">邮箱</van-checkbox>
+      <van-checkbox value="{{myInfo.phone_visible}}" checked-color="#82318E" data-key="phone_visible"
+        bind:change="checkboxChange">手机</van-checkbox>
+    </div>
+  </div>
+  <van-button color="linear-gradient(to right, #8d3f99, #82318E)" bindtap="release" block style="margin:20px;" round>提交修改</van-button>
   <van-dialog id="van-dialog" />
 </view>
-
-

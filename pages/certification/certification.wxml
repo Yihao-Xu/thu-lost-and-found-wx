@@ -6,4 +6,4 @@
 
 
 </van-cell-group>
-<van-button type="primary" class="button" block>提交认证</van-button>
+<van-button  color="linear-gradient(to right, #8d3f99, #82318E)" class="button" block>提交认证</van-button>

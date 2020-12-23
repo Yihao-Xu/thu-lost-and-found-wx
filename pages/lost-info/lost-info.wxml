@@ -50,7 +50,7 @@
   </van-cell-group>
   <van-action-sheet show="{{moreShow}}" actions="{{actions}}" bind:select="onSelect" bind:close="onClose">
   </van-action-sheet>
-  <van-button wx:if="{{myInfo.id !== infoData.author.id && scene !== 1154}}" type="primary" class="button"
+  <van-button wx:if="{{myInfo.id !== infoData.author.id && scene !== 1154}}"  color="linear-gradient(to right, #8d3f99, #82318E)" class="button"
     bindtap="contact" block>我有线索？联系失主</van-button>
   <van-dialog id="van-dialog" />
 </view>

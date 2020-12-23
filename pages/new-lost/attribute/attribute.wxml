@@ -17,7 +17,7 @@
     </view>
     <view slot="footer">
       <div style="position:relative; left:80%;">
-        <van-button type="primary" bindtap="openTagDialog" size="small" style="max-width:20%;" round>增加标签</van-button>
+        <van-button  color="linear-gradient(to right, #8d3f99, #82318E)" bindtap="openTagDialog" size="small" style="max-width:20%;" round>增加标签</van-button>
       </div>
     </view>
   </van-panel>
@@ -28,5 +28,5 @@
     </van-cell-group>
   </van-dialog>
   <van-dialog id="van-dialog"></van-dialog>
-  <van-button type="primary" block class="button" bindtap="enterNext" round>下一步</van-button>
+  <van-button  color="linear-gradient(to right, #8d3f99, #82318E)" block class="button" bindtap="enterNext" round>下一步</van-button>
 </view>

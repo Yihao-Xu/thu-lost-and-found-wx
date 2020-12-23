@@ -10,7 +10,7 @@
       </view>
     </van-panel>
   </van-cell-group>
-  <van-button class="button" type="primary" block bindtap="release">提交举报</van-button>
+  <van-button class="button"  color="linear-gradient(to right, #8d3f99, #82318E)" block bindtap="release">提交举报</van-button>
 </view>
 
 <van-popup show="{{picker_show}}" bind:close="closePicker" round position="bottom">

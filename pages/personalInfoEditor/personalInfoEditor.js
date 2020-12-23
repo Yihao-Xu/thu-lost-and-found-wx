@@ -128,5 +128,17 @@ Page({
     this.setData({
       [path]: event.detail
     })
+  },
+
+  /**
+   * 复选框改变
+   */
+  checkboxChange:function(event){
+    const key = event.currentTarget.dataset.key
+    const result = event.detail
+    const path = 'myInfo.'+ key
+    this.setData({
+      [path]: result
+    })
   }
 })

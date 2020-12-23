@@ -26,7 +26,7 @@
       max-date="{{maxDate}}" bind:confirm="calendarConfirm" bind:cancel="calendarCancel" formatter="{{formatter}}" />
   </van-popup>
 
-  <van-button block type="primary" class="release-btn" bindtap="release" round>提交招领启事</van-button>
+  <van-button block  color="linear-gradient(to right, #8d3f99, #82318E)" class="release-btn" bindtap="release" round>提交招领启事</van-button>
 
   <van-dialog id="van-dialog" />
 

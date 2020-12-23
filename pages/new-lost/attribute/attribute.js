@@ -1,7 +1,8 @@
 // pages/new-lost/attribute/attribute.js
 import Dialog from '@vant/weapp/dialog/dialog';
 import {
-  propertyBlankCheck
+  propertyBlankCheck,
+  clearObjectValue
 } from '../../../utils/util';
 Page({
 
@@ -29,6 +30,7 @@ Page({
     wx.getStorage({
       key: 'cur-template',
       success(res) {
+        res.data.fields = clearObjectValue(res.data.fields)
         that.setData({
           template: res.data
         })

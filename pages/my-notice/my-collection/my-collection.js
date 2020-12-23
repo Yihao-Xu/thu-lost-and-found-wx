@@ -15,7 +15,7 @@ Page({
   onLoad: function (options) {
 
     wx.setNavigationBarTitle({
-      title: '我的足迹',
+      title: '我的收藏',
     })
   },
 

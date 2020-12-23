@@ -15,6 +15,6 @@
     <image class="image-item" wx:for="{{cardData.images}}" src="{{item.url}}" mode="aspectFill" />
   </div>
   <div class="tags">
-    <van-tag wx:for="{{cardData.property.tags}}" color="{{item.color}}" class="tag" type="primary" size="medium" plain>{{item.name}}</van-tag>
+    <van-tag wx:for="{{cardData.property.tags}}" color="{{item.color}}" class="tag"  color="linear-gradient(to right, #8d3f99, #82318E)" size="medium" plain>{{item.name}}</van-tag>
   </div>
 </view>

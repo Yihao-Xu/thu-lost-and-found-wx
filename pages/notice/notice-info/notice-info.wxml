@@ -14,6 +14,6 @@
 <div class="input-box" style="bottom:{{input_bottom_val}}px;">
   <textarea class="input-textarea input" model:value="{{message}}" focus="{{inputFocus}}" auto-height
      maxlength="150"  adjust-position="{{input_up}}" bindfocus="inputFocus" bindblur="inputBlur"></textarea>
-  <van-button class="input-sendBtn input" bindtap="sendMsg" type="primary" size="small" bindtap="sendMessage">发送
+  <van-button class="input-sendBtn input" bindtap="sendMsg"  color="linear-gradient(to right, #8d3f99, #82318E)" size="small" bindtap="sendMessage">发送
   </van-button>
 </div>
